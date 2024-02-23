@@ -1,13 +1,24 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="flex-center">
+      <ion-card shape="round">
+          <ion-card-content>
+            <div class="login-header">
+              <div style="display: block;">
+                  <ion-text color="">
+                      Welcome in TaskFlow App!
+                  </ion-text>
+              </div>
+            </div>
+              <ion-item>
+                  <ion-input type="email" label="Email" labelPlacement="floating" placeholder=""></ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-input type="password" label="Password" labelPlacement="floating" placeholder=""></ion-input>
+              </ion-item>
+              <ion-button fill="clear" size="small" style="text-transform: initial;">Recovery password</ion-button>
+              <ion-button expand="block" shape="round" color="tertiary">Login</ion-button>
+              <ion-button fill="clear" expand="block" shape="round" color="tertiary">Register</ion-button>
+          </ion-card-content>
+      </ion-card>
+  </div>
 </ion-content>
