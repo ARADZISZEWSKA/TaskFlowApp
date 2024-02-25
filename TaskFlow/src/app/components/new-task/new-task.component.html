@@ -1,0 +1,40 @@
+<ion-header class="ion-no-border" [translucent]="true">
+  <ion-toolbar mode="ios">
+    <div class="close-outline">
+      <ion-icon name="close-outline" (click)="modalController.dismiss()"></ion-icon>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-input autofocus="true" placeholder="Enter new task" #taskName [value]="todoName" required></ion-input>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            
+            <ion-datetime-button datetime="datetime"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime id="datetime"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+           
+          </td>
+          <td>
+            <div class="rounded">
+              <ion-icon id="radio-icon" class="radio-business" name="radio-button-on-outline"></ion-icon>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" >
+    <ion-fab-button>
+      Create &nbsp; <ion-icon name="chevron-up-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
