@@ -14,7 +14,12 @@ export class HomePage {
     spaceBetween:  1,
     slidesPerView: 1.7
   } 
+  username: string | null | undefined;
+ 
+  
 
-  constructor() {}
+  ngOnInit() {
+    this.username = localStorage.getItem('username') ;
+  }
 
 }

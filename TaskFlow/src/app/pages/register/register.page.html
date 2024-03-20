@@ -1,38 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+</head>
+
 <ion-content [fullscreen]="true">
 
   <div class="flex-center">
-   
-      <ion-card shape="round">
-       <!-- <ion-item><img src="../../assets/icon/icon.png" alt="logo" width="50" height="50"></ion-item> -->
-        <ion-card-header>
-          <div class="login-header">
-            <div style="display: block;text-align: center; padding: 0 20px;">
-              <ion-card-title class="ion-padding-top">
-                Welcome in TaskFlow App!
-              </ion-card-title>
-              <ion-text class="ion-padding-top" color="">
-                We are very excited to have you join the <ion-text color="success">family</ion-text>
-              </ion-text>
-            </div>
+    <!-- <ion-item lines="none" class="logo-container">
+      <img src="../../assets/icon/icon.png" alt="logo" width="50" height="50">
+    </ion-item> -->
+
+
+    <ion-card shape="round">
+
+      <ion-card-header>
+        <div class="login-header">
+          <div style="display: block;text-align: center; padding: 0 20px;">
+            <ion-card-title class="ion-padding-top">
+              Welcome in TaskFlow App!
+            </ion-card-title>
+            <ion-text class="ion-padding-top" color="">
+              We are very excited to have you join the <ion-text color="tertiary">family</ion-text>
+            </ion-text>
           </div>
-        </ion-card-header>
-          <ion-card-content>
-              <ion-item>
-                  <ion-input type="email" label="Email" labelPlacement="floating" placeholder=""></ion-input>
-              </ion-item>
-              <ion-item>
-                  <ion-input type="password" label="Password" labelPlacement="floating" placeholder=""></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input type="password" label="Confirm Password" labelPlacement="floating" placeholder=""></ion-input>
-            </ion-item>
-              <ion-button class="ion-padding-top" expand="block" shape="round" color="tertiary">Register</ion-button>
-              <ion-text color="">
-                You already have an account? 
-              </ion-text>
-                <ion-button fill="clear" expand="block" shape="round" color="tertiary">Log in</ion-button>
-            
-          </ion-card-content>
-      </ion-card>
+        </div>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="user.firstName" label="Name" labelPlacement="floating"
+            placeholder="" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="user.lastName" label="Last name" labelPlacement="floating"
+            placeholder=""></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="email" [(ngModel)]="user.email" label="Email" labelPlacement="floating"
+            placeholder=""></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="password" [(ngModel)]="user.password" label="Password" labelPlacement="floating"
+            placeholder="" aria-label="Show/hide" [counter]="true" minlength="8"  [counterFormatter]="customCounterFormatter"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="password" [(ngModel)]="confirmPassword" class="ion-padding-bottom" label="Confirm password" labelPlacement="floating"
+            placeholder="" aria-label="Show/hide" [counter]="true" minlength="8"  [counterFormatter]="customCounterFormatter"></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-button (click)="register()" expand="block" shape="round" color="tertiary">Register</ion-button>
+      </ion-card-content>
+      <ion-card-content>
+        You already have an account?
+      </ion-card-content>
+
+      <ion-button (click)="goToLogin()"class="ion-padding-bottom" fill="clear" expand="block" shape="round" color="tertiary">Log
+        in</ion-button>
+
+    </ion-card>
+
+
+
   </div>
+
+
 </ion-content>

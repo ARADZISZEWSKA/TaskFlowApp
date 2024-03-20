@@ -16,7 +16,7 @@
 <!-- text -->
 <ion-content [fullscreen]="true">
   <div id="container">
-    <strong>What's up, Bianka!</strong>
+    <strong>What's up, {{username}}</strong>
     <span class="sub-header">tasks</span>
 
     <!-- categories/tasks/ -->
@@ -39,6 +39,7 @@
           <ion-progress-bar mode="ios" value="0.3"></ion-progress-bar>
         </div>
       </swiper-slide>
+      
     </swiper-container>
 
     <span class="todays-header">TODAY'S TASKs</span>
