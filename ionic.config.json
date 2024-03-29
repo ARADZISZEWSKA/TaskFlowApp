@@ -1,0 +1,7 @@
+{
+  "name": "TaskFlow",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

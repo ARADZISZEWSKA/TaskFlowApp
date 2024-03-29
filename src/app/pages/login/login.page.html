@@ -1,0 +1,31 @@
+<ion-content [fullscreen]="true">
+  <div class="flex-center">
+      <ion-card shape="round">
+          <ion-card-content>
+            <ion-card-header>
+                <div class="login-header">
+                  <div style="display: block;text-align: center; padding: 0 20px;">
+                    <ion-card-title class="ion-padding-top">
+                      Welcome in TaskFlow App!
+                    </ion-card-title>
+                    <ion-text class="ion-padding-top" color="">
+                      We are very excited to have you join the <ion-text color="primary-tint">family</ion-text>
+                    </ion-text>
+                  </div>
+                </div>
+              </ion-card-header>
+          <ion-card-content>
+              <ion-item>
+                  <ion-input type="email" [(ngModel)]="user.email" label="Email" labelPlacement="floating" placeholder=""></ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-input  type="password" [(ngModel)]="user.password" label="Password" labelPlacement="floating" placeholder=""></ion-input>
+              </ion-item>
+              </ion-card-content>
+              <ion-button fill="clear" size="small" style="text-transform: initial;">Recovery password</ion-button>
+              <ion-button (click)="login()" expand="block" shape="round" color="tertiary">Login</ion-button>
+              <ion-button (click)="goToRegister()" class="ion-margin-top" fill="clear" expand="block" shape="round" color="tertiary">Register</ion-button>
+          </ion-card-content>
+      </ion-card>
+  </div>
+</ion-content>

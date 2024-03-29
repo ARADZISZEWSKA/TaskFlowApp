@@ -1,0 +1,87 @@
+<ion-header class="ion-no-border" [translucent]="true">
+  <ion-toolbar mode="md">
+    
+<!-- search and notification icons -->
+    <ion-buttons slot="end">
+      <ion-button class="search-btn">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- text -->
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <strong>What's up, {{username}}</strong>
+    <span class="sub-header">tasks</span>
+
+    <!-- categories/tasks/ -->
+    <swiper-container [swiper]="sliderConfig">
+      <swiper-slide class="categories">
+        <div class="categories-buttons business">
+          <span class="task-count">
+            40 tasks
+          </span>
+          <span class="categories-name"> Business</span>
+          <ion-progress-bar mode="ios" value="0.7"></ion-progress-bar>
+        </div>
+      </swiper-slide>
+      <swiper-slide class="categories">
+        <div class="categories-buttons personal">
+          <span class="task-count">
+            18 tasks
+          </span>
+          <span class="categories-name"> Personal</span>
+          <ion-progress-bar mode="ios" value="0.3"></ion-progress-bar>
+        </div>
+      </swiper-slide>
+      
+    </swiper-container>
+
+    <span class="todays-header">TODAY'S TASKs</span>
+    <div class="task-list">
+      <!-- This is where the tasks go -->
+      <app-task [text]="'Task 1'"></app-task>
+      <app-task [text]="'Task 2'"></app-task>
+    </div>
+  </div>
+      <!-- the add button-->
+  <ion-fab id="trigger-button" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button mode="ios">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-modal mode="ios" trigger="trigger-button" [isOpen]="false" [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="1">
+    <ng-template>
+      <app-new-task></app-new-task>
+    </ng-template>
+  </ion-modal>
+
+  <!-- tab menu -->
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="recent-tasks">
+        <ion-icon name="hourglass-outline"></ion-icon>
+        <ion-label>Tasks</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="recent-tasks">
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="other-tab">
+        <ion-icon name="settings"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-tab-button>
+
+      <!-- Dodaj więcej tabów według potrzeb -->
+
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>
