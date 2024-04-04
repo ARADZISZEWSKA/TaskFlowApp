@@ -8,12 +8,11 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { TaskComponent } from '../../components/task/task.component';
-import { NewTaskComponent } from '../../components/new-task/new-task.component';
+
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule, IonicModule],
-  declarations: [HomePage, TaskComponent, NewTaskComponent],
+  declarations: [HomePage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePageModule {}

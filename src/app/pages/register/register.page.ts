@@ -12,6 +12,7 @@ import { AlertController } from '@ionic/angular';
 
 export class RegisterPage {
 
+  //counter for the password(from ionic)
   customCounterFormatter(inputLength: number, maxLength: number) {
     return `${maxLength - inputLength} characters remaining`;
   }
@@ -28,8 +29,8 @@ export class RegisterPage {
 
   register(): void {
     let errorMessage = '';
-    console.log(`Registering with password: ${this.user.password} and confirmPassword: ${this.user.confirmPassword}`);
-  
+    
+  // The validations prevent invalid requests from reaching the server, saving server resources
     if (!this.user.isValidEmail()) {
       errorMessage = 'Please provide a valid email address.';
     } else if (!this.user.isValidPassword()) {
@@ -63,6 +64,7 @@ export class RegisterPage {
     this.router.navigateByUrl('/login'); 
   }
 
+  //creates and presents an Ionic alert with custom messages
   async presentAlert(header: string, subHeader: string, message: string, isSuccess: boolean) {
     const alert = await this.alertController.create({
       header: header,
