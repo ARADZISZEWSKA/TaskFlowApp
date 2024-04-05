@@ -1,0 +1,67 @@
+ion-toolbar {
+    --background: var(--ion-background-color, --td-bg);
+    padding: 1rem 0.3rem;
+    padding-bottom: 0;
+  
+    ion-icon,
+    i {
+      font-weight: lighter;
+      color: var(--ion-secondary-text-color);
+      font-size: 1.66rem;
+    }
+  
+
+  }
+  
+  ion-content {
+    --background: var(--ion-background-color, --td-bg);
+  }
+  
+  #container {
+    padding: 3rem 0rem;
+    padding-top: 1.5vh;
+  
+    strong {
+      font-size: xx-large;
+      padding-left: 1.2rem;
+      letter-spacing: 0.5px;
+    }
+  }
+  
+  .sub-header,
+  .todays-header {
+    text-transform: uppercase;
+    display: block;
+    margin-left: 1.2rem;
+    margin-top: 4vh;
+    font-size: small;
+    letter-spacing: 0.5px;
+    color: var(--ion-secondary-text-color);
+  }
+  
+  .todays-header {
+    margin-top: 2vh;
+    margin-bottom: 3vh;
+  }
+
+  
+  .fab-container {
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.text-below-fab {
+    margin-top: 20px;
+  }
+  
+  
+  /* Rest of your CSS */
+  
+  
+  
+  
+  
+  
+  
