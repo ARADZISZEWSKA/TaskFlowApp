@@ -24,7 +24,7 @@ export class LoginPage {
       response => {
         console.log(response);
         //Navigate to a dashboard page on successful login
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/admin-homepage');
       },
       // if login fails
       async error => {
