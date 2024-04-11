@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { AddProjectModalComponent } from './add-project-modal.component';
+import { TypeaheadComponent } from 'src/app/components/typeahead/typeahead.component';
 
 describe('AddProjectModalComponent', () => {
   let component: AddProjectModalComponent;
