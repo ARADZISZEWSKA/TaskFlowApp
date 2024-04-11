@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button >Cancel</ion-button>
+    </ion-buttons>
+    <ion-title >Add your team</ion-title>
+    <ion-buttons slot="end">
+      <ion-button >Confirm</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-input placeholder="Enter project name"></ion-input>
+  </ion-item>
+  <ion-item class="ion-margin-top">
+    <ion-input placeholder="Enter project description"></ion-input>
+  </ion-item>
+  <ion-list>
+    <ion-item class="ion-margin-top">
+      <ion-select placeholder="Add members to your project" interface="popover" [multiple]="true">
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="oranges">Oranges</ion-select-option>
+        <ion-select-option value="bananas">Bananas</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-item class="ion-margin-top">
+   
+
+     <ion-grid>
+      <ion-row>
+        <ion-col> <ion-input [readonly]="true">Specify the deadline</ion-input>
+      </ion-col>
+        <ion-col><ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+          <ion-modal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="datetime"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
+    
+</ion-item>
+  
+</ion-content>
