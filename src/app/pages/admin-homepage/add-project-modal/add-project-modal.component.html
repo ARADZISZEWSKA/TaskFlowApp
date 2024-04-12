@@ -1,0 +1,72 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    
+    <ion-title >Add your team</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" >Confirm</ion-button>
+     
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+
+  <ion-item>
+    <ion-input placeholder="Enter project name"></ion-input>
+  </ion-item>
+
+  <ion-item class="ion-margin-top">
+    <ion-input placeholder="Enter project description"></ion-input>
+  </ion-item>
+
+  
+  <!--date picker-->
+    <ion-item class="ion-margin-top">
+    <ion-label color="medium">Select the date</ion-label>
+  </ion-item>
+  <div class="datetime-button-container">
+    <ion-datetime-button datetime="datetime"></ion-datetime-button>
+  </div>
+
+          <ion-modal #dataModal [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime id="datetime"></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        
+    
+
+
+
+<ion-list [inset]="true">
+  <ion-item [button]="true" [detail]="false" id="select-members">
+    <ion-label>Select project members</ion-label>
+    <div slot="end" id="selected-members">{{ selectedMembersText }}</div>
+  </ion-item>
+</ion-list>
+
+<!--modal dodający userów do projektu-->
+<ion-modal #memberModal  trigger="select-members" #modal>
+<ng-template>
+  <app-typeahead
+    class="ion-page"
+    title="Select members"
+    [items]="members"
+    [selectedItems]="selectedMembers"
+    (selectionChange)="memberSelectionChanged($event)"
+    (selectionCancel)="memberModal.dismiss()"
+  ></app-typeahead>
+</ng-template>
+</ion-modal>
+
+
+
+
+
+
+  
+</ion-content>
+

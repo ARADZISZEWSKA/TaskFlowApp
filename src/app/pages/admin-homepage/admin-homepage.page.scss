@@ -58,6 +58,9 @@ ion-toolbar {
     top: calc(50% + 40px); /* Dostosuj wartość w razie potrzeby */
     left: 50%;
     transform: translateX(-50%);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ion-secondary-text-color);
   }
   
  

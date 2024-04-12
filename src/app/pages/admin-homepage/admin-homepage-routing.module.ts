@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminHomepagePage } from './admin-homepage.page';
+import { ModalController } from '@ionic/angular';
 
 const routes: Routes = [
   {
