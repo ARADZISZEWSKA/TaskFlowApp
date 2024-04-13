@@ -3,6 +3,8 @@ import { Item } from '../../../models/types';
 import { IonModal } from '@ionic/angular';
 import { TypeaheadComponent } from 'src/app/components/typeahead/typeahead.component';
 import { ModalController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
+import { Project } from 'src/app/models/projects.model';
 
 
 
@@ -14,12 +16,9 @@ import { ModalController } from '@ionic/angular';
 })
 export class AddProjectModalComponent  {
 
+  newProject: Project = new Project();
   @ViewChild('memberModal', { static: true }) memberModal!: IonModal;
   
-
- 
-  constructor(private modalController: ModalController) {}
-
   selectedMembersText = '0 Items';
   selectedMembers: string[] = [];
 
@@ -70,17 +69,29 @@ export class AddProjectModalComponent  {
     this.memberModal.dismiss();
   }
 
+  constructor(
+    private http: HttpClient,
+    private modalController: ModalController
+  ) {}
 
-
+  async addProject(): Promise<void> {
+    try {
+      const response = await this.http.post<any>('http://localhost:5139/projects/create', this.newProject).toPromise();
+      console.log(response); // Wyświetl odpowiedź z serwera w konsoli
+      this.modalController.dismiss({ success: true }); // Zamknij modal po pomyślnym dodaniu projektu
+    } catch (error) {
+      console.error('Failed to add project:', error);
+      // Wyświetl komunikat błędu
+    }
+  }
   cancel() {
     this.modalController.dismiss(null, 'cancel');
   }
 
   confirm() {
     this.modalController.dismiss({ /* zmienne do przekazania, te z formularzy */ }, 'confirm');
+    this.addProject(); // Dodaj wywołanie metody addProject() po kliknięciu przycisku "Confirm"
+
   }
+  
 }
-
-  
-
-  

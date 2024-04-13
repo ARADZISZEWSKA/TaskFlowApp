@@ -2,25 +2,31 @@ export class User {
     id: string;
     email: string;
     password: string;
+    confirmPassword: string;
     firstName: string;
     lastName: string;
     roles: string[];
     projectIds: string[];
 
-    constructor(id: string = '', email: string = '', password: string = '', firstName: string = '', lastName: string = '', roles: string[] = [], projectIds: string[] = []) {
+    constructor(id: string = '', email: string = '', password: string = '', confirmPassword: string = '', firstName: string = '', lastName: string = '', roles: string[] = [], projectIds: string[] = []) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.confirmPassword = confirmPassword;
         this.firstName = firstName;
         this.lastName = lastName;
         this.roles = roles;
         this.projectIds = projectIds;
     }
 
-    passwordsMatch(confirmPassword: string): boolean {
-        console.log(`Password: ${this.password}, ConfirmPassword: ${confirmPassword}`);
-        return this.password === confirmPassword;
+    get name(): string {
+        return `${this.firstName} ${this.lastName}`;
     }
+    
+    passwordsMatch(): boolean {
+        console.log(`Password: ${this.password}, ConfirmPassword: ${this.confirmPassword}`);
+        return this.password === this.confirmPassword;
+      }
 
     isValidEmail(): boolean {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

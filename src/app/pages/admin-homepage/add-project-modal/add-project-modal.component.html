@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -15,11 +14,11 @@
 <ion-content class="ion-padding">
 
   <ion-item>
-    <ion-input placeholder="Enter project name"></ion-input>
+    <ion-input placeholder="Enter project name" [(ngModel)]="newProject.projectName"></ion-input>
   </ion-item>
 
   <ion-item class="ion-margin-top">
-    <ion-input placeholder="Enter project description"></ion-input>
+    <ion-input placeholder="Enter project description" [(ngModel)]="newProject.description"></ion-input>
   </ion-item>
 
   
@@ -28,7 +27,7 @@
     <ion-label color="medium">Select the date</ion-label>
   </ion-item>
   <div class="datetime-button-container">
-    <ion-datetime-button datetime="datetime"></ion-datetime-button>
+    <ion-datetime-button datetime="datetime" [(ngModel)]="newProject.deadline"></ion-datetime-button>
   </div>
 
           <ion-modal #dataModal [keepContentsMounted]="true">
@@ -61,12 +60,3 @@
   ></app-typeahead>
 </ng-template>
 </ion-modal>
-
-
-
-
-
-
-  
-</ion-content>
-
