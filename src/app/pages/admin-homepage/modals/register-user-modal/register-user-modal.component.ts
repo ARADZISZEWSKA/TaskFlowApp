@@ -21,5 +21,15 @@ export class RegisterUserModalComponent  implements OnInit {
   register() {
     // Logika do rejestrowania użytkownika
   }
+  public progress = 0;
+
+  
+
+  updateProgress() {
+    this.progress += 0.25;
+    if (this.progress > 1) {
+      this.progress = 1; // Ustaw maksymalną wartość na 100%
+    }
+  }
   
 }

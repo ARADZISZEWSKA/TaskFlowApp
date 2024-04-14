@@ -1,37 +1,33 @@
-
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="dismissModal()">Cancel</ion-button>
     </ion-buttons>
     
-    <ion-title >Create a new user</ion-title>
+    <ion-title>Create a new user</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="register()" >Confirm</ion-button>
-     
+      <ion-button id="open-loading" (click)="register()">Confirm</ion-button>
+      <ion-loading mode="ios" class="custom-loading" trigger="open-loading" message="Creating a new user..." duration="2000"></ion-loading>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-progress-bar [value]="progress"></ion-progress-bar>
 <ion-content class="ion-padding">
-
   <ion-item>
-    <ion-input placeholder="Name"></ion-input>
+    <ion-input placeholder="Name" (ionChange)="updateProgress()"></ion-input>
   </ion-item>
 
   <ion-item class="ion-margin-top">
-    <ion-input placeholder="Last name"></ion-input>
+    <ion-input placeholder="Last name" (ionChange)="updateProgress()"></ion-input>
   </ion-item>
 
   <ion-item class="ion-margin-top">
-    <ion-input placeholder="Password"></ion-input>
+    <ion-input placeholder="Password" (ionChange)="updateProgress()"></ion-input>
   </ion-item>
 
   <ion-item class="ion-margin-top">
-    <ion-input placeholder="Confirm password"></ion-input>
+    <ion-input placeholder="Confirm password" (ionChange)="updateProgress()"></ion-input>
   </ion-item>
-
-
 
   
 </ion-content>
-
