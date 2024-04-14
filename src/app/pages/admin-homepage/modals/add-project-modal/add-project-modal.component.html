@@ -23,18 +23,11 @@
 
   
   <!--date picker-->
-    <ion-item class="ion-margin-top">
-    <ion-label color="medium">Select the date</ion-label>
-  </ion-item>
-  <div class="datetime-button-container">
-    <ion-datetime-button datetime="datetime" [(ngModel)]="newProject.deadline"></ion-datetime-button>
+  <div class="datetime-button-container,ion-margin-top">
+    <ion-datetime [(ngModel)]="newProject.deadline" presentation="date"></ion-datetime>
   </div>
 
-          <ion-modal #dataModal [keepContentsMounted]="true">
-            <ng-template>
-              <ion-datetime id="datetime"></ion-datetime>
-            </ng-template>
-          </ion-modal>
+          
         
     
 
