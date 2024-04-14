@@ -1,48 +1,41 @@
 export class User {
+    id: string;
     email: string;
     password: string;
-    confirmPassword: string;
     firstName: string;
     lastName: string;
-  
-    constructor(email: string = '', password: string = '', confirmPassword: string = '', firstName: string = '', lastName: string = '') {
-      this.email = email;
-      this.password = password;
-      this.confirmPassword = confirmPassword;
-      this.firstName = firstName;
-      this.lastName = lastName;
+    roles: string[];
+    projectIds: string[];
+
+    constructor(id: string = '', email: string = '', password: string = '', firstName: string = '', lastName: string = '', roles: string[] = [], projectIds: string[] = []) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.roles = roles;
+        this.projectIds = projectIds;
     }
-  
-    
-  
-    passwordsMatch(): boolean {
-        console.log(`Password: ${this.password}, ConfirmPassword: ${this.confirmPassword}`);
-        return this.password === this.confirmPassword;
-      }
-      
-  
-    
-  
-    // Email validation
+
+    passwordsMatch(confirmPassword: string): boolean {
+        console.log(`Password: ${this.password}, ConfirmPassword: ${confirmPassword}`);
+        return this.password === confirmPassword;
+    }
+
     isValidEmail(): boolean {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(this.email);
     }
 
-    // Password validation (example: min 8 characters)
     isValidPassword(): boolean {
         return this.password.length >= 8;
     }
-   
 
-    // First and last name validation
     isValidName(): boolean {
         return this.firstName.trim().length > 0 && this.lastName.trim().length > 0;
     }
 
-    // General validation that calls all other validation methods
     isValidUser(): boolean {
         return this.isValidEmail() && this.isValidPassword() && this.isValidName();
     }
 }
-
