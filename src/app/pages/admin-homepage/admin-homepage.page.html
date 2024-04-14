@@ -1,10 +1,18 @@
-
-
 <ion-content [fullscreen]="true">
-  <div id="container" class="ion-margin-top">
-    <strong>What's up, Jeff</strong>
-    <span class="sub-header">Your teams</span>
-  </div>
+
+  <ion-toolbar>
+    <div id="container" class="ion-margin-top">
+      <strong>What's up, Jeff</strong>
+      <span class="sub-header">Your teams</span>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button (click)="openRegisterUserModal()">
+        <ion-icon name="person-add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+
 
   <div class="fab-container">
     <ion-fab vertical="center" horizontal="center" class="center-fab">

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { AddProjectModalComponent } from './add-project-modal/add-project-modal.component';
+import { AddProjectModalComponent } from './modals/add-project-modal/add-project-modal.component';
+import { RegisterUserModalComponent } from './modals/register-user-modal/register-user-modal.component';
+
 
 
 @Component({
@@ -20,7 +22,19 @@ export class AdminHomepagePage implements OnInit {
 
     return await modal.present();
   }
+  // async openRegisterUserModal() {
+  //   const modal = await this.modalController.create({
+  //     component: RegisterModalComponent,
+  //   });
+  //   return await modal.present();
+  // }
   
+  async openRegisterUserModal() {
+    const modal = await this.modalController.create({
+      component: RegisterUserModalComponent,
+    });
+    return await modal.present();
+  }
   
 
   ngOnInit() {
