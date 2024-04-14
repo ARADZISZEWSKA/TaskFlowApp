@@ -12,6 +12,7 @@ import { AlertController } from '@ionic/angular';
 export class LoginPage {
   user: User = new User();
   loginError: string = ''; 
+ 
 
   constructor(
     private authService: AuthService, 
@@ -23,25 +24,36 @@ export class LoginPage {
     this.authService.login(this.user).subscribe(
       response => {
         console.log(response);
-        //Navigate to a dashboard page on successful login
-        this.router.navigateByUrl('/admin-homepage');
+        const role = response.role; // Odczytaj rolę z odpowiedzi
+
+        //OD STORNY BACKENDU TEŻ MUSI BYĆ WALIDACJA!!!!!!!!!!!!!!
+        // Zapisz rolę w lokalnym magazynie
+        localStorage.setItem('role', role);
+
+        // Sprawdź rolę i przekieruj odpowiednio
+        if (role === 'admin') {
+          this.router.navigateByUrl('/admin-homepage');  // Strona główna dla administratora
+        } else {
+          this.router.navigateByUrl('/home');  // Strona główna standardowego użytkownika
+        }
       },
-      // if login fails
       async error => {
         console.error(error);
         this.loginError = 'Login failed. Please check your credentials.';
-  
-        // Present an alert with the error message
+    
+        // Prezentuj alert z komunikatem o błędzie
         const alert = await this.alertController.create({
           header: 'Login Error',
           message: this.loginError,
           buttons: ['OK']
         });
-  
+    
         await alert.present();
       }
     );
   }
+  
+  
   goToRegister(): void {
     this.router.navigateByUrl('/register'); 
   }

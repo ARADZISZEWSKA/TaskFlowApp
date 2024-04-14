@@ -23,7 +23,9 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/user/login`, user).pipe(
       tap((response:any) => {
         localStorage.setItem('token', response.token); 
-        localStorage.setItem('username', response.firstName); 
+        localStorage.setItem('username', response.firstName);
+        localStorage.setItem('role', response.role); 
+        
       })
     );
   }

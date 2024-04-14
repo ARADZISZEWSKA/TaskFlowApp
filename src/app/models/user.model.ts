@@ -5,17 +5,17 @@ export class User {
     confirmPassword: string;
     firstName: string;
     lastName: string;
-    roles: string[];
+    role: string;
     projectIds: string[];
 
-    constructor(id: string = '', email: string = '', password: string = '', confirmPassword: string = '', firstName: string = '', lastName: string = '', roles: string[] = [], projectIds: string[] = []) {
+    constructor(id: string = '', email: string = '', password: string = '', confirmPassword: string = '', firstName: string = '', lastName: string = '', role: string="", projectIds: string[] = []) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.roles = roles;
+        this.role = role;
         this.projectIds = projectIds;
     }
 

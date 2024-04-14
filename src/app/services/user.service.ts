@@ -1,19 +1,30 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/models/user.model'; 
+import { User } from '../models/user.model'; 
 
-@Injectable({                   //do oznaczenia, że klasa jest usługą wstrzykiwania zależności
-  providedIn: 'root'            //dostępna w całej aplikacji, globalnie
+@Injectable({
+  providedIn: 'root'
 })
 export class UserService {
+  private baseUrl = 'http://localhost:5139/user'; 
 
-  private apiUrl = 'http://localhost:5139/user';    //endpoint user odpowiada adresowi kontrolera UserController   // prywatne pole, przechowuje adres URL do endpointu API, z którego pobierane będą dane użytkowników
+  constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient) { }             //przyjmuje wstrzykiwaną zależność HttpClient - wykonywanie żądań HTTP 
-
-  getUsers(): Observable<User[]> {                      //metoda, która wywołuje zapytanie GET do określonego adresu URL - this.apiUrl, zwraca wynik jako Observable. wynik będzie tablicą obiektów typu User
-    return this.http.get<User[]>(this.apiUrl);          //będzie używana do pobierania danych użytkowników z serwera
+  getUsers(): Observable<User[]> {
+    return new Observable(observer => {
+      this.http.get<User[]>(`${this.baseUrl}/users`).subscribe({
+        next: (users) => {
+          console.log('Received users from backend:', users);
+          observer.next(users);
+          observer.complete();
+        },
+        error: (error) => {
+          console.error('Failed to get users from backend:', error);
+          observer.error(error);
+        }
+      });
+    });
   }
+  
 }
