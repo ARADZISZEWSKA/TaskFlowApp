@@ -1,0 +1,11 @@
+ion-title {
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
+  ion-loading.custom-loading {
+    --background: #fafcff;
+    --spinner-color: #6a94e2;
+  
+    color: #6a94e2;
+  }

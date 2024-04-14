@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Item } from '../../../models/types';
+import { Item } from '../../../../models/types';
 import { IonModal } from '@ionic/angular';
 import { TypeaheadComponent } from 'src/app/components/typeahead/typeahead.component';
 import { ModalController } from '@ionic/angular';

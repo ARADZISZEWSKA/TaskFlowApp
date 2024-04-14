@@ -8,8 +8,9 @@ import { AdminHomepagePageRoutingModule } from './admin-homepage-routing.module'
 
 import { AdminHomepagePage } from './admin-homepage.page';
 import { IonModal } from '@ionic/angular/common';
-import { AddProjectModalComponent } from './add-project-modal/add-project-modal.component';
+import { AddProjectModalComponent } from './modals/add-project-modal/add-project-modal.component';
 import { TypeaheadModule } from 'src/app/components/typeahead/typeahead.module';
+import { RegisterUserModalComponent } from './modals/register-user-modal/register-user-modal.component';
 
 
 
@@ -21,7 +22,7 @@ import { TypeaheadModule } from 'src/app/components/typeahead/typeahead.module';
     AdminHomepagePageRoutingModule,
     TypeaheadModule
   ],
-  declarations: [AdminHomepagePage, AddProjectModalComponent]  
+  declarations: [AdminHomepagePage, AddProjectModalComponent, RegisterUserModalComponent]  
 })
 
 
