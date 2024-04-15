@@ -14,19 +14,19 @@
 <ion-progress-bar [value]="progress"></ion-progress-bar>
 <ion-content class="ion-padding">
   <ion-item>
-    <ion-input placeholder="Name" (ionChange)="updateProgress()"></ion-input>
+    <ion-input placeholder="First name" [(ngModel)]="user.firstName" (ionChange)="updateProgress()"></ion-input>
   </ion-item>
 
   <ion-item class="ion-margin-top">
-    <ion-input placeholder="Last name" (ionChange)="updateProgress()"></ion-input>
+    <ion-input placeholder="Last name" [(ngModel)]="user.lastName" (ionChange)="updateProgress()"></ion-input>
   </ion-item>
 
   <ion-item class="ion-margin-top">
-    <ion-input placeholder="Password" (ionChange)="updateProgress()"></ion-input>
+    <ion-input placeholder="Email" [(ngModel)]="user.email" (ionChange)="updateProgress()"></ion-input>
   </ion-item>
 
   <ion-item class="ion-margin-top">
-    <ion-input placeholder="Confirm password" (ionChange)="updateProgress()"></ion-input>
+    <ion-input placeholder="Password" [(ngModel)]="user.password" (ionChange)="updateProgress()"></ion-input>
   </ion-item>
 
   

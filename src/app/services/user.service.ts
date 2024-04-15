@@ -26,5 +26,9 @@ export class UserService {
       });
     });
   }
+
+  registerUser(user: User): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/register`, user);
   
+}
 }
