@@ -18,6 +18,10 @@ export class AuthService {
   register(user: User): Observable<any> {
     return this.http.post(`${this.baseUrl}/user/register`, user);
   }
+  registerByAdmin(user: User): Observable<any> {
+    return this.http.post(`${this.baseUrl}/user/registerByAdmin`, user);
+  }
+  
 
   login(user: User): Observable<any> {
     return this.http.post(`${this.baseUrl}/user/login`, user).pipe(

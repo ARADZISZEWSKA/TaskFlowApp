@@ -6,8 +6,8 @@
     
     <ion-title>Create a new user</ion-title>
     <ion-buttons slot="end">
-      <ion-button id="open-loading" (click)="register()">Confirm</ion-button>
-      <ion-loading mode="ios" class="custom-loading" trigger="open-loading" message="Creating a new user..." duration="2000"></ion-loading>
+      <ion-button id="open-loading" (click)="registerByAdmin()">Confirm</ion-button>
+      <!-- <ion-loading mode="ios" class="custom-loading" trigger="open-loading" message="Creating a new user..." duration="2000"></ion-loading> -->
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -26,8 +26,16 @@
   </ion-item>
 
   <ion-item class="ion-margin-top">
-    <ion-input placeholder="Password" [(ngModel)]="user.password" (ionChange)="updateProgress()"></ion-input>
+    <ion-input placeholder="Password" [(ngModel)]="user.password" (ionChange)="updateProgress()" aria-label="Show/hide" type="password" value="password"></ion-input>
   </ion-item>
+
+  <ion-item class="ion-margin-top">
+    <ion-input placeholder="Confirm password" [(ngModel)]="user.confirmPassword" (ionChange)="updateProgress()" aria-label="Show/hide" type="password" value="password"></ion-input>
+  </ion-item>
+
+  
+
+
 
   
 </ion-content>
