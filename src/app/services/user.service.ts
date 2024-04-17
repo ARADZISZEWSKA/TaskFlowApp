@@ -10,7 +10,7 @@ export class UserService {
   private baseUrl = 'http://localhost:5139/user'; 
 
   constructor(private http: HttpClient) { }
-
+//zapytanie do backendu o userów (w backendzie jest filtr aby zwracało tylko osoby o roli "user")
   getUsers(): Observable<User[]> {
     return new Observable(observer => {
       this.http.get<User[]>(`${this.baseUrl}/users`).subscribe({
