@@ -17,10 +17,10 @@ export class AddProjectModalComponent implements OnInit {
 
   selectedMembersText = '0 Items';
   selectedMembers: string[] = [];
-  members: any[] = [];  // Change type to any[] for compatibility with Item interface
+  members: any[] = [];  // This will be modified to work with the typeahead component
 
   constructor(
-    private http: HttpClient, // Ensure this is included
+    private http: HttpClient,
     private userService: UserService,
     private modalController: ModalController
   ) {}
@@ -62,20 +62,14 @@ export class AddProjectModalComponent implements OnInit {
 
   async addProject(): Promise<void> {
     try {
+      // Set the member IDs directly to the newProject object
+      this.newProject.members = this.selectedMembers;
+
       const response = await this.http.post<any>('http://localhost:5139/projects/create', this.newProject).toPromise();
-      console.log(response); // Wyświetl odpowiedź z serwera w konsoli
-      this.modalController.dismiss({ success: true }); // Zamknij modal po pomyślnym dodaniu projektu
+      console.log(response); // Display server response
+      this.modalController.dismiss({ success: true }); // Dismiss modal on successful response
     } catch (error) {
-      console.error('Failed to add project:', error);
-      // Wyświetl komunikat błędu
+      console.error('Failed to add project:', error); // Display error message
     }
   }
 }
-
-
-  
-
-
-  
-  
-

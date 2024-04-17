@@ -31,4 +31,6 @@ export class UserService {
     return this.http.post<any>(`${this.baseUrl}/register`, user);
   
 }
+
+
 }

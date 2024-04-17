@@ -24,7 +24,6 @@ export class User {
     }
     
     passwordsMatch(): boolean {
-        console.log(`Password: ${this.password}, ConfirmPassword: ${this.confirmPassword}`);
         return this.password === this.confirmPassword;
       }
 
