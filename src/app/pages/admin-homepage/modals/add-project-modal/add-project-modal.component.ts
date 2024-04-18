@@ -62,14 +62,18 @@ export class AddProjectModalComponent implements OnInit {
 
   async addProject(): Promise<void> {
     try {
-      // Set the member IDs directly to the newProject object
-      this.newProject.members = this.selectedMembers;
+        // Set the member IDs directly to the newProject object
+        this.newProject.members = this.selectedMembers;
+      
+        const response = await this.http.post<any>('http://localhost:5139/projects/create', this.newProject, {
+            withCredentials: true
+        }).toPromise();
 
-      const response = await this.http.post<any>('http://localhost:5139/projects/create', this.newProject).toPromise();
-      console.log(response); // Display server response
-      this.modalController.dismiss({ success: true }); // Dismiss modal on successful response
+        console.log(response); // Display server response
+        this.modalController.dismiss({ success: true }); // Dismiss modal on successful response
     } catch (error) {
-      console.error('Failed to add project:', error); // Display error message
+        console.error('Failed to add project:', error); // Display error message
     }
-  }
+}
+
 }
