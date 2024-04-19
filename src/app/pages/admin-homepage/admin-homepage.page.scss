@@ -1,7 +1,7 @@
 ion-toolbar {
     --background: var(--ion-background-color, --td-bg);
-    padding: 1rem 0.3rem;
-    padding-bottom: 0;
+    // padding: 1rem 0.3rem;
+    // padding-bottom: 0;
   
     ion-icon,
     i {
@@ -46,37 +46,154 @@ ion-toolbar {
     margin-bottom: 3vh;
   }
 
-  .center-fab {
-    position: absolute;
-   /* top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-  }
-  
-  .text-below-fab {
-    position: absolute;
-    top: calc(50% + 40px); /* Dostosuj wartość w razie potrzeby */
-    left: 50%;
-    transform: translateX(-50%);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--ion-secondary-text-color);
-  }
+
   ion-tab-bar {
     --background: #ffffff;  /* White background */
     --color-selected: #488aff; /* Blue color for selected tab */
     --color: grey;  /* Grey color for unselected tabs */
     --mode: ios;
-    border-top: 1px solid #e0e0e0; /* Adding a top border */
     padding-top: 5px; /* Padding at the top of the tab bar */
+    border-top: 1px solid #e0e0e0;
 }
-  
  
   
+
+
+
+
+/* Ensure card container allows wrapping and fills width */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 16px;
+  flex-direction: column;  /* Układanie elementów w pionie */
+  flex-direction: column; 
+  
+}
+
+/* Cards should be flexible but have a max-width to control size */
+ion-card {
+  flex: 0 1 45%; /* Adjusts size to be less than half the container width with some space */
+  margin: 10px;
+  
+}
+
+/* Bottom container holding the fab and text */
+// .fab-container {
+//   display: flex;          /* Enables flexbox layout */
+//   justify-content: center; /* Centers content horizontally in the container */
+//   align-items: center;     /* Centers content vertically if needed */
+//   position: absolute;
+//   text-align: center;
+//   position: absolute;
+//   width: 100%;
+//   bottom: 60px; /* Adjust this value based on your needs, make sure it's above the tab bar */
+//   padding: 10px 0;
+//   z-index: 10; 
+//   flex-direction: column;
+// }
+
+.fab-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+  flex-direction: column;
+  margin-top: 20px; /* Add margin-top to create space between the cards and the FAB */
+}
+
+.text-below-fab {
+  text-align: center; /* Center the text */
+  padding: 10px 0; /* Adds some space above and below the text */
+  text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--ion-secondary-text-color);
+}
+ion-card-title{
+  color: #243158
+}
   
   
   
-  
-  
+.projects {
+  &-name {
+    color: var(--color);
+    font-size: large;
+    font-weight: 600;
+  }
+
+  &-buttons {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.8rem 1rem;
+    padding-bottom: 1.1rem;
+    margin: 1rem;
+    margin-bottom: 1.4rem;
+    margin-right: 0;
+    border-radius: 1.4rem;
+    font-size: larger;
+    color: var(--ion-color-secondary-contrast);
+    background-color: var(--ion-card-background);
+    text-align: left;
+    box-shadow: var(--ion-card-box-shadow);
+
+    ion-icon,
+    .bx-envelope {
+      font-size: xx-large;
+    }
+
+    ion-progress-bar {
+      margin-top: 0.6rem;
+      --background: var(--ion-progressbar);
+    }
+
+    .task-count {
+      color: var(--ion-secondary-text-color);
+      font-size: small;
+    }
+
+    span {
+      margin-bottom: 0.7rem;
+    }
+  }
+}
+
+.business {
+  ion-progress-bar {
+    --progress-background: var(--td-blue);
+  }
+}
+
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Take full width of its parent */
+}
+
+ion-progress-bar {
+  flex-grow: 0; /* Does not grow to fill the space */
+  width: 90%; /* Adjust this percentage as needed */
+  margin-right: 10px; /* Space between progress bar and button */
+}
+
+
+/* Default styles for mobile devices */
+swiper-container {
+  width: 100%; /* Full width on mobile */
+}
+
+/* Media query for tablets and desktops */
+@media (min-width: 992px) {
+  swiper-container {
+    width: 50%; /* 50% width on larger screens */
+    margin: 0 auto; /* Center the slider */
+  }
+}
+
+
   
   

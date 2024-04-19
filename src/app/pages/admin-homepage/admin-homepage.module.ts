@@ -11,6 +11,7 @@ import { IonModal } from '@ionic/angular/common';
 import { AddProjectModalComponent } from './modals/add-project-modal/add-project-modal.component';
 import { TypeaheadModule } from 'src/app/components/typeahead/typeahead.module';
 import { RegisterUserModalComponent } from './modals/register-user-modal/register-user-modal.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 
@@ -22,7 +23,8 @@ import { RegisterUserModalComponent } from './modals/register-user-modal/registe
     AdminHomepagePageRoutingModule,
     TypeaheadModule
   ],
-  declarations: [AdminHomepagePage, AddProjectModalComponent, RegisterUserModalComponent]  
+  declarations: [AdminHomepagePage, AddProjectModalComponent, RegisterUserModalComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 
