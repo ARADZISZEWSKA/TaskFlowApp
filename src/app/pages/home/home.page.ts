@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { register } from 'swiper/element/bundle';
-register();
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,6 +20,22 @@ export class HomePage {
 
   ngOnInit() {
     this.username = localStorage.getItem('username') ;
+  }
+//---Tab---
+  constructor(
+    private router: Router
+  ){}
+
+  goToSettings(): void {
+    this.router.navigateByUrl('/settings'); 
+  }
+
+  goToTasks(): void {
+    this.router.navigateByUrl('/tasks'); 
+  }
+
+  goToHome(): void {
+    this.router.navigateByUrl('/home'); 
   }
 
 }

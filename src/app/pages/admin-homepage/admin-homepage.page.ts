@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AddProjectModalComponent } from './modals/add-project-modal/add-project-modal.component';
 import { RegisterUserModalComponent } from './modals/register-user-modal/register-user-modal.component';
+import { Router } from '@angular/router';
 
 
 
@@ -12,7 +13,10 @@ import { RegisterUserModalComponent } from './modals/register-user-modal/registe
 })
 export class AdminHomepagePage implements OnInit {
 
-  constructor(private modalController: ModalController) {}
+  constructor(
+    private modalController: ModalController,
+    private router: Router) {}
+
 
   async openAddProjectModal() {
     const modal = await this.modalController.create({
@@ -38,6 +42,18 @@ export class AdminHomepagePage implements OnInit {
   
 
   ngOnInit() {
+  }
+
+  goToSettings(): void {
+    this.router.navigateByUrl('/settings'); 
+  }
+
+  goToTasks(): void {
+    this.router.navigateByUrl('/tasks'); 
+  }
+
+  goToAdminHomepage(): void {
+    this.router.navigateByUrl('/admin-homepage'); 
   }
 
 }
