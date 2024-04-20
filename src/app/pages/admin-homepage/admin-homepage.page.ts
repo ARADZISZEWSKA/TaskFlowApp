@@ -17,6 +17,7 @@ import { Project } from '../../models/projects.model';
 export class AdminHomepagePage implements OnInit {
   projects: Project[] = []; // Stores the list of projects
 
+  
  
   constructor(
     private modalController: ModalController,
@@ -25,8 +26,12 @@ export class AdminHomepagePage implements OnInit {
     
   ) {}
 
+  
+  username: string | null | undefined;
+
   ngOnInit() {
-    this.loadProjects(); // Load projects when component initializes
+    this.loadProjects();
+    this.username = localStorage.getItem('username') ; // Load projects when component initializes
   }
 
   loadProjects() {
