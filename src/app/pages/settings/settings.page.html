@@ -1,16 +1,16 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>settings</ion-title>
+    <ion-title size="large" style="font-size: 24px; margin-left: 20px;" >Settings</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">settings</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="ion-padding" style="position: absolute; bottom: 60px; left: 0; right: 0;">
+    <ion-button expand="full">Change your password</ion-button>
+    <ion-button expand="full">Log out</ion-button>
+  </div>
 </ion-content>
+
 
 <ion-footer>
   <ion-toolbar>
@@ -32,3 +32,4 @@
 </ion-tabs>
 </ion-toolbar>
 </ion-footer>
+
