@@ -54,12 +54,12 @@ export class AdminHomepagePage implements OnInit {
     return await modal.present();
   }
 
-  goToSettings(): void {
-    this.router.navigateByUrl('/settings'); 
+  goToSettingsAdmin(): void {
+    this.router.navigateByUrl('/settings-admin'); 
   }
 
-  goToTasks(): void {
-    this.router.navigateByUrl('/tasks'); 
+  goToTasksAdmin(): void {
+    this.router.navigateByUrl('/tasks-admin'); 
   }
 
   goToAdminHomepage(): void {

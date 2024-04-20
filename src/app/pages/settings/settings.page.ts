@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsPage implements OnInit {
 
-  constructor() { }
 
   ngOnInit() {
   }
+
+
+
+//---Tab---
+constructor(
+  private router: Router
+){}
+
+goToSettings(): void {
+  this.router.navigateByUrl('/settings'); 
+}
+
+goToTasks(): void {
+  this.router.navigateByUrl('/tasks'); 
+}
+
+goToHome(): void {
+  this.router.navigateByUrl('/home'); 
+}
 
 }
