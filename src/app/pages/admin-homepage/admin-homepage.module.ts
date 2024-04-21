@@ -12,6 +12,7 @@ import { AddProjectModalComponent } from './modals/add-project-modal/add-project
 import { TypeaheadModule } from 'src/app/components/typeahead/typeahead.module';
 import { RegisterUserModalComponent } from './modals/register-user-modal/register-user-modal.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ProjectDetailsModalComponent } from './modals/project-details-modal/project-details-modal.component';
 
 
 
@@ -23,7 +24,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     AdminHomepagePageRoutingModule,
     TypeaheadModule
   ],
-  declarations: [AdminHomepagePage, AddProjectModalComponent, RegisterUserModalComponent],
+  declarations: [AdminHomepagePage, AddProjectModalComponent, RegisterUserModalComponent, ProjectDetailsModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 

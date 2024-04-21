@@ -4,7 +4,7 @@
   </ion-refresher>
   <ion-toolbar>
     <div id="container" class="ion-margin-top">
-      <strong>What's up, Jeff</strong>
+      <strong>What's up, {{username}}</strong>
       <span class="sub-header">Your projects</span>
     </div>
     <ion-buttons slot="end">
@@ -32,20 +32,6 @@
     </div> -->
 
 
-    <!-- <swiper-container [swiper]="sliderConfig" >
-      <swiper-slide *ngFor="let project of projects" >
-        <div class="slide-content"  >
-          <h3>{{ project.projectName }}</h3>
-          <div class="progress-container">
-            <ion-progress-bar value="0.7"></ion-progress-bar>
-            <ion-button class="corner-button" fill="clear">
-              <ion-icon name="chevron-forward-outline"></ion-icon>
-            </ion-button>
-          </div>
-        </div>
-      </swiper-slide>
-    </swiper-container> -->
-
     <swiper-container [swiper]="sliderConfig">
       <swiper-slide *ngFor="let project of projects" class="projects">
         <div class="projects-buttons business">
@@ -55,7 +41,7 @@
           <span class="projects-name">{{ project.projectName }}</span>
           <div class="progress-container">
             <ion-progress-bar mode="ios" [value]=0.7></ion-progress-bar>
-            <ion-button class="corner-button" fill="clear">
+            <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsModal(project)">
               <ion-icon name="chevron-forward-outline"></ion-icon>
             </ion-button>
           </div>

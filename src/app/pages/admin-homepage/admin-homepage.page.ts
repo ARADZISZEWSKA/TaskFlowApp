@@ -6,6 +6,7 @@ import { RegisterUserModalComponent } from './modals/register-user-modal/registe
 import { Router } from '@angular/router';
 import { ProjectService } from '../../services/project.service'
 import { Project } from '../../models/projects.model'; 
+import { ProjectDetailsModalComponent } from './modals/project-details-modal/project-details-modal.component';
 
 
 
@@ -25,8 +26,11 @@ export class AdminHomepagePage implements OnInit {
     
   ) {}
 
+  username: string | null | undefined;
+
   ngOnInit() {
     this.loadProjects(); // Load projects when component initializes
+    this.username = localStorage.getItem('username') ;
   }
 
   loadProjects() {
@@ -50,6 +54,16 @@ export class AdminHomepagePage implements OnInit {
   async openRegisterUserModal() {
     const modal = await this.modalController.create({
       component: RegisterUserModalComponent,
+    });
+    return await modal.present();
+  }
+
+  async openProjectDetailsModal(project: Project) {
+    const modal = await this.modalController.create({
+      component: ProjectDetailsModalComponent,
+      componentProps: {
+        project: project // Przekazanie danych projektu do modalu
+      }
     });
     return await modal.present();
   }

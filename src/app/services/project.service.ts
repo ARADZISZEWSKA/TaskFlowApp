@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Project } from '../models/projects.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,4 +19,12 @@ export class ProjectService {
       withCredentials: true
     });
   }
+
+  // project.service.ts
+    getUserProjectMembers(projectId: string): Observable<User[]> {
+        return this.http.get<User[]>(`${this.baseUrl}/${projectId}/members`, {
+        withCredentials: true
+        });
+    }
+  
 }
