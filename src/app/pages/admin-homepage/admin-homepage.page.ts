@@ -18,6 +18,7 @@ import { ProjectDetailsModalComponent } from './modals/project-details-modal/pro
 export class AdminHomepagePage implements OnInit {
   projects: Project[] = []; // Stores the list of projects
 
+  
  
   constructor(
     private modalController: ModalController,
@@ -26,11 +27,12 @@ export class AdminHomepagePage implements OnInit {
     
   ) {}
 
+  
   username: string | null | undefined;
 
   ngOnInit() {
-    this.loadProjects(); // Load projects when component initializes
-    this.username = localStorage.getItem('username') ;
+    this.loadProjects();
+    this.username = localStorage.getItem('username') ; // Load projects when component initializes
   }
 
   loadProjects() {
@@ -71,10 +73,11 @@ export class AdminHomepagePage implements OnInit {
   goToSettings(): void {
     this.router.navigateByUrl('/settings'); 
   }
-
-  goToTasks(): void {
-    this.router.navigateByUrl('/tasks'); 
+  goToSettingsAdmin(): void {
+    this.router.navigateByUrl('/settings-admin'); 
   }
+
+  
 
   goToAdminHomepage(): void {
     this.router.navigateByUrl('/admin-homepage'); 
@@ -97,7 +100,8 @@ export class AdminHomepagePage implements OnInit {
     const differenceInMilliseconds = deadlineDate.getTime() - currentDate.getTime();
     const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 3600 * 24));
     return differenceInDays;
-  }
-  
   
 }
+
+}
+

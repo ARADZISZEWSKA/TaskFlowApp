@@ -34,7 +34,15 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
+  },  {
+    path: 'tasks-admin',
+    loadChildren: () => import('./pages/tasks-admin/tasks-admin.module').then( m => m.TasksAdminPageModule)
+  },
+  {
+    path: 'settings-admin',
+    loadChildren: () => import('./pages/settings-admin/settings-admin.module').then( m => m.SettingsAdminPageModule)
   }
+
 
 ];
 
