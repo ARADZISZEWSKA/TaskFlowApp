@@ -70,11 +70,13 @@ export class AdminHomepagePage implements OnInit {
     return await modal.present();
   }
 
-  goToSettings(): void {
-    this.router.navigateByUrl('/settings'); 
-  }
+  
   goToSettingsAdmin(): void {
     this.router.navigateByUrl('/settings-admin'); 
+  }
+
+  goToTasksAdmin(): void {
+    this.router.navigateByUrl('/tasks-admin'); 
   }
 
   
