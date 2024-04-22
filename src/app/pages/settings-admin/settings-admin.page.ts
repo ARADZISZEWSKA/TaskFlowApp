@@ -24,4 +24,13 @@ export class SettingsAdminPage implements OnInit {
     this.router.navigateByUrl('/admin-homepage'); 
   }
 
+  logout(): void {
+    // Usuń dane użytkownika z local storage
+    localStorage.removeItem('username');
+    localStorage.removeItem('token'); // Przykładowe dane do usunięcia, możesz dodać inne w zależności od potrzeb
+
+    // Po usunięciu danych przekieruj użytkownika do strony logowania
+    this.router.navigateByUrl('/login');
+  }
+
 }
