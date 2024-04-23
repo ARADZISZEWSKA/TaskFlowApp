@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-settings-admin',
   templateUrl: './settings-admin.page.html',
@@ -7,7 +8,8 @@ import { Router } from '@angular/router';
 })
 export class SettingsAdminPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -24,13 +26,17 @@ export class SettingsAdminPage implements OnInit {
     this.router.navigateByUrl('/admin-homepage'); 
   }
 
-  logout(): void {
-    // Usuń dane użytkownika z local storage
-    localStorage.removeItem('username');
-    localStorage.removeItem('token'); // Przykładowe dane do usunięcia, możesz dodać inne w zależności od potrzeb
+  logout() {
+    this.authService.logout().subscribe({
+        next: (response) => {
+            console.log('Wylogowano pomyślnie');
+            this.router.navigateByUrl('/login');
+        },
+        error: (error) => {
+            console.error('Błąd podczas wylogowywania', error);
+        }
+    });
+}
 
-    // Po usunięciu danych przekieruj użytkownika do strony logowania
-    this.router.navigateByUrl('/login');
-  }
 
 }

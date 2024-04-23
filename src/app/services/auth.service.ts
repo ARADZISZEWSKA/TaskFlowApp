@@ -37,15 +37,15 @@ export class AuthService {
     );
   }
 
-  // logout(): Observable<any> {
-  //   return this.http.post(`${this.baseUrl}/user/logout`, {}, {
-  //     withCredentials: true // Ensure cookies are sent to clear the session
-  //   }).pipe(
-  //     tap(() => {
-  //       localStorage.removeItem('username');
-  //       localStorage.removeItem('role');
-  //       // Do not need to remove token since it's not stored in localStorage
-  //     })
-  //   );
-  // }
+  logout(): Observable<any> {
+    return this.http.post(`${this.baseUrl}/user/logout`, {}, {
+      withCredentials: true // Ensure cookies are sent to clear the session
+    }).pipe(
+      tap(() => {
+        localStorage.removeItem('username');
+        localStorage.removeItem('role');
+        //token removed in backend
+      })
+    );
+  }
 }
