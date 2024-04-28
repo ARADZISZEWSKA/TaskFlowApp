@@ -90,10 +90,7 @@ export class AdminHomepagePage implements OnInit {
       event.detail.complete();
     }, 1000);
   }
-  sliderConfig = {
-    slidesPerView: 2,
-    spaceBetween: 30
-  } 
+  
   
   daysUntilDeadline(deadline: string | Date): number {
     // Ensure deadline is a Date object

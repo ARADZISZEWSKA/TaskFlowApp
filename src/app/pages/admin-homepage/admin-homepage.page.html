@@ -1,85 +1,78 @@
 <ion-content [fullscreen]="true">
-  <ion-refresher mode="ios"slot="fixed" [pullFactor]="0.5" [pullMin]="100" [pullMax]="200" (ionRefresh)="handleRefresh($event)">
+  <ion-refresher
+    mode="ios"
+    slot="fixed"
+    [pullFactor]="0.5"
+    [pullMin]="100"
+    [pullMax]="200"
+    (ionRefresh)="handleRefresh($event)"
+  >
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+
   <ion-toolbar>
     <div id="container" class="ion-margin-top">
       <strong>What's up, {{username}}</strong>
       <span class="sub-header">Your projects</span>
     </div>
     <ion-buttons slot="end">
-      <ion-button (click)="openRegisterUserModal()">
+      <ion-button (click)="openRegisterUserModal()" aria-label="Add User">
         <ion-icon name="person-add-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  
-  
-    <!-- <div class="card-container">
-      
-      <ion-card *ngFor="let project of projects">
-        <ion-card-header>
-          <ion-card-title class="ion-padding-horizontal;ion-padding-vertical" class="ion-padding-vertical">{{ project.projectName }}</ion-card-title>
-          <ion-card-subtitle class="ion-padding-horizontal">{{project.deadline}}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          {{project.description}}
-        </ion-card-content>
-        <ion-button fill="clear">Action 1</ion-button>
-        <ion-button fill="clear">Action 2</ion-button>
-      </ion-card>
-    
-    </div> -->
 
 
-    <swiper-container [swiper]="sliderConfig">
-      <swiper-slide *ngFor="let project of projects" class="projects">
-        <div class="projects-buttons business">
+
+
+  <div class="card-container">
+    <ion-card *ngFor="let project of projects" class="projects" >
+      <div class="projects-buttons bussiness">
+        <ion-card-content class="card-content">
           <span class="task-count">
             {{ daysUntilDeadline(project.deadline) }} days left
           </span>
-          <span class="projects-name">{{ project.projectName }}</span>
-          <div class="progress-container">
-            <ion-progress-bar mode="ios" [value]=0.7></ion-progress-bar>
-            <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsModal(project)">
-              <ion-icon name="chevron-forward-outline"></ion-icon>
-            </ion-button>
-          </div>
+          <ion-card-title>
+          <span class="projects-name">{{ project.projectName }} </span>
+        </ion-card-title>
+        </ion-card-content>
+        <div class="progress-container">
+          <ion-progress-bar mode="ios" [value]="0.7"></ion-progress-bar>
+          <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsModal(project)">
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+          </ion-button>
         </div>
-      </swiper-slide>
-    </swiper-container>
-    
-    
-    
-    
-    <div class="fab-container">
-      <ion-fab-button vertical="bottom" horizontal="center"  mode="ios" (click)="openAddProjectModal()">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-      <div class="text-below-fab">Add your project!</div>
-    </div>
+      </div>
+    </ion-card>
+  </div>
   
-  </ion-content >
 
+  <!-- Floating Action Button (FAB) -->
+  <div class="fab-container">
+    <ion-fab-button vertical="bottom" horizontal="center" mode="ios" (click)="openAddProjectModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <div class="text-below-fab">Add your project!</div>
+  </div>
+</ion-content>
 
-  <!-- Tab menu at the bottom -->
-  <ion-footer>
-    <ion-toolbar>
-  <ion-tabs >
-    <ion-tab-bar slot="bottom" slot="fixed">
-      <ion-tab-button (click)="goToTasksAdmin()" tab="tasks">
-        <ion-icon name="hourglass-outline"></ion-icon>
-        <ion-label>Tasks</ion-label>
-      </ion-tab-button>
-      <ion-tab-button (click)="goToAdminHomepage()" tab="admin-homepage">
-        <ion-icon name="home"></ion-icon>
-        <ion-label>Home</ion-label>
-      </ion-tab-button>
-      <ion-tab-button (click)="goToSettingsAdmin()" tab="settings">
-        <ion-icon name="settings"></ion-icon>
-        <ion-label>Settings</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
-</ion-toolbar>
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button (click)="goToTasksAdmin()" tab="tasks">
+          <ion-icon name="hourglass-outline"></ion-icon>
+          <ion-label>Tasks</ion-label>
+        </ion-tab-button>
+        <ion-tab-button (click)="goToAdminHomepage()" tab="admin-homepage">
+          <ion-icon name="home"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-tab-button>
+        <ion-tab-button (click)="goToSettingsAdmin()" tab="settings">
+          <ion-icon name="settings"></ion-icon>
+          <ion-label>Settings</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
 </ion-footer>

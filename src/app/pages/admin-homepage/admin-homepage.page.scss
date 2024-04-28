@@ -55,44 +55,9 @@ ion-toolbar {
     padding-top: 5px; /* Padding at the top of the tab bar */
     border-top: 1px solid #e0e0e0;
 }
- 
-  
 
 
 
-
-/* Ensure card container allows wrapping and fills width */
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 16px;
-  flex-direction: column;  /* Układanie elementów w pionie */
-  flex-direction: column; 
-  
-}
-
-/* Cards should be flexible but have a max-width to control size */
-ion-card {
-  flex: 0 1 45%; /* Adjusts size to be less than half the container width with some space */
-  margin: 10px;
-  
-}
-
-/* Bottom container holding the fab and text */
-// .fab-container {
-//   display: flex;          /* Enables flexbox layout */
-//   justify-content: center; /* Centers content horizontally in the container */
-//   align-items: center;     /* Centers content vertically if needed */
-//   position: absolute;
-//   text-align: center;
-//   position: absolute;
-//   width: 100%;
-//   bottom: 60px; /* Adjust this value based on your needs, make sure it's above the tab bar */
-//   padding: 10px 0;
-//   z-index: 10; 
-//   flex-direction: column;
-// }
 
 .fab-container {
   display: flex;
@@ -111,15 +76,12 @@ ion-card {
     letter-spacing: 0.5px;
     color: var(--ion-secondary-text-color);
 }
-ion-card-title{
-  color: #243158
-}
-  
+
   
   
 .projects {
   &-name {
-    color: var(--color);
+    color: #243158;
     font-size: large;
     font-weight: 600;
   }
@@ -138,7 +100,7 @@ ion-card-title{
     color: var(--ion-color-secondary-contrast);
     background-color: var(--ion-card-background);
     text-align: left;
-    box-shadow: var(--ion-card-box-shadow);
+    
 
     ion-icon,
     .bx-envelope {
@@ -181,19 +143,34 @@ ion-progress-bar {
 }
 
 
+/* Basic Styles for Card Layout */
+.card-container {
+  display: flex;
+  flex-direction: column; /* Ensures vertical stacking of cards */
+  justify-content: center; /* Centers cards vertically if needed */
+  align-items: center; /* Centers cards horizontally */
+  padding: 16px; /* Provides padding around the entire container */
+  width: 100%; /* Full width to utilize the entire container space */
+}
+
+ion-card {
+  width: 100%; /* Each card will take full width of its container */
+  
+}
+
+
+
 /* Default styles for mobile devices */
-swiper-container {
+.card-container {
   width: 100%; /* Full width on mobile */
 }
 
 /* Media query for tablets and desktops */
 @media (min-width: 992px) {
-  swiper-container {
-    width: 50%; /* 50% width on larger screens */
-    margin: 0 auto; /* Center the slider */
+  .card-container {
+    width: 65%; /* 50% width on larger screens */
+    margin-right: 40%;
   }
 }
-
-
   
   
