@@ -4,6 +4,8 @@ import { ProjectService } from '../../../../services/project.service';
 import { Project } from '../../../../models/projects.model';
 import { User } from 'src/app/models/user.model';
 import { ModalController } from '@ionic/angular';
+import { UserProfileModalComponent } from '../user-profile-modal/user-profile-modal.component';
+
 
 
 @Component({
@@ -43,5 +45,15 @@ cancel() {
     return differenceInDays;
   }
 
+  
+  async openProfileModal(user: any) {
+    const modal = await this.modalController.create({
+      component: UserProfileModalComponent,
+      componentProps: {
+        user: user
+      }
+    });
+    return await modal.present();
+  }
   
 }

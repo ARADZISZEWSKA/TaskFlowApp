@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ProjectService } from '../../services/project.service'
 import { Project } from '../../models/projects.model'; 
 import { ProjectDetailsModalComponent } from './modals/project-details-modal/project-details-modal.component';
+import { UserProfileModalComponent } from './modals/user-profile-modal/user-profile-modal.component';
 
 
 

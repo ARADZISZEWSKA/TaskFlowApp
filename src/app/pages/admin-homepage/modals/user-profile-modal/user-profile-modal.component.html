@@ -1,0 +1,73 @@
+<ion-toolbar>
+  <ion-button (click)="cancel()">
+    <ion-icon name="chevron-back-outline"></ion-icon>
+
+  </ion-button>
+</ion-toolbar>
+
+<ion-content>
+
+  <ion-item lines="none" style="justify-content: center; display: flex; align-items: center;">
+    <ion-avatar aria-hidden="true">
+      <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Avatar" />
+    </ion-avatar>
+    <ion-label class="ion-padding-vertical"style="color: #243158; font-size: large; font-weight: 600;">
+      {{ user.firstName }} {{ user.lastName }}
+    </ion-label>
+  </ion-item>
+  
+    
+     <ion-item lines="none">
+      <ion-label>
+        <h2 style="font-weight: 600;">To do</h2>
+      </ion-label>
+      </ion-item>
+      <ion-list class="ion-padding-horizontal" [inset]="true">
+        <ion-item>
+          <ion-checkbox slot="start" aria-label="Toggle task completion"></ion-checkbox>
+          <ion-input [readonly]="true" aria-label="Task name" value="Get milk"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-checkbox slot="start" aria-label="Toggle task completion"></ion-checkbox>
+          <ion-input [readonly]="true" aria-label="Task name" value="Get milk"></ion-input>
+        </ion-item>
+        <ion-item >
+          <ion-checkbox slot="start" aria-label="Toggle task completion"></ion-checkbox>
+          <ion-input [readonly]="true" aria-label="Task name" value="Get milk"></ion-input>
+        </ion-item>
+        <ion-item >
+          <ion-checkbox slot="start" aria-label="Toggle task completion"></ion-checkbox>
+          <ion-input [readonly]="true" aria-label="Task name" value="Get milk"></ion-input>
+        </ion-item>
+      
+    </ion-list>
+
+    <ion-item lines="none">
+      <ion-label>
+        <h2 style="font-weight: 600;">Overdue assignments</h2>
+      </ion-label>
+      </ion-item>
+      <ion-list class="ion-padding-horizontal" [inset]="true">
+        <ion-item>
+          <ion-checkbox slot="start" aria-label="Toggle task completion"></ion-checkbox>
+          <ion-input  [readonly]="true" aria-label="Task name" value="Rzodkiewka"></ion-input> 
+          <!-- W KONCOWYM EFEKCIE TASKI POBIERANE Z BAZY DANYCH -->
+        </ion-item>
+        
+      
+    </ion-list>
+    <div class="fab-container">
+      <ion-fab-button vertical="bottom" horizontal="center" mode="ios" >
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <div class="text-below-fab">Add new task</div>
+    </div>
+  </ion-content>
+
+    
+     
+
+
+ 
+  <!-- Add more user details as needed -->
+

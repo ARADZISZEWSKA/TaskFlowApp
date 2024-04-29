@@ -37,6 +37,9 @@
       </ion-label>
     </ion-list-header>
     <ion-item *ngFor="let user of users; let i = index">
+      <ion-avatar aria-hidden="true" slot="start">
+        <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
       <ion-label>
         {{ user.firstName }} {{ user.lastName }}
       </ion-label>
@@ -48,7 +51,7 @@
         <ng-template>
           <ion-content>
             <ion-list>
-              <ion-item [button]="true" [detail]="false">See profile</ion-item>
+              <ion-item [button]="true" [detail]="false" (click)="openProfileModal(user)">See profile</ion-item>
               <ion-item [button]="true" [detail]="false">Delete</ion-item>
             </ion-list>
           </ion-content>
@@ -57,11 +60,21 @@
     </ion-item>
   </ion-list>
   
-    
-  <ion-item>
+  
+  <ion-item lines="none">
     <ion-label>
-      <h2>Overdue tasks</h2>
-    
+      <h2 >Overdue assignments</h2>
     </ion-label>
-  </ion-item>
-</ion-content>
+    </ion-item>
+    <ion-list class="ion-padding-horizontal" [inset]="true">
+      <ion-item>
+        <ion-checkbox slot="start" aria-label="Toggle task completion"></ion-checkbox>
+        <ion-input [readonly]="true" aria-label="Task name" value="Rzodkiewka"></ion-input> 
+        <!-- W KONCOWYM EFEKCIE TASKI POBIERANE Z BAZY DANYCH -->
+      </ion-item>
+      <ion-item>
+        <ion-checkbox slot="start" aria-label="Toggle task completion"></ion-checkbox>
+        <ion-input [readonly]="true" aria-label="Task name" value="Wyrzucić smieci"></ion-input> 
+      </ion-item>
+      <ion-list>
+

@@ -1,0 +1,23 @@
+ion-checkbox{
+    --border-radius: 5px;
+    --border-color: gray;
+    --border-width: 1px;
+}
+
+.fab-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    flex-direction: column;
+    margin-top: 40px; /* Add margin-top to create space between the cards and the FAB */
+  }
+  
+  .text-below-fab {
+    text-align: center; /* Center the text */
+    padding: 10px 0; /* Adds some space above and below the text */
+    text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--ion-secondary-text-color);
+  }
