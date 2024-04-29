@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button (click)="dismissModal()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item >
+      <ion-input labelPlacement="floating" label="Task name"[(ngModel)]="taskName"></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-input labelPlacement="floating" label="Task description"[(ngModel)]="description"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Deadline</ion-label>
+      <ion-datetime class="ion-padding-vertical"  displayFormat="MMM DD, YYYY" [(ngModel)]="deadline"></ion-datetime>
+    </ion-item>
+  <ion-button expand="block" (click)="addTask()">Add Task</ion-button>
+</ion-content>

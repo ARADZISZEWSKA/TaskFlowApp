@@ -7,8 +7,9 @@ export class User {
     lastName: string;
     role: string;
     projectIds: string[];
+    tasks: string[];
 
-    constructor(id: string = '', email: string = '', password: string = '', confirmPassword: string = '', firstName: string = '', lastName: string = '', role: string="", projectIds: string[] = []) {
+    constructor(id: string = '', email: string = '', password: string = '', confirmPassword: string = '', firstName: string = '', lastName: string = '', role: string="", projectIds: string[] = [], tasks: string[] = []) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -17,6 +18,7 @@ export class User {
         this.lastName = lastName;
         this.role = role;
         this.projectIds = projectIds;
+        this.tasks=tasks;
     }
 
     get name(): string {

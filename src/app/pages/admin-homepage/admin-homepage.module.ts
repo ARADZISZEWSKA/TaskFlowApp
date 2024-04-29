@@ -14,6 +14,7 @@ import { RegisterUserModalComponent } from './modals/register-user-modal/registe
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ProjectDetailsModalComponent } from './modals/project-details-modal/project-details-modal.component';
 import { UserProfileModalComponent } from './modals/user-profile-modal/user-profile-modal.component';
+import { NewTaskModalComponent } from './modals/new-task-modal/new-task-modal.component';
 
 
 
@@ -25,7 +26,7 @@ import { UserProfileModalComponent } from './modals/user-profile-modal/user-prof
     AdminHomepagePageRoutingModule,
     TypeaheadModule
   ],
-  declarations: [AdminHomepagePage, AddProjectModalComponent, RegisterUserModalComponent, ProjectDetailsModalComponent, UserProfileModalComponent],
+  declarations: [AdminHomepagePage, AddProjectModalComponent, RegisterUserModalComponent, ProjectDetailsModalComponent, UserProfileModalComponent, NewTaskModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 

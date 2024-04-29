@@ -65,7 +65,7 @@ export class AdminHomepagePage implements OnInit {
     const modal = await this.modalController.create({
       component: ProjectDetailsModalComponent,
       componentProps: {
-        project: project // Przekazanie danych projektu do modalu
+        project: project 
       }
     });
     return await modal.present();

@@ -50,10 +50,12 @@ cancel() {
     const modal = await this.modalController.create({
       component: UserProfileModalComponent,
       componentProps: {
-        user: user
+        user: user,
+        projectId: this.project.id  
       }
     });
     return await modal.present();
   }
+  
   
 }
