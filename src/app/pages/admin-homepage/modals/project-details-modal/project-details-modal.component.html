@@ -63,18 +63,13 @@
   
   <ion-item lines="none">
     <ion-label>
-      <h2 >Overdue assignments</h2>
+      <h2>Overdue assignments</h2>
     </ion-label>
+  </ion-item>
+  <ion-list class="ion-padding-horizontal" [inset]="true">
+    <ion-item *ngFor="let task of overdueTasks">
+      <ion-checkbox slot="start" aria-label="Toggle task completion"></ion-checkbox>
+      <ion-input [readonly]="true" aria-label="Task name" [value]="task.taskName"></ion-input>
     </ion-item>
-    <ion-list class="ion-padding-horizontal" [inset]="true">
-      <ion-item>
-        <ion-checkbox slot="start" aria-label="Toggle task completion"></ion-checkbox>
-        <ion-input [readonly]="true" aria-label="Task name" value="Rzodkiewka"></ion-input> 
-        <!-- W KONCOWYM EFEKCIE TASKI POBIERANE Z BAZY DANYCH -->
-      </ion-item>
-      <ion-item>
-        <ion-checkbox slot="start" aria-label="Toggle task completion"></ion-checkbox>
-        <ion-input [readonly]="true" aria-label="Task name" value="Wyrzucić smieci"></ion-input> 
-      </ion-item>
-      <ion-list>
+  </ion-list>
 

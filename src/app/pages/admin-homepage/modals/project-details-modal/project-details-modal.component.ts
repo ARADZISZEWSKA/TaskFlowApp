@@ -1,12 +1,10 @@
-// project-details-modal.component.ts
 import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../../../services/project.service';
 import { Project } from '../../../../models/projects.model';
 import { User } from 'src/app/models/user.model';
 import { ModalController } from '@ionic/angular';
 import { UserProfileModalComponent } from '../user-profile-modal/user-profile-modal.component';
-
-
+import { Task } from '../../../../models/task.model';
 
 @Component({
   selector: 'app-project-details-modal',
@@ -15,47 +13,51 @@ import { UserProfileModalComponent } from '../user-profile-modal/user-profile-mo
 })
 export class ProjectDetailsModalComponent implements OnInit {
   @Input() project!: Project;
-  users: User[] = [];
+  users: User[] | null = null; // Initialize with null
+  overdueTasks: any[] | null = null; // Initialize with null
 
-  constructor(private projectService: ProjectService,
-    private modalController: ModalController) {}
+  constructor(
+    private projectService: ProjectService,
+    private modalController: ModalController
+  ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.project && this.project.id) {
-      console.log(`Fetching members for project ID: ${this.project.id}`);
-      this.projectService.getUserProjectMembers(this.project.id).subscribe(users => {
+      try {
+        console.log(`Fetching members for project ID: ${this.project.id}`);
+        const users = await this.projectService.getUserProjectMembers(this.project.id).toPromise();
         console.log(users);
-        this.users = users;
-      }, error => {
-        console.error('Error fetching project members', error);
-      });
+        this.users = users as User[];
+  
+        // Fetch overdue tasks
+        const tasks = await this.projectService.getOverdueTasks(this.project.id).toPromise();
+        this.overdueTasks = tasks as any[];
+      } catch (error) {
+        console.error('Error fetching project details:', error);
+      }
     }
-}
-cancel() {
-  this.modalController.dismiss(null, 'cancel');
-}
+  }
 
+  cancel() {
+    this.modalController.dismiss(null, 'cancel');
+  }
 
+  // Funkcja do obliczania liczby dni do terminu zadania
   daysUntilDeadline(deadline: string | Date): number {
-    // Ensure deadline is a Date object
     const deadlineDate = new Date(deadline);
     const currentDate = new Date();
     const differenceInMilliseconds = deadlineDate.getTime() - currentDate.getTime();
-    const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 3600 * 24));
-    return differenceInDays;
+    return Math.ceil(differenceInMilliseconds / (1000 * 3600 * 24));
   }
 
-  
   async openProfileModal(user: any) {
     const modal = await this.modalController.create({
       component: UserProfileModalComponent,
       componentProps: {
         user: user,
-        projectId: this.project.id  
+        projectId: this.project.id
       }
     });
     return await modal.present();
   }
-  
-  
 }

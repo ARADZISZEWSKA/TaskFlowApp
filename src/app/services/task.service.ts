@@ -14,7 +14,12 @@ private baseUrl = 'http://localhost:5139/tasks';
   addTask(task: Task): Observable<Task>  {
     return this.http.post<Task>(`${this.baseUrl}/create`, task);
   }
-}
 
+  getTasksByUserAndProject(userId: string, projectId: string) {
+    return this.http.get<any[]>(`${this.baseUrl}/user/${userId}/project/${projectId}`);
+  }
+
+  
+}
 
 

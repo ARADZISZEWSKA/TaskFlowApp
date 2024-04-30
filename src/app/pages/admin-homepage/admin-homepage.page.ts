@@ -8,6 +8,7 @@ import { ProjectService } from '../../services/project.service'
 import { Project } from '../../models/projects.model'; 
 import { ProjectDetailsModalComponent } from './modals/project-details-modal/project-details-modal.component';
 import { UserProfileModalComponent } from './modals/user-profile-modal/user-profile-modal.component';
+import { ToastController } from '@ionic/angular';
 
 
 
@@ -23,6 +24,7 @@ export class AdminHomepagePage implements OnInit {
  
   constructor(
     private modalController: ModalController,
+    private toastController:ToastController,
     private router: Router,
     private projectService: ProjectService // Inject the ProjectService
     
@@ -61,15 +63,33 @@ export class AdminHomepagePage implements OnInit {
     return await modal.present();
   }
 
-  async openProjectDetailsModal(project: Project) {
-    const modal = await this.modalController.create({
-      component: ProjectDetailsModalComponent,
-      componentProps: {
-        project: project 
-      }
-    });
-    return await modal.present();
+  async openProjectDetailsModal(projectId: string) {
+    try {
+      const project = await this.projectService.getProjectById(projectId).toPromise();
+      const modal = await this.modalController.create({
+        component: ProjectDetailsModalComponent,
+        componentProps: {
+          project: project 
+        }
+      });
+      await modal.present();
+    } catch (error) {
+      console.error('Error fetching project details', error);
+      // Handle error gracefully, e.g., display a toast message
+      this.showToast('Failed to open project details. Please try again later.');
+    }
   }
+  
+  // Function to display a toast message
+  private async showToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000, // Duration in milliseconds
+      position: 'bottom' // Position of the toast message
+    });
+    toast.present();
+  }
+  
 
   
   goToSettingsAdmin(): void {
@@ -87,8 +107,8 @@ export class AdminHomepagePage implements OnInit {
   }
   handleRefresh(event: CustomEvent) {
     setTimeout(() => {
-      // Any calls to load data go here
-      event.detail.complete();
+      this.loadProjects();
+    event.detail.complete();
     }, 1000);
   }
   

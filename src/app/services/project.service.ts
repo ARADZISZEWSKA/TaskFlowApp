@@ -26,5 +26,18 @@ export class ProjectService {
         withCredentials: true
         });
     }
+
+    getOverdueTasks(projectId: string): Observable<Task[]> {
+        return this.http.get<Task[]>(`${this.baseUrl}/${projectId}/overdue-tasks`);
+      }
+
+      getProjectById(projectId: string): Observable<Project> {
+        return this.http.get<Project>(`${this.baseUrl}/get/${projectId}`, {
+          withCredentials: true
+        });
+      }
+      
+    }
+
   
-}
+

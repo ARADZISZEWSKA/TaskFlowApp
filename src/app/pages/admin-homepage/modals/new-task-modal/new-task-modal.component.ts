@@ -39,7 +39,7 @@ export class NewTaskModalComponent {
 
     this.taskService.addTask(newTask).subscribe({
       next: (res) => {
-        if (res instanceof HttpResponse && res.ok) {
+        if (res instanceof HttpResponse) {
           console.log('Task added successfully:', res.body);
         } else {
           console.error('Unexpected response:', res);
