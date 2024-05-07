@@ -11,31 +11,37 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-card *ngFor="let project of projects" class="projects">
-    <div class="card-container">
-      <div class="projects-buttons bussiness">
-        <ion-card-content class="card-content">
-          <span class="task-count">
-            {{ daysUntilDeadline(project.deadline) }} days left
-          </span>
-          <ion-card-title>
-            <span class="projects-name">{{ project.projectName }}</span>
-          </ion-card-title>
-        </ion-card-content>
-        <div class="progress-container">
-          <ion-progress-bar mode="ios" [value]="0.7"></ion-progress-bar>
-          <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsModal(project.id)">
-            <ion-icon name="chevron-forward-outline"></ion-icon>
-          </ion-button>
-        </div>
-      </div>
-    </div>
-  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let project of projects">
+        <ion-card class="projects">
+          <div class="card-container">
+            <div class="projects-buttons bussiness">
+              <ion-card-content class="card-content">
+                <span class="task-count">
+                  {{ daysUntilDeadline(project.deadline) }} days left
+                </span>
+                <ion-card-title size="large" class="title-black">
+                  <span class="projects-name">{{ project.projectName }}</span>
+                </ion-card-title>
+              </ion-card-content>
+              <div class="progress-container">
+                <ion-progress-bar mode="ios" [value]="0.7"></ion-progress-bar>
+                <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsModal(project.id)">
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-<ion-tabs >
+<ion-tabs>
   <ion-tab-bar slot="bottom" slot="fixed">
     <ion-tab-button (click)="goToTasks()" tab="tasks">
       <ion-icon name="hourglass-outline"></ion-icon>

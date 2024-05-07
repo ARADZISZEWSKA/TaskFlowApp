@@ -63,7 +63,7 @@ ion-toolbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 100%;
   padding: 10px 0;
   flex-direction: column;
 }
@@ -199,17 +199,30 @@ ion-card {
     display: flex; /* Use Flexbox to layout children */
     justify-content: space-between; /* Distribute children with space between */
   }
-  .AddUser{
+  // .AddUser{
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   width: 50%;
+  //   padding: 06px 0;
+  //   flex-direction: column;
+  // }
+  // .AddUser ion-button {
+  //   font-size: 2rem; /* Increase the font size */
+  //   padding: 0px 40px; /* Increase padding to make the button larger */
+  // }
+
+  .center {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 50%;
-    padding: 06px 0;
-    flex-direction: column;
+    justify-content: center; /* Opcjonalnie, jeśli chcesz wyśrodkować zawartość w poziomie */
   }
-  .AddUser ion-button {
-    font-size: 2rem; /* Increase the font size */
-    padding: 0px 40px; /* Increase padding to make the button larger */
-  }
+  @media (max-width: 767px) {
+    .center {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+}
 }
   

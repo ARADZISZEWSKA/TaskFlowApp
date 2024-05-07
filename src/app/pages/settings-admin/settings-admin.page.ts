@@ -19,7 +19,7 @@ export class SettingsAdminPage implements OnInit {
   }
 
   goToTasksAdmin(): void {
-    this.router.navigateByUrl('/tasks-admin'); 
+    this.router.navigateByUrl('/tasks'); 
   }
 
   goToAdminHomepage(): void {

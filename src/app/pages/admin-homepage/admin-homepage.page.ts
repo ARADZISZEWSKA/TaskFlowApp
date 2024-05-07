@@ -103,7 +103,7 @@ export class AdminHomepagePage implements OnInit {
   }
 
   goToTasksAdmin(): void {
-    this.router.navigateByUrl('/tasks-admin'); 
+    this.router.navigateByUrl('/tasks'); 
   }
 
   

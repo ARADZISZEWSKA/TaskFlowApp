@@ -59,22 +59,46 @@
   
 
   <!-- Floating Action Button (FAB) -->
-  <div class="buttons">
-    <div class="fab-container">
-      <ion-fab-button vertical="bottom" horizontal="center" mode="ios" (click)="openAddProjectModal()">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-      <div class="text-below-fab">Add your project!</div>
-    </div>
-    <div class="AddUser">
-      <ion-buttons slot="end" class="fab-container">
-        <ion-button (click)="openRegisterUserModal()" aria-label="Add User">
-          <ion-icon name="person-add-outline"></ion-icon>
-        </ion-button>
-        <div class="text-below-fab">Add new user!</div>
-      </ion-buttons>
-    </div>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <div class="buttons">
+          <div class="fab-container center">
+            <ion-fab-button vertical="bottom" horizontal="center" mode="ios" (click)="openAddProjectModal()">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+            <div class="text-below-fab">
+              Add your project!
+            </div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="buttons">
+          <div class="fab-container center">
+            <ion-fab-button vertical="bottom" horizontal="center" mode="ios" (click)="openRegisterUserModal()">
+              <ion-icon name="person-add-outline"></ion-icon>
+            </ion-fab-button>
+            <div class="text-below-fab">
+              Add new user!
+            </div>
+          </div>
+        </div>
+        <!-- <div class="buttons">
+          <div class="AddUser center">
+            <ion-buttons slot="end" class="fab-container">
+              <ion-button (click)="openRegisterUserModal()" aria-label="Add User">
+                <ion-icon name="person-add-outline"></ion-icon>
+              </ion-button>
+              <div class="text-below-fab">Add new user!</div>
+            </ion-buttons>
+          </div>
+        </div> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  
  
 </ion-content>
 

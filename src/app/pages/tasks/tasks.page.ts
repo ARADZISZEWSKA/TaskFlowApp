@@ -81,7 +81,7 @@ export class TasksPage implements OnInit {
   }
   
   goToHome(): void {
-    this.router.navigateByUrl('/home'); 
+    this.router.navigateByUrl('/admin-homepage'); 
   }
 
   ngOnInit() {
