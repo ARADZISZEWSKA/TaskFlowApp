@@ -22,29 +22,40 @@
     </ion-buttons>
   </ion-toolbar>
 
-
-
-
-  <div class="card-container">
-    <ion-card *ngFor="let project of projects" class="projects" >
-      <div class="projects-buttons bussiness">
-        <ion-card-content class="card-content">
-          <span class="task-count">
-            {{ daysUntilDeadline(project.deadline) }} days left
-          </span>
-          <ion-card-title>
-          <span class="projects-name">{{ project.projectName }} </span>
-        </ion-card-title>
-        </ion-card-content>
-        <div class="progress-container">
-          <ion-progress-bar mode="ios" [value]="0.7"></ion-progress-bar>
-          <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsModal(project.id)">
-            <ion-icon name="chevron-forward-outline"></ion-icon>
-          </ion-button>
-        </div>
-      </div>
-    </ion-card>
+<div>
+  <div>
+    <swiper-container [swiper]="sliderConfig">
+      <swiper-slide *ngFor="let project of projects" class="swiper-slide">
+        <ion-card class="projects">
+          <div class="card-container">
+            <div class="projects-buttons bussiness">
+              <ion-card-content class="card-content">
+                <span class="task-count">
+                  {{ daysUntilDeadline(project.deadline) }} days left
+                </span>
+                <ion-card-title>
+                  <span class="projects-name">{{ project.projectName }}</span>
+                </ion-card-title>
+              </ion-card-content>
+              <div class="progress-container">
+                <ion-progress-bar mode="ios" [value]="0.7"></ion-progress-bar>
+                <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsModal(project.id)">
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+          </div>
+        </ion-card>
+      </swiper-slide>
+  </swiper-container>
   </div>
+  <div class="button">
+    <ion-button class="seeAll-button" (click)="goToTasksPage()" shape="round">See all projects</ion-button>
+  </div>
+</div>
+  
+  
+
   
 
   <!-- Floating Action Button (FAB) -->

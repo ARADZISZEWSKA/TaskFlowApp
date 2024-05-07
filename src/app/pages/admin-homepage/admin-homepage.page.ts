@@ -30,7 +30,13 @@ export class AdminHomepagePage implements OnInit {
     
   ) {}
 
-  
+  sliderConfig = {
+    slidesPerView: 2,
+    spaceBetween: 20,
+    slidesPerGroup: 1,
+    navigation: true, // Dodaj nawigację
+  } 
+
   username: string | null | undefined;
 
   ngOnInit() {
@@ -122,6 +128,9 @@ export class AdminHomepagePage implements OnInit {
     return differenceInDays;
   
 }
+goToTasksPage() {
+  this.router.navigateByUrl('/tasks');
 
+}
 }
 
