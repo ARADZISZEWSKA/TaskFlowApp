@@ -63,7 +63,7 @@ ion-toolbar {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 50%;
   padding: 10px 0;
   flex-direction: column;
 }
@@ -194,6 +194,22 @@ ion-card {
     transform: translateY(-50%); /* Wyśrodkuj przycisk względem pionu */
     border-radius: 5px; /* Zaokrąglij rogi przycisku */
     z-index: 999; /* Ustaw wysoki indeks warstwy, aby był na wierzchu */
+  }
+  .buttons {
+    display: flex; /* Use Flexbox to layout children */
+    justify-content: space-between; /* Distribute children with space between */
+  }
+  .AddUser{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    padding: 06px 0;
+    flex-direction: column;
+  }
+  .AddUser ion-button {
+    font-size: 2rem; /* Increase the font size */
+    padding: 0px 40px; /* Increase padding to make the button larger */
   }
 }
   
