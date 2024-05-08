@@ -41,6 +41,7 @@
                 <ion-progress-bar mode="ios" [value]="0.7"></ion-progress-bar>
                 <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsModal(project.id)">
                   <ion-icon name="chevron-forward-outline"></ion-icon>
+                  <span>See details</span>
                 </ion-button>
               </div>
             </div>
@@ -49,9 +50,11 @@
       </swiper-slide>
   </swiper-container>
   </div>
-  <div class="button">
-    <ion-button class="seeAll-button" (click)="goToTasksPage()" shape="round">See all projects</ion-button>
-  </div>
+  <ion-grid class="buttons">
+    <ion-col size="12">
+      <ion-button class="seeAll-button center" (click)="goToTasksPage()" shape="round">See all projects</ion-button>
+    </ion-col>
+  </ion-grid>
 </div>
   
   

@@ -37,6 +37,12 @@ export class ProjectService {
         });
       }
       
+      deleteProject(projectId: string): Observable<void> {
+        return this.http.delete<void>(`${this.baseUrl}/delete/${projectId}`, {
+          withCredentials: true
+        });
+      }
+      
     }
 
   

@@ -24,7 +24,7 @@ ion-toolbar {
     padding-top: 1.5vh;
   
     strong {
-      font-size: xx-large;
+      font-size: x-large;
       padding-left: 1.2rem;
       letter-spacing: 0.5px;
     }
@@ -215,7 +215,7 @@ ion-card {
   .center {
     display: flex;
     align-items: center;
-    justify-content: center; /* Opcjonalnie, jeśli chcesz wyśrodkować zawartość w poziomie */
+    justify-content: center; 
   }
   @media (max-width: 767px) {
     .center {
@@ -223,6 +223,16 @@ ion-card {
       align-items: center;
     }
   
+}
+
+.progress-container {
+  width: 85VH; 
+}
+
+ion-progress-bar {
+  width: 100%; 
+  margin: 0; 
+  padding: 0; 
 }
 }
   

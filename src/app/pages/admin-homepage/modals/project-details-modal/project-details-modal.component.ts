@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../../../services/project.service';
 import { Project } from '../../../../models/projects.model';
 import { User } from 'src/app/models/user.model';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { UserProfileModalComponent } from '../user-profile-modal/user-profile-modal.component';
 import { Task } from '../../../../models/task.model';
 
@@ -18,7 +18,8 @@ export class ProjectDetailsModalComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private toastController: ToastController
   ) {}
 
   async ngOnInit() {
@@ -60,4 +61,31 @@ export class ProjectDetailsModalComponent implements OnInit {
     });
     return await modal.present();
   }
-}
+
+  async deleteProject() {
+    const projectId = this.project.id; // Pobranie ID projektu
+    try {
+      await this.projectService.deleteProject(projectId).toPromise();
+      // Obsłuż sukces usuwania projektu, np. wyświetl toast z potwierdzeniem
+      const toast = await this.toastController.create({
+        message: 'Project deleted successfully!',
+        duration: 2000,
+        color: 'success'
+      });
+      toast.present();
+      // Zamknij modal po usunięciu projektu
+      this.modalController.dismiss(null, 'delete');
+    } catch (error) {
+      console.error('Error deleting project:', error);
+      // Obsłuż błąd usuwania projektu, np. wyświetl toast z informacją o błędzie
+      const toast = await this.toastController.create({
+        message: 'Failed to delete project. Please try again later.',
+        duration: 2000,
+        color: 'danger'
+      });
+      toast.present();
+    }
+  }
+  
+  }
+

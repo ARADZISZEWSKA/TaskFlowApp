@@ -1,9 +1,26 @@
 <ion-toolbar>
-  <ion-button (click)="cancel()">
-    <ion-icon name="chevron-back-outline"></ion-icon>
-
-  </ion-button>
+  <ion-row class="ion-align-items-center">
+    <ion-col size="auto">
+      <ion-button (click)="cancel()" fill="clear">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-title size="large" style="font-size: 24px;">Project Details</ion-title>
+    </ion-col>
+    <ion-col class="crud-buttons" size="auto">
+      <ion-buttons>
+        <ion-button  fill="clear">
+          Edit
+        </ion-button>
+        <ion-button (click)="deleteProject()" fill="clear">
+          Delete
+        </ion-button>
+      </ion-buttons>
+    </ion-col>
+  </ion-row>
 </ion-toolbar>
+
 
 <ion-content class="ion-padding">
   <ion-item >
