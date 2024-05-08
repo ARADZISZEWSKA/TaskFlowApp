@@ -48,4 +48,13 @@ export class AuthService {
       })
     );
   }
+  isLoggedIn(): boolean {
+    // Sprawdź, czy w local storage znajduje się nazwa użytkownika (czyli czy użytkownik jest zalogowany)
+    return !!localStorage.getItem('username');
+  }
+
+  isUserAdmin(): boolean {
+    // Sprawdź, czy w local storage znajduje się rola użytkownika i czy jest to rola admina
+    return localStorage.getItem('role') === 'admin';
+  }
 }
