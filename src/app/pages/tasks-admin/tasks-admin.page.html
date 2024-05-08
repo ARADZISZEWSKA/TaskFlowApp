@@ -1,27 +1,53 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title size="large" style="font-size: 24px; margin-left: 20px;" >All Tasks</ion-title>
+    <ion-title size="large" style="font-size: 24px; margin-left: 20px;" >All Your Projects</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">tasks-admin</ion-title>
+      <ion-title size="large">Projects</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let project of projects">
+        <ion-card class="projects">
+          <div class="card-container">
+            <div class="projects-buttons bussiness">
+              <ion-card-content class="card-content">
+                <span class="task-count">
+                  {{ daysUntilDeadline(project.deadline) }} days left
+                </span>
+                <ion-card-title size="large" class="title-black">
+                  <span class="projects-name">{{ project.projectName }}</span>
+                </ion-card-title>
+              </ion-card-content>
+              <div class="progress-container">
+                <ion-progress-bar mode="ios" [value]="0.7"></ion-progress-bar>
+                <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsModal(project.id)">
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </ion-button>
+              </div>
+            </div>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
-<!-- Tab menu at the bottom -->
 <ion-footer>
   <ion-toolbar>
-<ion-tabs >
+<ion-tabs>
   <ion-tab-bar slot="bottom" slot="fixed">
     <ion-tab-button (click)="goToTasksAdmin()" tab="tasks">
       <ion-icon name="hourglass-outline"></ion-icon>
       <ion-label>Projects</ion-label>
     </ion-tab-button>
-    <ion-tab-button (click)="goToAdminHomepage()" tab="admin-homepage">
+    <ion-tab-button (click)="goToAdminHomepage()" tab="home">
       <ion-icon name="home"></ion-icon>
       <ion-label>Home</ion-label>
     </ion-tab-button>

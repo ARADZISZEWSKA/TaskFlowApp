@@ -103,7 +103,7 @@ export class AdminHomepagePage implements OnInit {
   }
 
   goToTasksAdmin(): void {
-    this.router.navigateByUrl('/tasks'); 
+    this.router.navigateByUrl('/tasks-admin'); 
   }
 
   
@@ -129,7 +129,7 @@ export class AdminHomepagePage implements OnInit {
   
 }
 goToTasksPage() {
-  this.router.navigateByUrl('/tasks');
+  this.router.navigateByUrl('/tasks-admin');
 
 }
 }
