@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { AdminGuard } from 'src/guards/admin.guard';
 import { TasksAdminPage } from './tasks-admin.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: TasksAdminPage
+    component: TasksAdminPage,
+    canActivate: [AdminGuard]
   }
 ];
 
