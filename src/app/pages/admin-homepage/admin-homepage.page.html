@@ -24,8 +24,9 @@
 
 <div>
   <div>
-    <swiper-container [swiper]="sliderConfig">
-      <swiper-slide *ngFor="let project of projects" class="swiper-slide">
+
+    <swiper [config]="sliderConfig">
+      <ng-template swiperSlide *ngFor="let project of projects" class="swiper-slide">
         <ion-card class="projects">
           <div class="card-container">
             <div class="projects-buttons bussiness">
@@ -47,8 +48,8 @@
             </div>
           </div>
         </ion-card>
-      </swiper-slide>
-  </swiper-container>
+      </ng-template>
+  </swiper>
   </div>
   <ion-grid class="buttons">
     <ion-col size="12">

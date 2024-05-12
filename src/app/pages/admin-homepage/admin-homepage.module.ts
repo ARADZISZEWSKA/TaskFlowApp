@@ -15,6 +15,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ProjectDetailsModalComponent } from './modals/project-details-modal/project-details-modal.component';
 import { UserProfileModalComponent } from './modals/user-profile-modal/user-profile-modal.component';
 import { NewTaskModalComponent } from './modals/new-task-modal/new-task-modal.component';
+import { SwiperModule } from 'swiper/angular';
 
 
 
@@ -24,7 +25,8 @@ import { NewTaskModalComponent } from './modals/new-task-modal/new-task-modal.co
     FormsModule,
     IonicModule,
     AdminHomepagePageRoutingModule,
-    TypeaheadModule
+    TypeaheadModule,
+    SwiperModule
   ],
   declarations: [AdminHomepagePage, AddProjectModalComponent, RegisterUserModalComponent, ProjectDetailsModalComponent, UserProfileModalComponent, NewTaskModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -1,3 +1,191 @@
 .title-black {
     color: black; /* Ustawienie koloru czarnego dla tytułu */
   }
+  ion-tab-bar {
+    --background: #ffffff;  /* White background */
+    --color-selected: #488aff; /* Blue color for selected tab */
+    --color: grey;  /* Grey color for unselected tabs */
+    --mode: ios;
+    padding-top: 5px; /* Padding at the top of the tab bar */
+    border-top: 1px solid #e0e0e0;
+}
+ion-toolbar {
+  --background: var(--ion-background-color, --td-bg);
+  // padding: 1rem 0.3rem;
+  // padding-bottom: 0;
+
+  ion-icon,
+  i {
+    font-weight: lighter;
+    color: var(--ion-secondary-text-color);
+    font-size: 1.66rem;
+  }
+
+
+}
+
+ion-content {
+  --background: var(--ion-background-color, --td-bg);
+}
+
+
+
+#container {
+  padding: 3rem 0rem;
+  padding-top: 1.5vh;
+
+  strong {
+    font-size: xx-large;
+    padding-left: 1.2rem;
+    letter-spacing: 0.5px;
+  }
+}
+
+.sub-header,
+.todays-header {
+  text-transform: uppercase;
+  display: block;
+  margin-left: 1.2rem;
+  margin-top: 4vh;
+  font-size: medium;
+  letter-spacing: 0.5px;
+  color: var(--ion-secondary-text-color);
+}
+
+.todays-header {
+  margin-top: 2vh;
+  margin-bottom: 3vh;
+}
+
+
+ion-tab-bar {
+  --background: #ffffff;  /* White background */
+  --color-selected: #488aff; /* Blue color for selected tab */
+  --color: grey;  /* Grey color for unselected tabs */
+  --mode: ios;
+  padding-top: 5px; /* Padding at the top of the tab bar */
+  border-top: 1px solid #e0e0e0;
+}
+
+
+
+
+.fab-container {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+padding: 10px 0;
+flex-direction: column;
+margin-top: 20px; /* Add margin-top to create space between the cards and the FAB */
+}
+
+.text-below-fab {
+text-align: center; /* Center the text */
+padding: 10px 0; /* Adds some space above and below the text */
+text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ion-secondary-text-color);
+}
+
+
+
+.projects {
+&-name {
+  color: #243158;
+  font-size: large;
+  font-weight: 600;
+}
+
+&-buttons {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.8rem 1rem;
+  padding-bottom: 1.1rem;
+  margin: 1rem;
+  margin-bottom: 1.4rem;
+  margin-right: 0;
+  border-radius: 1.4rem;
+  font-size: larger;
+  color: var(--ion-color-secondary-contrast);
+  background-color: var(--ion-card-background);
+  text-align: left;
+  
+
+  ion-icon,
+  .bx-envelope {
+    font-size: xx-large;
+  }
+
+  ion-progress-bar {
+    margin-top: 0.6rem;
+    --background: var(--ion-progressbar);
+  }
+
+  .task-count {
+    color: var(--ion-secondary-text-color);
+    font-size: small;
+  }
+
+  span {
+    margin-bottom: 0.7rem;
+  }
+}
+}
+
+.business {
+ion-progress-bar {
+  --progress-background: var(--td-blue);
+}
+}
+
+
+.progress-container {
+display: flex;
+align-items: center;
+width: 100%; /* Take full width of its parent */
+}
+
+ion-progress-bar {
+flex-grow: 0; /* Does not grow to fill the space */
+width: 90%; /* Adjust this percentage as needed */
+margin-right: 10px; /* Space between progress bar and button */
+}
+
+
+/* Basic Styles for Card Layout */
+.card-container {
+display: flex;
+flex-direction: column; /* Ensures vertical stacking of cards */
+justify-content: center; /* Centers cards vertically if needed */
+align-items: center; /* Centers cards horizontally */
+padding: 16px; /* Provides padding around the entire container */
+width: 100%; /* Full width to utilize the entire container space */
+}
+
+ion-card {
+width: 100%; /* Each card will take full width of its container */
+
+}
+
+
+
+/* Default styles for mobile devices */
+.card-container {
+width: 100%; /* Full width on mobile */
+}
+
+/* Media query for tablets and desktops */
+@media (min-width: 992px) {
+.card-container {
+  width: 65%; /* 50% width on larger screens */
+  margin-right: 40%;
+}
+}
+
+ion-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

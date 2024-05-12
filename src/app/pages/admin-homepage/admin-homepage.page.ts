@@ -9,6 +9,12 @@ import { Project } from '../../models/projects.model';
 import { ProjectDetailsModalComponent } from './modals/project-details-modal/project-details-modal.component';
 import { UserProfileModalComponent } from './modals/user-profile-modal/user-profile-modal.component';
 import { ToastController } from '@ionic/angular';
+// import Swiper core and required modules
+import SwiperCore, { Navigation, Pagination, Scrollbar} from 'swiper';
+
+// install Swiper modules
+SwiperCore.use([Navigation, Pagination, Scrollbar]);
+
 
 
 
@@ -31,11 +37,12 @@ export class AdminHomepagePage implements OnInit {
   ) {}
 
   sliderConfig = {
-    slidesPerView: 2,
+    
+    slidesPerView: 1,
     spaceBetween: 20,
-    slidesPerGroup: 1,
-    navigation: true, // Dodaj nawigację
-  } 
+    navigation: true,
+    pagination: { clickable: true }
+  };
 
   username: string | null | undefined;
 

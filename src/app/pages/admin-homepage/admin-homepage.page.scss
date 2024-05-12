@@ -1,3 +1,5 @@
+
+
 ion-toolbar {
     --background: var(--ion-background-color, --td-bg);
     // padding: 1rem 0.3rem;
@@ -178,7 +180,7 @@ ion-card {
   }
   
   .swiper-slide {
-    width: calc((100% - 40px) / 3); /* Ustaw szerokość slajdów na jedną trzecią kontenera, odjąć dwa razy odstęp */
+    width: calc((100% - 60px) / 3); /* Ustaw szerokość slajdów na jedną trzecią kontenera, odjąć dwa razy odstęp */
     height: 50vh; /* Ustaw wysokość slajdów */
   }
   .button {
@@ -235,4 +237,21 @@ ion-progress-bar {
   padding: 0; 
 }
 }
+
+::ng-deep .swiper-button-prev:after,
+::ng-deep .swiper-button-next:after {
+  display: none;
+    font-size: 30px;
+}
+
+@media (min-width: 500px) {
+  ::ng-deep .swiper-button-prev:after,
+  ::ng-deep .swiper-button-next:after {
+    display: block !important;
+    font-size: 30px;
+  }
+}
+
+
+
   
