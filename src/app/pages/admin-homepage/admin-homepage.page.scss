@@ -26,7 +26,7 @@ ion-toolbar {
     padding-top: 1.5vh;
   
     strong {
-      font-size: x-large;
+      font-size: xx-large;
       padding-left: 1.2rem;
       letter-spacing: 0.5px;
     }
@@ -143,46 +143,73 @@ ion-progress-bar {
   margin-right: 10px; /* Space between progress bar and button */
 }
 
-
-/* Basic Styles for Card Layout */
-.card-container {
-  display: flex;
-  flex-direction: column; /* Ensures vertical stacking of cards */
-  justify-content: center; /* Centers cards vertically if needed */
-  align-items: center; /* Centers cards horizontally */
-  padding: 16px; /* Provides padding around the entire container */
-  width: 100%; /* Full width to utilize the entire container space */
+.swiper-container {
+  width: 70%;
+  padding: 30px 0; 
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-ion-card {
-  width: 100%; /* Each card will take full width of its container */
+
+.card-container {
+  padding: 5px;
+  width: 100%;
+  display:block;
+  padding-bottom: 10;
+}
   
-}
+  ion-card {
+      display: flex;
+      flex-direction: column; 
+      align-items: flex-start; 
+      width: 90%; 
+      margin: 0 auto; 
+      border-radius: 20px; 
+      justify-content: flex-start; 
+    
+    }
+
+    @media (max-width: 600px) {
+
+      .card-container[_ngcontent-ng-c3627282167] {
+        padding: 15px;
+        width: 100%;
+        display:block;
+        padding-bottom: 10;
+      }
+      .projects-buttons, ion-card-content {
+        font-size: 8px; 
+        padding: 4px; 
+      }
+    
+      .task-count, ion-card-title {
+        font-size: 10px; 
+      }
+    
+      ion-progress-bar {
+        height: 2px; 
+        margin-top: 2px;
+      }
+    
+      .swiper-container {
+        width: 90%;
+        padding: 30px 0; 
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+    }
+    
 
 
 
-/* Default styles for mobile devices */
-.card-container {
-  width: 100%; /* Full width on mobile */
-}
 
 /* Media query for tablets and desktops */
 @media (min-width: 992px) {
-  .card-container {
-    width: 65%; /* 50% width on larger screens */
-    margin-right: 40%;
-  }
 
-  .swiper-container {
-    width: 100%;
-    padding: 40px 0; /* Dodaj padding od boków strony */
-    position: relative; /* Ustaw pozycję względną */
-  }
   
-  .swiper-slide {
-    width: calc((100% - 60px) / 3); /* Ustaw szerokość slajdów na jedną trzecią kontenera, odjąć dwa razy odstęp */
-    height: 50vh; /* Ustaw wysokość slajdów */
-  }
   .button {
     display: flex;
     justify-content: flex-end; /* Wyrównanie do prawej strony */

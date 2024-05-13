@@ -23,14 +23,14 @@
   </ion-toolbar>
 
 <div>
-  <div>
+  <div class="swiper-container">
 
     <swiper [config]="sliderConfig">
       <ng-template swiperSlide *ngFor="let project of projects" class="swiper-slide">
         <ion-card class="projects">
           <div class="card-container">
             <div class="projects-buttons bussiness">
-              <ion-card-content class="card-content">
+              <ion-card-content >
                 <span class="task-count">
                   {{ daysUntilDeadline(project.deadline) }} days left
                 </span>
