@@ -2,8 +2,7 @@
 
 ion-toolbar {
     --background: var(--ion-background-color, --td-bg);
-    // padding: 1rem 0.3rem;
-    // padding-bottom: 0;
+   
   
     ion-icon,
     i {
@@ -26,7 +25,7 @@ ion-toolbar {
     padding-top: 1.5vh;
   
     strong {
-      font-size: xx-large;
+      font-size: x-large;
       padding-left: 1.2rem;
       letter-spacing: 0.5px;
     }
@@ -56,6 +55,7 @@ ion-toolbar {
     --mode: ios;
     padding-top: 5px; /* Padding at the top of the tab bar */
     border-top: 1px solid #e0e0e0;
+   
 }
 
 
@@ -153,8 +153,8 @@ ion-progress-bar {
 
 
 .card-container {
-  padding: 5px;
-  width: 100%;
+  padding: 10px;
+  width: 90%;
   display:block;
   padding-bottom: 10;
 }
@@ -163,7 +163,7 @@ ion-progress-bar {
       display: flex;
       flex-direction: column; 
       align-items: flex-start; 
-      width: 90%; 
+      width: 100%; 
       margin: 0 auto; 
       border-radius: 20px; 
       justify-content: flex-start; 
@@ -174,7 +174,7 @@ ion-progress-bar {
 
       .card-container[_ngcontent-ng-c3627282167] {
         padding: 15px;
-        width: 100%;
+        width: 90%;
         display:block;
         padding-bottom: 10;
       }
@@ -279,6 +279,36 @@ ion-progress-bar {
   }
 }
 
-
-
+#popover-button {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  font-size: x-large;
+ 
   
+}
+@media (min-width: 601px) {
+  #popover-button {
+    display: none;
+    
+    
+  }
+  
+}
+@media (max-width: 601px) {
+  #add-buttons{
+    display:none;
+    
+  }
+  
+}
+
+ion-item {
+  display: flex;
+  align-items: center; /* This will vertically center all content within the item */
+}
+ion-icon {
+  vertical-align: middle; /* Adjust alignment of icon */
+}
+
+

@@ -57,13 +57,15 @@
     </ion-col>
   </ion-grid>
 </div>
+
+
   
   
 
   
 
   <!-- Floating Action Button (FAB) -->
-  <ion-grid>
+  <ion-grid id="add-buttons">
     <ion-row>
       <ion-col size="6">
         <div class="buttons">
@@ -103,6 +105,38 @@
   </ion-grid>
   
   
+ <!-- Floating Action Button for phones -->
+  <div class="fab-container">
+    <ion-fab vertical="center" horizontal="center">
+      <ion-fab-button id="popover-button" mode="ios">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+  <ion-popover trigger="popover-button" [dismissOnSelect]="true">
+    <ng-template>
+      <ion-content>
+        <ion-list>
+          <ion-item aria-label="People" [button]="true" [detail]="false" (click)="openRegisterUserModal()">
+            <ion-label>
+              <ion-icon size="large" name="people-circle-outline" slot="start"></ion-icon>
+              Add User
+            </ion-label>
+          </ion-item>
+          <ion-item aria-label="Person" [button]="true" [detail]="false" (click)="openAddProjectModal()">
+            <ion-label>
+              <ion-icon size="large"name="person-circle-outline" slot="start"></ion-icon>
+              Add Project
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-popover>
+  
+  
+
  
 </ion-content>
 

@@ -1,6 +1,6 @@
 // AdminHomepagePage.ts
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { AddProjectModalComponent } from './modals/add-project-modal/add-project-modal.component';
 import { RegisterUserModalComponent } from './modals/register-user-modal/register-user-modal.component';
 import { Router } from '@angular/router';
@@ -26,15 +26,19 @@ SwiperCore.use([Navigation, Pagination, Scrollbar]);
 export class AdminHomepagePage implements OnInit {
   projects: Project[] = []; // Stores the list of projects
 
-  
+  isMobile = false;
  
   constructor(
     private modalController: ModalController,
     private toastController:ToastController,
     private router: Router,
-    private projectService: ProjectService // Inject the ProjectService
+    private projectService: ProjectService,
+    private platform: Platform // Inject the ProjectService
     
-  ) {}
+  ) {
+
+    this.isMobile = this.platform.is('mobile');
+  }
 
   sliderConfig = {
     
