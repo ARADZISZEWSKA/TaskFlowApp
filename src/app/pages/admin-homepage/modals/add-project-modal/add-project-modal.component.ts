@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Project } from 'src/app/models/projects.model';
 import { UserService } from '../../../../services/user.service';
 import { User } from '../../../../models/user.model';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-add-project-modal',
@@ -12,6 +13,7 @@ import { User } from '../../../../models/user.model';
   styleUrls: ['./add-project-modal.component.scss'],
 })
 export class AddProjectModalComponent implements OnInit {
+  @Input() ownerId: string | undefined;
   newProject: Project = new Project();
   @ViewChild('memberModal', { static: true }) memberModal!: IonModal;
 
@@ -26,17 +28,19 @@ export class AddProjectModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.fetchUsers();
+    this.fetchUsers(); // Wywołujemy fetchUsers bez parametru ownerId
   }
 
   fetchUsers() {
-    this.userService.getUsers().subscribe(users => {
+    this.userService.getUsersByOwner().subscribe(users => { // Pobierz listę użytkowników
       this.members = users.map(user => ({
         text: `${user.firstName} ${user.lastName}`,
         value: user.id
-      }));
-    });
+      }));// Dodaj dane użytkownika do tablicy members
+      });
   }
+
+   
 
   memberSelectionChanged(selectedUserIds: string[]) {
     this.selectedMembers = selectedUserIds;
