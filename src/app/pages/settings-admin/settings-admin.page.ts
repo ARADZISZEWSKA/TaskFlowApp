@@ -36,7 +36,12 @@ export class SettingsAdminPage implements OnInit {
             console.error('Błąd podczas wylogowywania', error);
         }
     });
-}
+  }
+  
+  goToManageUsers(): void {
+    this.router.navigateByUrl('/manage-users')
+  }
+
 
 
 }

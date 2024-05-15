@@ -12,6 +12,22 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  getUsersByOwner(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/ownerOf`, { withCredentials: true })
+      .pipe(
+        catchError((error) => {
+          console.error('Failed to get users by owner from backend:', error);
+          return throwError(error); // or handle this error in a user-friendly way
+        })
+      );
+  }
+
+
+
+
+
+  //zostawiac?
+  
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}/users`, { withCredentials: true })
       .pipe(
@@ -23,14 +39,5 @@ export class UserService {
   }
   getUserById(id: string): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/${id}`);
-  }
-  getUsersByOwner(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}/ownerOf`, { withCredentials: true })
-      .pipe(
-        catchError((error) => {
-          console.error('Failed to get users by owner from backend:', error);
-          return throwError(error); // or handle this error in a user-friendly way
-        })
-      );
   }
   }

@@ -105,9 +105,7 @@ export class AdminHomepagePage implements OnInit {
   goToTasksAdmin(): void {
     this.router.navigateByUrl('/tasks-admin'); 
   }
-
   
-
   goToAdminHomepage(): void {
     this.router.navigateByUrl('/admin-homepage'); 
   }

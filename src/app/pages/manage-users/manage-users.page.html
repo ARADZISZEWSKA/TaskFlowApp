@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Lista użytkowników
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let user of users">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>{{ user.firstName }}</ion-card-subtitle>
+            <ion-card-title>{{ user.lastName }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Email: {{ user.email }}</p>
+            <!-- Dodaj dodatkowe pola w zależności od modelu użytkownika -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
