@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Task } from '../models/task.model';
 
@@ -19,7 +19,21 @@ private baseUrl = 'http://localhost:5139/tasks';
     return this.http.get<any[]>(`${this.baseUrl}/user/${userId}/project/${projectId}`);
   }
 
-  
+  getTodayTasksByProject(projectId: string): Observable<Task[]> {
+    // Ustawienie opcji żądania, aby przekazywać ciasteczka
+    const options = {
+      withCredentials: true
+    };
+
+    // Utworzenie nagłówka z uwzględnieniem opcji żądania
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get<Task[]>(`${this.baseUrl}/project/${projectId}/today`, { headers, ...options });
+  }
 }
+
+  
+
 
 

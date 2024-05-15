@@ -48,6 +48,12 @@ export class ProjectService {
           withCredentials: true
         });
       }
+
+      // In your project.service.ts
+      getTasksForUserProjectDueToday(userId: string, projectId: string): Observable<Task[]> {
+        return this.http.get<Task[]>(`${this.baseUrl}/tasks/user/${userId}/project/${projectId}/dueToday`);
+      }
+
       
     }
 

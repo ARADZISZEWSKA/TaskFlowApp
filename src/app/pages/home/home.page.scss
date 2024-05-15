@@ -25,7 +25,7 @@ ion-content {
   padding-top: 1.5vh;
 
   strong {
-    font-size: x-large;
+    font-size: xx-large;
     padding-left: 1.2rem;
     letter-spacing: 0.5px;
   }
@@ -129,6 +129,11 @@ ion-progress-bar {
   --progress-background: var(--td-blue);
 }
 }
+.purple{
+  ion-progress-bar{
+    --progress-background: var(--td-magenta);
+  }
+}
 
 
 .progress-container {
@@ -214,6 +219,7 @@ ion-card {
   display: flex;
   justify-content: flex-end; /* Wyrównanie do prawej strony */
   align-items: center; /* Wyśrodkowanie w pionie */
+  
 }
 
 .seeAll-button {
@@ -267,15 +273,22 @@ padding: 0;
 
 ::ng-deep .swiper-button-prev:after,
 ::ng-deep .swiper-button-next:after {
-display: none;
-  font-size: 30px;
+  display:none;
+  font-size: 20px;
+  padding-bottom: 160px;
+  
 }
+
+::ng-deep .swiper-pagination{
+  margin:120px 4px;
+}
+
 
 @media (min-width: 500px) {
 ::ng-deep .swiper-button-prev:after,
 ::ng-deep .swiper-button-next:after {
   display: block !important;
-  font-size: 30px;
+  font-size: 25px;
 }
 }
 
@@ -303,12 +316,65 @@ font-size: x-large;
 
 }
 
-ion-item {
-display: flex;
-align-items: center; /* This will vertically center all content within the item */
-}
+
 ion-icon {
 vertical-align: middle; /* Adjust alignment of icon */
 }
+
+ion-list{
+  background-color: var(--ion-background-color, --td-bg);
+  padding-top: 70px;
+  border-width:none;
+  position:relative;
+}
+ion-item{
+  
+  --ion-item-background:var(--ion-background-color, --td-bg);
+  --ripple-color:transparent;
+  --background-activated:transparent;
+  position:relative;
+  display: flex;
+  align-items: center;
+}
+ion-label{
+  background-color:var(--ion-background-color, --td-bg);
+  position:relative;
+  
+}
+ion-checkbox{
+  --border-radius: 5px;
+  --border-color: gray;
+  --border-width: 1px;
+  position:relative;
+  size:large;
+
+}
+.container-item{
+  display:flex;
+  flex-direction: row;
+  position:relative;
+}
+.swiper-and-text-container{
+  display:flex;
+  flex-direction: row;
+  position:relative;
+}
+.todays-tasks-header {
+  margin-top: 280px;  /* Dostosuj tę wartość według potrzeb */
+  margin-left:5px;
+  position:absolute;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+@media (max-width: 601px) {
+  .todays-tasks-header {
+    margin-top: 210px;  /* Dostosuj tę wartość według potrzeb */
+  }
+  
+  }
+  
+  
+
 
 

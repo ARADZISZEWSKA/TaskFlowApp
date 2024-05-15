@@ -17,14 +17,18 @@
     </div>
   </ion-toolbar>
 
-<div>
+<div class="swiper-and-text-container">
+  <div class="sub-header todays-tasks-header">
+    <span class="sub-header">Today's tasks</span>
+  </div>
   <div class="swiper-container">
 
     <swiper [config]="sliderConfig">
+      
       <ng-template swiperSlide *ngFor="let project of projects" class="swiper-slide">
         <ion-card class="projects">
           <div class="card-container">
-            <div class="projects-buttons bussiness">
+            <div class="projects-buttons purple">
               <ion-card-content >
                 <span class="task-count">
                   {{ daysUntilDeadline(project.deadline) }} days left
@@ -43,6 +47,16 @@
             </div>
           </div>
         </ion-card>
+
+        <ion-list lines="none" *ngIf="tasksMap[project.id] && tasksMap[project.id].length > 0">
+          <ion-item *ngFor="let task of tasksMap[project.id]">
+            <ion-checkbox  (click)="playCheckboxAnimation($event)" slot="start"></ion-checkbox>
+            <ion-label>
+              {{ task.taskName }}
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        
       </ng-template>
   </swiper>
   </div>
