@@ -1,113 +1,314 @@
+
+
 ion-toolbar {
-    --background: var(--ion-background-color, --td-bg);
-    padding: 1rem 0.3rem;
-    padding-bottom: 0;
-  
-    ion-icon,
-    i {
-      font-weight: lighter;
-      color: var(--ion-secondary-text-color);
-      font-size: 1.66rem;
-    }
-  
-    ion-button.search-btn {
-      margin-right: 0.2rem;
-    }
-  }
-  
-  ion-content {
-    --background: var(--ion-background-color, --td-bg);
-  }
-  
-  #container {
-    padding: 3rem 0rem;
-    padding-top: 1.5vh;
-  
-    strong {
-      font-size: xx-large;
-      padding-left: 1.2rem;
-      letter-spacing: 0.5px;
-    }
-  }
-  
-  .sub-header,
-  .todays-header {
-    text-transform: uppercase;
-    display: block;
-    margin-left: 1.2rem;
-    margin-top: 4vh;
-    font-size: small;
-    letter-spacing: 0.5px;
+  --background: var(--ion-background-color, --td-bg);
+ 
+
+  ion-icon,
+  i {
+    font-weight: lighter;
     color: var(--ion-secondary-text-color);
+    font-size: 1.66rem;
   }
-  
-  .todays-header {
-    margin-top: 2vh;
-    margin-bottom: 3vh;
+
+
+}
+
+ion-content {
+  --background: var(--ion-background-color, --td-bg);
+}
+
+
+
+#container {
+  padding: 1.5rem 0rem;
+  padding-top: 1.5vh;
+
+  strong {
+    font-size: x-large;
+    padding-left: 1.2rem;
+    letter-spacing: 0.5px;
   }
+}
+
+.sub-header,
+.todays-header {
+  text-transform: uppercase;
+  display: block;
+  margin-left: 1.2rem;
+  margin-top: 4vh;
+  font-size: medium;
+  letter-spacing: 0.5px;
+  color: var(--ion-secondary-text-color);
+}
+
+.todays-header {
+  margin-top: 2vh;
+  margin-bottom: 3vh;
+}
+
+
+ion-tab-bar {
+  --background: #ffffff;  /* White background */
+  --color-selected: #488aff; /* Blue color for selected tab */
+  --color: grey;  /* Grey color for unselected tabs */
+  --mode: ios;
+  padding-top: 5px; /* Padding at the top of the tab bar */
+  border-top: 1px solid #e0e0e0;
+ 
+}
+
+
+
+
+.fab-container {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+padding: 10px 0;
+flex-direction: column;
+}
+
+.text-below-fab {
+text-align: center; /* Center the text */
+padding: 10px 0; /* Adds some space above and below the text */
+text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ion-secondary-text-color);
+}
+
+
+
+.projects {
+&-name {
+  color: #243158;
+  font-size: large;
+  font-weight: 600;
+}
+
+&-buttons {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.8rem 1rem;
+  padding-bottom: 1.1rem;
+  margin: 1rem;
+  margin-bottom: 1.4rem;
+  margin-right: 0;
+  border-radius: 1.4rem;
+  font-size: larger;
+  color: var(--ion-color-secondary-contrast);
+  background-color: var(--ion-card-background);
+  text-align: left;
   
-  .categories {
-    &-name {
-      color: var(--color);
-      font-size: large;
-      font-weight: 600;
+
+  ion-icon,
+  .bx-envelope {
+    font-size: xx-large;
+  }
+
+  ion-progress-bar {
+    margin-top: 0.6rem;
+    --background: var(--ion-progressbar);
+  }
+
+  .task-count {
+    color: var(--ion-secondary-text-color);
+    font-size: small;
+  }
+
+  span {
+    margin-bottom: 0.7rem;
+  }
+}
+}
+
+.business {
+ion-progress-bar {
+  --progress-background: var(--td-blue);
+}
+}
+
+
+.progress-container {
+display: flex;
+align-items: center;
+width: 100%; /* Take full width of its parent */
+}
+
+ion-progress-bar {
+flex-grow: 0; /* Does not grow to fill the space */
+width: 90%; /* Adjust this percentage as needed */
+margin-right: 10px; /* Space between progress bar and button */
+}
+
+.swiper-container {
+width: 70%;
+padding: 30px 0; 
+position: relative;
+margin-left: auto;
+margin-right: auto;
+}
+
+
+.card-container {
+padding: 10px;
+width: 90%;
+display:block;
+padding-bottom: 10;
+}
+
+ion-card {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    width: 100%; 
+    margin: 0 auto; 
+    border-radius: 20px; 
+    justify-content: flex-start; 
+  
+  }
+
+  @media (max-width: 600px) {
+
+    .card-container[_ngcontent-ng-c3627282167] {
+      padding: 15px;
+      width: 90%;
+      display:block;
+      padding-bottom: 10;
+    }
+    .projects-buttons, ion-card-content {
+      font-size: 8px; 
+      padding: 4px; 
     }
   
-    &-buttons {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 1.8rem 1rem;
-      padding-bottom: 1.1rem;
-      margin: 1rem;
-      margin-bottom: 1.4rem;
-      margin-right: 0;
-      border-radius: 1.4rem;
-      font-size: larger;
-      color: var(--ion-color-secondary-contrast);
-      background-color: var(--ion-card-background);
-      text-align: left;
-      box-shadow: var(--ion-card-box-shadow);
-  
-      ion-icon,
-      .bx-envelope {
-        font-size: xx-large;
-      }
-  
-      ion-progress-bar {
-        margin-top: 0.6rem;
-        --background: var(--ion-progressbar);
-      }
-  
-      .task-count {
-        color: var(--ion-secondary-text-color);
-        font-size: small;
-      }
-  
-      span {
-        margin-bottom: 0.7rem;
-      }
+    .task-count, ion-card-title {
+      font-size: 10px; 
     }
-  }
   
-  .business {
     ion-progress-bar {
-      --progress-background: var(--td-magenta);
+      height: 2px; 
+      margin-top: 2px;
     }
-  }
   
-  .personal {
-    ion-progress-bar {
-      --progress-background: var(--td-blue);
+    .swiper-container {
+      width: 90%;
+      padding: 30px 0; 
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
     }
+
   }
   
-  .task-list {
-    margin-top: 1rem;
-    padding: 0 1.2rem;
+
+
+
+
+/* Media query for tablets and desktops */
+@media (min-width: 992px) {
+
+
+.button {
+  display: flex;
+  justify-content: flex-end; /* Wyrównanie do prawej strony */
+  align-items: center; /* Wyśrodkowanie w pionie */
+}
+
+.seeAll-button {
+  position: fixed; /* Ustaw pozycję przycisku na stałą */
+  top: 36%;
+  right: 20px; 
+  transform: translateY(-50%); /* Wyśrodkuj przycisk względem pionu */
+  border-radius: 5px; /* Zaokrąglij rogi przycisku */
+  z-index: 999; /* Ustaw wysoki indeks warstwy, aby był na wierzchu */
+}
+.buttons {
+  display: flex; /* Use Flexbox to layout children */
+  justify-content: space-between; /* Distribute children with space between */
+}
+// .AddUser{
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: 50%;
+//   padding: 06px 0;
+//   flex-direction: column;
+// }
+// .AddUser ion-button {
+//   font-size: 2rem; /* Increase the font size */
+//   padding: 0px 40px; /* Increase padding to make the button larger */
+// }
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+@media (max-width: 767px) {
+  .center {
+    flex-direction: column;
+    align-items: center;
   }
+
+}
+
+.progress-container {
+width: 85VH; 
+}
+
+ion-progress-bar {
+width: 100%; 
+margin: 0; 
+padding: 0; 
+}
+}
+
+::ng-deep .swiper-button-prev:after,
+::ng-deep .swiper-button-next:after {
+display: none;
+  font-size: 30px;
+}
+
+@media (min-width: 500px) {
+::ng-deep .swiper-button-prev:after,
+::ng-deep .swiper-button-next:after {
+  display: block !important;
+  font-size: 30px;
+}
+}
+
+#popover-button {
+position: fixed;
+bottom: 80px;
+right: 20px;
+font-size: x-large;
+
+
+}
+@media (min-width: 601px) {
+#popover-button {
+  display: none;
   
-  ion-fab {
-    bottom: 40px;
-    right: calc(20px + var(--ion-safe-area-right, 0px));
-  }
+  
+}
+
+}
+@media (max-width: 601px) {
+#add-buttons{
+  display:none;
+  
+}
+
+}
+
+ion-item {
+display: flex;
+align-items: center; /* This will vertically center all content within the item */
+}
+ion-icon {
+vertical-align: middle; /* Adjust alignment of icon */
+}
+
+

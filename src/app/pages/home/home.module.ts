@@ -4,6 +4,8 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { SwiperModule } from 'swiper/angular';
+
 
 
 
@@ -11,7 +13,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 
 @NgModule({
-  imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule, IonicModule],
+  imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule, IonicModule, SwiperModule],
   declarations: [HomePage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

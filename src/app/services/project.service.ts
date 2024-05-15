@@ -20,6 +20,12 @@ export class ProjectService {
     });
   }
 
+  getAssignedProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>(`${this.baseUrl}/assignedProjects`, {
+      withCredentials: true
+    });
+  }
+
   // project.service.ts
     getUserProjectMembers(projectId: string): Observable<User[]> {
         return this.http.get<User[]>(`${this.baseUrl}/${projectId}/members`, {
