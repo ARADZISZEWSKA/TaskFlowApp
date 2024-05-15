@@ -1,26 +1,49 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Lista użytkowników
+    <ion-title size="large" style="font-size: 24px; margin-left: 20px;" >
+      Your Users
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="4" *ngFor="let user of users">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>{{ user.firstName }}</ion-card-subtitle>
-            <ion-card-title>{{ user.lastName }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>Email: {{ user.email }}</p>
-            <!-- Dodaj dodatkowe pola w zależności od modelu użytkownika -->
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-card style="max-width: 800px; margin: 50px auto 50px;">
+    <ion-card-header>
+      <ion-card-title style="text-align: center; color: black; padding: 30px;">
+        Your Users
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <!-- Nagłówki tabeli -->
+        <ion-row>
+          <ion-col size="1" style="border: 1px solid #ccc; text-align: center; color: black;"></ion-col>
+          <ion-col size="3" style="border: 1px solid #ccc; text-align: center; color: black;">
+            <strong>Imię</strong>
+          </ion-col>
+          <ion-col size="3" style="border: 1px solid #ccc; text-align: center; color: black;">
+            <strong>Nazwisko</strong>
+          </ion-col>
+          <ion-col size="5" style="border: 1px solid #ccc; text-align: center; color: black;">
+            <strong>Email</strong>
+          </ion-col>
+        </ion-row>
+        <!-- Wiersze z danymi użytkowników -->
+        <ion-row *ngFor="let user of users; let i = index">
+          <ion-col size="1" style="border: 1px solid #ccc; text-align: center;">
+            {{ i + 1 }}
+          </ion-col>
+          <ion-col size="3" style="border: 1px solid #ccc; text-align: center;">
+            {{ user.firstName }}
+          </ion-col>
+          <ion-col size="3" style="border: 1px solid #ccc; text-align: center;">
+            {{ user.lastName }}
+          </ion-col>
+          <ion-col size="5" style="border: 1px solid #ccc; text-align: center;">
+            {{ user.email }}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
