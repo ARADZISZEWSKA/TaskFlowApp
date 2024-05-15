@@ -1,0 +1,35 @@
+ion-title {
+    color: black;
+    font-size: 24px;
+  }
+  
+  ion-searchbar {
+    --placeholder-color: #333;
+    padding: 10px;
+  }
+  
+  ion-card {
+    max-width: 800px;
+    margin: 50px auto;
+  }
+  
+  ion-card-title {
+    text-align: center;
+    color: black;
+    padding: 30px;
+  }
+  
+  ion-col {
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  .header-col {
+    color: black;
+  }
+  
+  .data-col {
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  

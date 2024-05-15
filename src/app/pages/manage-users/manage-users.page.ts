@@ -9,22 +9,26 @@ import { User } from 'src/app/models/user.model';
 })
 export class ManageUsersPage implements OnInit {
   users: User[] = [];
+  filteredUsers: User[] = [];
+  searchTerm: string = '';
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.loadUsers();
+    this.userService.getUsersByOwner().subscribe((data) => {
+      this.users = data;
+      this.filteredUsers = data;
+    });
   }
 
-  loadUsers() {
-    this.userService.getUsersByOwner().subscribe(
-      (users: User[]) => {
-        this.users = users;
-      },
-      (error: any) => {
-        console.error('Failed to load users:', error);
-        // Obsługa błędu
-      }
-    );
+  filterUsers(event: any) {
+    const searchTerm = event.target.value.toLowerCase();
+    this.filteredUsers = this.users.filter(user => {
+      return (
+        user.firstName.toLowerCase().includes(searchTerm) ||
+        user.lastName.toLowerCase().includes(searchTerm) ||
+        user.email.toLowerCase().includes(searchTerm)
+      );
+    });
   }
 }

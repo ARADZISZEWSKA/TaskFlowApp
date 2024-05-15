@@ -1,45 +1,47 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title size="large" style="font-size: 24px; margin-left: 20px;" >
+    <ion-title>
       Your Users
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card style="max-width: 800px; margin: 50px auto 50px;">
+  <ion-card>
     <ion-card-header>
-      <ion-card-title style="text-align: center; color: black; padding: 30px;">
+      <ion-card-title>
         Your Users
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
+      <!-- Dodanie ion-searchbar -->
+      <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterUsers($event)"></ion-searchbar>
       <ion-grid>
         <!-- Nagłówki tabeli -->
         <ion-row>
-          <ion-col size="1" style="border: 1px solid #ccc; text-align: center; color: black;"></ion-col>
-          <ion-col size="3" style="border: 1px solid #ccc; text-align: center; color: black;">
+          <ion-col size="1"></ion-col>
+          <ion-col size="3">
             <strong>Imię</strong>
           </ion-col>
-          <ion-col size="3" style="border: 1px solid #ccc; text-align: center; color: black;">
+          <ion-col size="3">
             <strong>Nazwisko</strong>
           </ion-col>
-          <ion-col size="5" style="border: 1px solid #ccc; text-align: center; color: black;">
+          <ion-col size="5">
             <strong>Email</strong>
           </ion-col>
         </ion-row>
         <!-- Wiersze z danymi użytkowników -->
-        <ion-row *ngFor="let user of users; let i = index">
-          <ion-col size="1" style="border: 1px solid #ccc; text-align: center;">
+        <ion-row *ngFor="let user of filteredUsers; let i = index">
+          <ion-col size="1" class="data-col">
             {{ i + 1 }}
           </ion-col>
-          <ion-col size="3" style="border: 1px solid #ccc; text-align: center;">
+          <ion-col size="3" class="data-col">
             {{ user.firstName }}
           </ion-col>
-          <ion-col size="3" style="border: 1px solid #ccc; text-align: center;">
+          <ion-col size="3" class="data-col">
             {{ user.lastName }}
           </ion-col>
-          <ion-col size="5" style="border: 1px solid #ccc; text-align: center;">
+          <ion-col size="5" class="data-col">
             {{ user.email }}
           </ion-col>
         </ion-row>
