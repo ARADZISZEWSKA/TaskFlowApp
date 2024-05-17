@@ -26,6 +26,8 @@ export class HomePage {
 
   projects: Project[] = []; // Stores the list of projects
   tasksMap: { [projectId: string]: Task[] } = {};
+  tasks: Task[] = [];
+
 
 
   isMobile = false;
@@ -54,14 +56,24 @@ export class HomePage {
 
   username: string | null | undefined;
   
-  playCheckboxAnimation(event: { srcElement: any; }): void{
+  // Component method to handle checkbox click
+  playCheckboxAnimation(event: any, task: Task): void {
     console.log(event);
-    (createAnimation('')
-      .addElement(event.srcElement)
-      .easing('cubic-bezier(0, 0.55, 0.45, 1)')
-      .duration(500)
-      .fromTo('transform', 'rotate(0)', 'rotate(360deg)')).play();
+    const newStatus = task.status === 'completed' ? 'not completed' : 'completed';
+    this.taskService.updateTaskStatus(task.id!, newStatus).subscribe({
+      next: () => {
+        task.status = newStatus; // Update local task model
+        createAnimation('')
+          .addElement(event.srcElement)
+          .easing('cubic-bezier(0, 0.55, 0.45, 1)')
+          .duration(500)
+          .fromTo('transform', 'rotate(0)', 'rotate(360deg)').play();
+      },
+      error: (error) => console.error('Failed to update task status:', error)
+    });
   }
+  
+
   ngOnInit() {
     this.loadProjects();
     this.username = localStorage.getItem('username') ; // Load projects when component initializes
@@ -78,6 +90,8 @@ export class HomePage {
       error: (error) => console.error('Failed to load projects', error)
     });
   }
+
+
   
 
 
@@ -90,6 +104,25 @@ export class HomePage {
       }
     });
   }
+ 
+  
+  
+
+
+
+
+
+
+  
+
+ 
+
+  
+
+
+  
+  
+  
 
   
   

@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../../../services/project.service';
 import { Project } from '../../../../models/projects.model';
 import { User } from 'src/app/models/user.model';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, createAnimation } from '@ionic/angular';
 import { UserProfileModalComponent } from '../user-profile-modal/user-profile-modal.component';
 import { Task } from '../../../../models/task.model';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-project-details-modal',
@@ -15,11 +16,13 @@ export class ProjectDetailsModalComponent implements OnInit {
   @Input() project!: Project;
   users: User[] | null = null; // Initialize with null
   overdueTasks: any[] | null = null; // Initialize with null
+  tasks: Task[] = [];
 
   constructor(
     private projectService: ProjectService,
     private modalController: ModalController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private taskService: TaskService
   ) {}
 
   async ngOnInit() {
@@ -85,6 +88,22 @@ export class ProjectDetailsModalComponent implements OnInit {
       });
       toast.present();
     }
+  }
+
+  playCheckboxAnimation(event: any, task: Task): void {
+    console.log(event);
+    const newStatus = task.status === 'completed' ? 'not completed' : 'completed';
+    this.taskService.updateTaskStatus(task.id!, newStatus).subscribe({
+      next: () => {
+        task.status = newStatus; // Update local task model
+        createAnimation('')
+          .addElement(event.srcElement)
+          .easing('cubic-bezier(0, 0.55, 0.45, 1)')
+          .duration(500)
+          .fromTo('transform', 'rotate(0)', 'rotate(360deg)').play();
+      },
+      error: (error) => console.error('Failed to update task status:', error)
+    });
   }
   
   }

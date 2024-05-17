@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, createAnimation } from '@ionic/angular';
 import { NewTaskModalComponent } from '../new-task-modal/new-task-modal.component';
 import { TaskService } from 'src/app/services/task.service';
 import { Subscription } from 'rxjs';
+import { Task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-user-profile-modal',
@@ -24,6 +25,25 @@ export class UserProfileModalComponent implements OnInit {
   ngOnInit() {
     this.loadTasks(this.user.id, this.projectId);
   }
+  tasks: Task[] = [];
+
+  // Component method to handle checkbox click
+  playCheckboxAnimation(event: any, task: Task): void {
+    console.log(event);
+    const newStatus = task.status === 'completed' ? 'not completed' : 'completed';
+    this.taskService.updateTaskStatus(task.id!, newStatus).subscribe({
+      next: () => {
+        task.status = newStatus; // Update local task model
+        createAnimation('')
+          .addElement(event.srcElement)
+          .easing('cubic-bezier(0, 0.55, 0.45, 1)')
+          .duration(500)
+          .fromTo('transform', 'rotate(0)', 'rotate(360deg)').play();
+      },
+      error: (error) => console.error('Failed to update task status:', error)
+    });
+  }
+  
 
  
 

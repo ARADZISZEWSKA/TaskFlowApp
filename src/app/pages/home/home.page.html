@@ -50,7 +50,8 @@
 
         <ion-list lines="none" *ngIf="tasksMap[project.id] && tasksMap[project.id].length > 0">
           <ion-item *ngFor="let task of tasksMap[project.id]">
-            <ion-checkbox  (click)="playCheckboxAnimation($event)" slot="start"></ion-checkbox>
+            <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
+
             <ion-label>
               {{ task.taskName }}
             </ion-label>

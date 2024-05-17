@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Task } from '../models/task.model';
+import { TaskStatusResponse } from '../models/taskstatusresponse';
+
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +33,29 @@ private baseUrl = 'http://localhost:5139/tasks';
 
     return this.http.get<Task[]>(`${this.baseUrl}/project/${projectId}/today`, { headers, ...options });
   }
+
+  updateTaskStatus(taskId: string, status: string): Observable<any> {
+    const payload = { status }; // Object shorthand
+    console.log("Sending payload:", JSON.stringify(payload)); // Debug payload
+    return this.http.put(`${this.baseUrl}/update-status/${taskId}`, payload, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
 }
+
+
+  
+ 
+
+}
+  
+
+
+  
+  
+  
+
 
   
 

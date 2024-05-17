@@ -24,7 +24,7 @@
 </ion-item>
 <ion-list class="ion-padding-horizontal" [inset]="true">
   <ion-item *ngFor="let task of toDoTasks">
-    <ion-checkbox slot="start" aria-label="Toggle task completion"></ion-checkbox>
+    <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
     <ion-input [readonly]="true" aria-label="Task name" [value]="task.taskName"></ion-input>
   </ion-item>
 </ion-list>
@@ -37,7 +37,7 @@
 </ion-item>
 <ion-list class="ion-padding-horizontal" [inset]="true">
   <ion-item *ngFor="let task of overdueTasks">
-    <ion-checkbox slot="start" aria-label="Toggle task completion"></ion-checkbox>
+    <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
     <ion-input [readonly]="true" aria-label="Task name" [value]="task.taskName"></ion-input>
   </ion-item>
 </ion-list>
