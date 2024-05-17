@@ -25,7 +25,10 @@
 <ion-list class="ion-padding-horizontal" [inset]="true">
   <ion-item *ngFor="let task of toDoTasks">
     <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
-    <ion-input [readonly]="true" aria-label="Task name" [value]="task.taskName"></ion-input>
+        
+            <ion-label [ngClass]="{'completed-task': task.status === 'completed'}">
+              {{ task.taskName }}
+            </ion-label>
   </ion-item>
 </ion-list>
 
@@ -38,9 +41,12 @@
 <ion-list class="ion-padding-horizontal" [inset]="true">
   <ion-item *ngFor="let task of overdueTasks">
     <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
-    <ion-input [readonly]="true" aria-label="Task name" [value]="task.taskName"></ion-input>
+            <ion-label [ngClass]="{'completed-task': task.status === 'completed'}">
+              {{ task.taskName }}
+            </ion-label>
   </ion-item>
 </ion-list>
+
 
 
   <!-- Przycisk dodawania nowego zadania -->

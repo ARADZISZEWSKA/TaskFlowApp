@@ -21,3 +21,7 @@ ion-checkbox{
       letter-spacing: 0.5px;
       color: var(--ion-secondary-text-color);
   }
+
+  .completed-task {
+    text-decoration: line-through;
+  }
