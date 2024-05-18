@@ -39,7 +39,7 @@
               </ion-card-content>
               <div class="progress-container">
                 <ion-progress-bar mode="ios" [value]="0.7"></ion-progress-bar>
-                <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsHomeModal(project.id)">
+                <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsHomeModal(project)">
                   <ion-icon name="chevron-forward-outline"></ion-icon>
                   <span>See details</span>
                 </ion-button>
@@ -51,7 +51,6 @@
         <ion-list lines="none" *ngIf="tasksMap[project.id] && tasksMap[project.id].length > 0">
           <ion-item *ngFor="let task of tasksMap[project.id]">
             <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
-        
             <ion-label [ngClass]="{'completed-task': task.status === 'completed'}">
               {{ task.taskName }}
             </ion-label>

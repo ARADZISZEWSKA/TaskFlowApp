@@ -34,6 +34,20 @@ private baseUrl = 'http://localhost:5139/tasks';
     return this.http.get<Task[]>(`${this.baseUrl}/project/${projectId}/today`, { headers, ...options });
   }
 
+
+  getAllTasksByProject(projectId: string): Observable<Task[]> {
+    // Ustawienie opcji żądania, aby przekazywać ciasteczka
+    const options = {
+      withCredentials: true
+    };
+
+    // Utworzenie nagłówka z uwzględnieniem opcji żądania
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get<Task[]>(`${this.baseUrl}/project/${projectId}/all-tasks`, { headers, ...options });
+  }
+
   updateTaskStatus(taskId: string, status: string): Observable<any> {
     const payload = { status }; // Object shorthand
     console.log("Sending payload:", JSON.stringify(payload)); // Debug payload

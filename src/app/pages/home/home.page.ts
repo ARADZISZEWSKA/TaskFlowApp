@@ -129,22 +129,17 @@ export class HomePage {
       }
   
 
-  async openProjectDetailsHomeModal(projectId: string) {
-    try {
-      const project = await this.projectService.getProjectById(projectId).toPromise();
-      const modal = await this.modalController.create({
-        component: ProjectDetailsHomeModalComponent,
-        componentProps: {
-          project: project 
-        }
-      });
-      await modal.present();
-    } catch (error) {
-      console.error('Error fetching project details', error);
-      // Handle error gracefully, e.g., display a toast message
-      this.showToast('Failed to open project details. Please try again later.');
-    }
-  }
+      async openProjectDetailsHomeModal(project: Project) {
+        try {
+          const modal = await this.modalController.create({
+            component: ProjectDetailsHomeModalComponent,
+            componentProps: { project: project }
+          });
+          await modal.present();
+        } catch (error) {
+          console.error('Error opening modal', error);
+          this.showToast('Failed to open project details. Please try again later.');
+        }}
   
   // Function to display a toast message
   private async showToast(message: string) {

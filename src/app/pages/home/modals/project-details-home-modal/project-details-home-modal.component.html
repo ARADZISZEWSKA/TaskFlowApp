@@ -33,7 +33,7 @@
     <ion-label>
       <h2>Deadline</h2>
       <p>{{ project.deadline | date: 'yyyy-MM-dd' }}</p> 
-      <p> {{ daysUntilDeadline(project.deadline)  }} days left</p><!-- Date formatted -->
+      <p> {{ daysUntilDeadline(project.deadline)  }} days left</p>
     </ion-label>
   </ion-item>
 
@@ -44,7 +44,7 @@
     </ion-label>
   </ion-item>
   <ion-list class="ion-padding-horizontal" [inset]="true">
-    <ion-item *ngFor="let task of toDoTasks">
+    <ion-item *ngFor="let task of tasksMap[project.id]">
       <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
         
             <ion-label [ngClass]="{'completed-task': task.status === 'completed'}">

@@ -16,10 +16,10 @@ import { ToastController } from '@ionic/angular';
 export class ProjectDetailsHomeModalComponent  implements OnInit {
 
   tasks: Task[] = [];
-  @Input() user: any;
-  @Input() projectId!: string; 
+  
   toDoTasks: any[] = [];
   @Input() project!: Project;
+  tasksMap: { [projectId: string]: Task[] } = {};
   
 
   constructor(
@@ -29,11 +29,14 @@ export class ProjectDetailsHomeModalComponent  implements OnInit {
     private taskService: TaskService
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.archiveAndDeleteCompletedTasks();
-    this.loadTasks(this.user.id, this.projectId);
+    if (this.project && this.project.id) {
+      this.loadTasks(this.project.id);
+    } else {
+      console.error('Project data is undefined');
+    }
   }
-  
 
   archiveAndDeleteCompletedTasks() {
     this.taskService.archiveAndDeleteCompletedTasks().subscribe({
@@ -52,14 +55,16 @@ export class ProjectDetailsHomeModalComponent  implements OnInit {
     });
   }
 
-  loadTasks(userId: string, projectId: string) {
-    this.taskService.getTasksByUserAndProject(userId, projectId).subscribe({
+  
+
+
+  loadTasks(projectId: string) {
+    this.taskService.getAllTasksByProject(projectId).subscribe({
       next: (tasks) => {
-        this.toDoTasks = tasks; // Directly assign tasks to toDoTasks
-        console.log('ToDo Tasks:', this.toDoTasks); // Check if tasks are logged correctly
+        this.tasksMap[projectId] = tasks;
       },
-      error: (err) => {
-        console.error('Error retrieving tasks:', err);
+      error: (error) => {
+        console.error('Failed to load tasks:', error);
       }
     });
   }
