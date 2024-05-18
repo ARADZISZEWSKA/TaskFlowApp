@@ -26,7 +26,8 @@ SwiperCore.use([Navigation, Pagination, Scrollbar]);
 export class HomePage {
 
   projects: Project[] = []; // Stores the list of projects
-  tasksMap: { [projectId: string]: Task[] } = {};
+  tasksMap: { [projectId: string]: { tasks: Task[], completionRate: number } } = {};
+
   tasks: Task[] = [];
   username: string | null | undefined;
   
@@ -77,7 +78,6 @@ export class HomePage {
     }
 
   
-
     archiveAndDeleteCompletedTasks() {
       this.taskService.archiveAndDeleteCompletedTasks().subscribe({
         next: (response) => {
@@ -109,21 +109,37 @@ export class HomePage {
         });
       }
 
+      private calculateCompletionRate(tasks: Task[]): number {
+        const completedTasks = tasks.filter(task => task.status === 'completed').length;
+        return tasks.length > 0 ? (completedTasks / tasks.length) * 100 : 0;
+      }
+      
+
 
       loadTasksDueToday(projectId: string) {
         this.taskService.getTodayTasksByProject(projectId).subscribe({
           next: (tasks) => {
-            this.tasksMap[projectId] = tasks;
+            const completionRate = this.calculateCompletionRate(tasks);
+            this.tasksMap[projectId] = { tasks: tasks, completionRate: completionRate };
             console.log('Tasks loaded successfully:', tasks);
           },
           error: (error) => {
-            // Check if the error status is a client-side error (e.g., network issues, no server response)
-            if (error.status && error.status >= 400) {
-              console.error('Failed to load tasks due to server error:', error);
-            } else {
-              console.log('Failed to load tasks', error);
-            }
-            this.tasksMap[projectId] = [];
+            console.error('Failed to load tasks:', error);
+            this.tasksMap[projectId] = { tasks: [], completionRate: 0 }; // Provide default structuring on error
+          }
+        });
+      }
+      
+      
+      loadTasksForProject(projectId: string) {
+        this.taskService.getAllTasksByProject(projectId).subscribe({
+          next: (tasks) => {
+            const completedTasks = tasks.filter(task => task.status === 'completed').length;
+            const completionRate = tasks.length > 0 ? (completedTasks / tasks.length) : 0;
+            this.tasksMap[projectId] = { tasks: tasks, completionRate: completionRate * 100 }; // Percentage
+          },
+          error: () => {
+            this.tasksMap[projectId] = { tasks: [], completionRate: 0 };
           }
         });
       }
