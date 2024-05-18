@@ -9,6 +9,7 @@ import { Project } from '../../models/projects.model';
 import { ProjectDetailsModalComponent } from './modals/project-details-modal/project-details-modal.component';
 import { UserProfileModalComponent } from './modals/user-profile-modal/user-profile-modal.component';
 import { ToastController } from '@ionic/angular';
+import { TaskService } from 'src/app/services/task.service';
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Pagination, Scrollbar} from 'swiper';
 
@@ -33,7 +34,8 @@ export class AdminHomepagePage implements OnInit {
     private toastController:ToastController,
     private router: Router,
     private projectService: ProjectService,
-    private platform: Platform // Inject the ProjectService
+    private platform: Platform, // Inject the ProjectService
+    private taskService: TaskService
     
   ) {
 
@@ -53,6 +55,7 @@ export class AdminHomepagePage implements OnInit {
   ngOnInit() {
     this.loadProjects();
     this.username = localStorage.getItem('username') ; // Load projects when component initializes
+    this.archiveAndDeleteCompletedTasks();
   }
 
   loadProjects() {
@@ -62,6 +65,23 @@ export class AdminHomepagePage implements OnInit {
       },
       error: (error) => {
         console.error('Failed to load projects', error);
+      }
+    });
+  }
+
+  archiveAndDeleteCompletedTasks() {
+    this.taskService.archiveAndDeleteCompletedTasks().subscribe({
+      next: (response) => {
+        // Assuming response is already a JavaScript object
+        if (response.success) {
+          console.log('Tasks deleted succesfully');
+        } else {
+          console.error('API succeeded but indicated failure:', response.message);
+        }
+      },
+      error: (error) => {
+        // Log the error response to understand the issue better
+        console.error('Failed to archive and delete tasks:', error.error);
       }
     });
   }

@@ -9,6 +9,7 @@ import { ProjectDetailsModalComponent } from '../admin-homepage/modals/project-d
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/services/task.service';
 import { UserService } from 'src/app/services/user.service';
+import { ProjectDetailsHomeModalComponent } from './modals/project-details-home-modal/project-details-home-modal.component';
 
 // import Swiper core and required modules
 import SwiperCore, { Navigation, Pagination, Scrollbar} from 'swiper';
@@ -27,10 +28,9 @@ export class HomePage {
   projects: Project[] = []; // Stores the list of projects
   tasksMap: { [projectId: string]: Task[] } = {};
   tasks: Task[] = [];
-
-
-
-  isMobile = false;
+  username: string | null | undefined;
+  
+  
  
   constructor(
     private modalController: ModalController,
@@ -41,20 +41,16 @@ export class HomePage {
     private userService: UserService,
     private taskService:TaskService
     
-  ) {
-
-    this.isMobile = this.platform.is('mobile');
-  }
+  ) {}
 
   sliderConfig = {
-    
     slidesPerView: 1,
     spaceBetween: 20,
     navigation: true,
     pagination: { clickable: true}
   };
 
-  username: string | null | undefined;
+ 
   
   // Component method to handle checkbox click
   playCheckboxAnimation(event: any, task: Task): void {
@@ -62,7 +58,7 @@ export class HomePage {
     const newStatus = task.status === 'completed' ? 'not completed' : 'completed';
     this.taskService.updateTaskStatus(task.id!, newStatus).subscribe({
       next: () => {
-        task.status = newStatus; // Update local task model
+        task.status = newStatus; 
         createAnimation('')
           .addElement(event.srcElement)
           .easing('cubic-bezier(0, 0.55, 0.45, 1)')
@@ -74,69 +70,70 @@ export class HomePage {
   }
   
 
-  ngOnInit() {
-    this.loadProjects();
-    this.username = localStorage.getItem('username') ; // Load projects when component initializes
-  }
+    ngOnInit() {
+      this.loadProjects();
+      this.archiveAndDeleteCompletedTasks();
+      this.username = localStorage.getItem('username') ; // Load projects when component initializes
+    }
 
-  loadProjects() {
-    this.projectService.getAssignedProjects().subscribe({
-      next: (projects) => {
-        this.projects = projects;
-        projects.forEach(project => {
-          this.loadTasksDueToday(project.id);
+  
+
+    archiveAndDeleteCompletedTasks() {
+      this.taskService.archiveAndDeleteCompletedTasks().subscribe({
+        next: (response) => {
+          // Assuming response is already a JavaScript object
+          if (response.success) {
+            this.loadProjects();
+          } else {
+            console.error('API succeeded but indicated failure:', response.message);
+          }
+        },
+        error: (error) => {
+          // Log the error response to understand the issue better
+          console.error('Failed to archive and delete tasks:', error.error);
+        }
+      });
+    }
+    
+    
+
+      loadProjects() {
+        this.projectService.getAssignedProjects().subscribe({
+          next: (projects) => {
+            this.projects = projects;
+            projects.forEach(project => {
+              this.loadTasksDueToday(project.id);
+            });
+          },
+          error: (error) => console.error('Failed to load projects', error)
         });
-      },
-      error: (error) => console.error('Failed to load projects', error)
-    });
-  }
-
-
-  
-
-
-  loadTasksDueToday(projectId: string) {
-    this.taskService.getTodayTasksByProject(projectId).subscribe({
-      next: (tasks) => this.tasksMap[projectId] = tasks,
-      error: (error) => {
-        console.error('Failed to load tasks:', error);
-        this.tasksMap[projectId] = [];
       }
-    });
-  }
- 
-  
-  
 
 
-
-
-
-
-  
-
- 
-
-  
-
-
-  
-  
-  
-
-  
-  
-  
-  
+      loadTasksDueToday(projectId: string) {
+        this.taskService.getTodayTasksByProject(projectId).subscribe({
+          next: (tasks) => {
+            this.tasksMap[projectId] = tasks;
+            console.log('Tasks loaded successfully:', tasks);
+          },
+          error: (error) => {
+            // Check if the error status is a client-side error (e.g., network issues, no server response)
+            if (error.status && error.status >= 400) {
+              console.error('Failed to load tasks due to server error:', error);
+            } else {
+              console.log('Failed to load tasks', error);
+            }
+            this.tasksMap[projectId] = [];
+          }
+        });
+      }
   
 
-
-
-  async openProjectDetailsModal(projectId: string) {
+  async openProjectDetailsHomeModal(projectId: string) {
     try {
       const project = await this.projectService.getProjectById(projectId).toPromise();
       const modal = await this.modalController.create({
-        component: ProjectDetailsModalComponent,
+        component: ProjectDetailsHomeModalComponent,
         componentProps: {
           project: project 
         }
@@ -159,8 +156,6 @@ export class HomePage {
     toast.present();
   }
   
-
-  
   goToSettingsAdmin(): void {
     this.router.navigateByUrl('/settings-admin'); 
   }
@@ -168,8 +163,6 @@ export class HomePage {
   goToTasksAdmin(): void {
     this.router.navigateByUrl('/tasks-admin'); 
   }
-
-  
 
   goToAdminHomepage(): void {
     this.router.navigateByUrl('/admin-homepage'); 

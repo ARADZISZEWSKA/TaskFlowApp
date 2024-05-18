@@ -44,6 +44,10 @@ private baseUrl = 'http://localhost:5139/tasks';
     });
 }
 
+    archiveAndDeleteCompletedTasks(): Observable<any> {
+      return this.http.post(`${this.baseUrl}/archive-and-delete-completed-tasks`, {});
+    }
+
 
   
  

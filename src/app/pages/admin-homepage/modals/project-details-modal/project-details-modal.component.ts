@@ -40,11 +40,30 @@ export class ProjectDetailsModalComponent implements OnInit {
         console.error('Error fetching project details:', error);
       }
     }
+    this.archiveAndDeleteCompletedTasks();
+  }
+
+  archiveAndDeleteCompletedTasks() {
+    this.taskService.archiveAndDeleteCompletedTasks().subscribe({
+      next: (response) => {
+        // Assuming response is already a JavaScript object
+        if (response.success) {
+          console.log('Tasks deleted succesfully');
+        } else {
+          console.error('API succeeded but indicated failure:', response.message);
+        }
+      },
+      error: (error) => {
+        // Log the error response to understand the issue better
+        console.error('Failed to archive and delete tasks:', error.error);
+      }
+    });
   }
 
   cancel() {
     this.modalController.dismiss(null, 'cancel');
   }
+
 
   // Funkcja do obliczania liczby dni do terminu zadania
   daysUntilDeadline(deadline: string | Date): number {
