@@ -48,6 +48,19 @@ private baseUrl = 'http://localhost:5139/tasks';
     return this.http.get<Task[]>(`${this.baseUrl}/project/${projectId}/all-tasks`, { headers, ...options });
   }
 
+  getAllTasksByProjectAdmin(projectId: string): Observable<Task[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+  
+    const options = {
+      headers: headers,
+      withCredentials: true
+    };
+  
+    return this.http.get<Task[]>(`${this.baseUrl}/project/${projectId}/all-tasks-admin`, options);
+  }
+
   updateTaskStatus(taskId: string, status: string): Observable<any> {
     const payload = { status }; // Object shorthand
     console.log("Sending payload:", JSON.stringify(payload)); // Debug payload

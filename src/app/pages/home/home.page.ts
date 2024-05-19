@@ -27,6 +27,7 @@ export class HomePage {
 
   projects: Project[] = []; // Stores the list of projects
   tasksMap: { [projectId: string]: { tasks: Task[], completionRate: number } } = {};
+  todayTasksMap: { [projectId: string]: Task[] } = {};
 
   tasks: Task[] = [];
   username: string | null | undefined;
@@ -97,17 +98,18 @@ export class HomePage {
     
     
 
-      loadProjects() {
-        this.projectService.getAssignedProjects().subscribe({
-          next: (projects) => {
-            this.projects = projects;
-            projects.forEach(project => {
-              this.loadTasksDueToday(project.id);
-            });
-          },
-          error: (error) => console.error('Failed to load projects', error)
-        });
-      }
+    loadProjects() {
+      this.projectService.getAssignedProjects().subscribe({
+        next: (projects) => {
+          this.projects = projects;
+          projects.forEach(project => {
+            this.loadTasksForProject(project.id);
+            this.loadTasksDueToday(project.id);
+          });
+        },
+        error: (error) => console.error('Failed to load projects', error)
+      });
+    }
 
       private calculateCompletionRate(tasks: Task[]): number {
         const completedTasks = tasks.filter(task => task.status === 'completed').length;
@@ -119,31 +121,30 @@ export class HomePage {
       loadTasksDueToday(projectId: string) {
         this.taskService.getTodayTasksByProject(projectId).subscribe({
           next: (tasks) => {
-            const completionRate = this.calculateCompletionRate(tasks);
-            this.tasksMap[projectId] = { tasks: tasks, completionRate: completionRate };
-            console.log('Tasks loaded successfully:', tasks);
+            this.todayTasksMap[projectId] = tasks;
           },
           error: (error) => {
-            console.error('Failed to load tasks:', error);
-            this.tasksMap[projectId] = { tasks: [], completionRate: 0 }; // Provide default structuring on error
+            console.error('Failed to load today\'s tasks:', error);
+            this.todayTasksMap[projectId] = [];
           }
         });
       }
-      
+
       
       loadTasksForProject(projectId: string) {
         this.taskService.getAllTasksByProject(projectId).subscribe({
           next: (tasks) => {
             const completedTasks = tasks.filter(task => task.status === 'completed').length;
-            const completionRate = tasks.length > 0 ? (completedTasks / tasks.length) : 0;
-            this.tasksMap[projectId] = { tasks: tasks, completionRate: completionRate * 100 }; // Percentage
+            const completionRate = tasks.length > 0 ? (completedTasks / tasks.length) * 100 : 0;
+            this.tasksMap[projectId] = { tasks, completionRate };
           },
-          error: () => {
+          error: (error) => {
+            console.error(`Failed to load tasks for project ${projectId}`, error);
             this.tasksMap[projectId] = { tasks: [], completionRate: 0 };
           }
         });
       }
-  
+            
 
       async openProjectDetailsHomeModal(project: Project) {
         try {

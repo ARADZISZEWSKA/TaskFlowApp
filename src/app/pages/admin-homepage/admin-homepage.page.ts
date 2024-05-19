@@ -26,6 +26,8 @@ SwiperCore.use([Navigation, Pagination, Scrollbar]);
 })
 export class AdminHomepagePage implements OnInit {
   projects: Project[] = []; // Stores the list of projects
+  completionRates: { [projectId: string]: number } = {};
+
 
   isMobile = false;
  
@@ -62,12 +64,30 @@ export class AdminHomepagePage implements OnInit {
     this.projectService.getUserProjects().subscribe({
       next: (projects) => {
         this.projects = projects;
+        projects.forEach(project => {
+          this.calculateProjectCompletion(project.id);
+        });
+      },
+      error: (error) => console.error('Failed to load projects', error)
+    });
+  }
+
+  calculateProjectCompletion(projectId: string) {
+    this.taskService.getAllTasksByProjectAdmin(projectId).subscribe({
+      next: (tasks) => {
+        const totalTasks = tasks.length;
+        const completedTasks = tasks.filter(task => task.status === 'completed').length;
+        this.completionRates[projectId] = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+        console.log(`Completion rate for ${projectId}: ${this.completionRates[projectId]}%`);
       },
       error: (error) => {
-        console.error('Failed to load projects', error);
+        console.error(`Failed to load tasks for project ${projectId}`, error);
+        this.completionRates[projectId] = 0; // Set to 0 in case of error
       }
     });
   }
+  
+
 
   archiveAndDeleteCompletedTasks() {
     this.taskService.archiveAndDeleteCompletedTasks().subscribe({
