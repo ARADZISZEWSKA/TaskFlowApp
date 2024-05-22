@@ -1,35 +1,41 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title size="large" style="font-size: 24px; margin-left: 20px;" >Settings</ion-title>
+    <ion-title size="large" style="font-size: 24px; margin-left: 20px;">Settings</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="ion-padding" style="position: absolute; bottom: 60px; left: 0; right: 0;">
-    <ion-button expand="full">Change your password</ion-button>
-    <ion-button (click)="logout()" expand="full">Log out</ion-button>
+  <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+    <ion-card style="width: 90%;">
+      <ion-card-content>
+        <ion-button class="round-button" (click)="goToManageUsers()" expand="block" style="margin-bottom: 20px;">See all your users</ion-button>
+        <div style="margin-top: auto;">
+          <ion-button class="round-button" expand="block" style="margin-bottom: 10px;">Change your password</ion-button>
+          <ion-button color="danger" class="round-button" (click)="logout()" expand="block">Log out</ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
-
 
 <!-- Tab menu at the bottom -->
 <ion-footer>
   <ion-toolbar>
-<ion-tabs >
-  <ion-tab-bar slot="bottom" slot="fixed">
-    <ion-tab-button (click)="goToTasksAdmin()" tab="tasks">
-      <ion-icon name="hourglass-outline"></ion-icon>
-      <ion-label>Projects</ion-label>
-    </ion-tab-button>
-    <ion-tab-button (click)="goToAdminHomepage()" tab="admin-homepage">
-      <ion-icon name="home"></ion-icon>
-      <ion-label>Home</ion-label>
-    </ion-tab-button>
-    <ion-tab-button (click)="goToSettingsAdmin()" tab="settings">
-      <ion-icon name="settings"></ion-icon>
-      <ion-label>Settings</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
-</ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom" slot="fixed">
+        <ion-tab-button (click)="goToTasksAdmin()" tab="tasks">
+          <ion-icon name="hourglass-outline"></ion-icon>
+          <ion-label>Projects</ion-label>
+        </ion-tab-button>
+        <ion-tab-button (click)="goToAdminHomepage()" tab="admin-homepage">
+          <ion-icon name="home"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-tab-button>
+        <ion-tab-button (click)="goToSettingsAdmin()" tab="settings" selected>
+          <ion-icon name="settings"></ion-icon>
+          <ion-label>Settings</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
 </ion-footer>

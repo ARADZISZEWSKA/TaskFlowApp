@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { ModalController, Platform, ToastController, createAnimation } from '@ionic/angular';
 import { Project } from 'src/app/models/projects.model';

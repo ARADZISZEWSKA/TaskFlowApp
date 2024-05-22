@@ -17,6 +17,9 @@ export class ProjectDetailsModalComponent implements OnInit {
   users: User[] | null = null; // Initialize with null
   overdueTasks: any[] | null = null; // Initialize with null
   tasks: Task[] = [];
+  users: User[] | null = null; 
+  overdueTasks: any[] | null = null;
+
 
   constructor(
     private projectService: ProjectService,
@@ -88,7 +91,6 @@ export class ProjectDetailsModalComponent implements OnInit {
     const projectId = this.project.id; // Pobranie ID projektu
     try {
       await this.projectService.deleteProject(projectId).toPromise();
-      // Obsłuż sukces usuwania projektu, np. wyświetl toast z potwierdzeniem
       const toast = await this.toastController.create({
         message: 'Project deleted successfully!',
         duration: 2000,
