@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { Platform, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-users',
@@ -11,13 +13,20 @@ export class ManageUsersPage implements OnInit {
   users: User[] = [];
   filteredUsers: User[] = [];
   searchTerm: string = '';
+  isMobile: boolean = false;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private platform: Platform, private router: Router,    private toastController: ToastController
+
+  ) {
+    this.isMobile = this.platform.is('mobile');
+
+  }
 
   ngOnInit() {
     this.userService.getUsersByOwner().subscribe((data) => {
       this.users = data;
       this.filteredUsers = data;
+      this.isMobile = window.innerWidth <= 768;
     });
   }
 
@@ -30,5 +39,51 @@ export class ManageUsersPage implements OnInit {
         user.email.toLowerCase().includes(searchTerm)
       );
     });
+  }
+
+  deleteUser(userId: string) {
+    this.userService.deleteUser(userId).subscribe(
+      () => {
+        // Usunięcie użytkownika z listy
+        this.users = this.users.filter((user) => user.id !== userId);
+        this.filteredUsers = this.filteredUsers.filter(
+          (user) => user.id !== userId
+        );
+        this.presentToast('User deleted successfully.');
+      },
+      (error) => {
+        console.error('Failed to delete user:', error);
+        this.presentToast('Failed to delete user.');
+      }
+    );
+  }
+  
+
+  // Metoda do edycji użytkownika
+  editUser(user: User) {
+    // Tutaj możesz dodać logikę do edycji użytkownika
+    console.log('Edycja użytkownika:', user);
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+    });
+    toast.present();
+  }
+  
+  
+  
+  goToSettingsAdmin(): void {
+    this.router.navigateByUrl('/settings-admin'); 
+  }
+
+  goToTasksAdmin(): void {
+    this.router.navigateByUrl('/tasks-admin'); 
+  }
+  
+  goToAdminHomepage(): void {
+    this.router.navigateByUrl('/admin-homepage'); 
   }
 }

@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="!isMobile">
   <ion-card>
     <ion-card-header>
       <ion-card-title>
@@ -19,33 +19,70 @@
       <ion-grid>
         <!-- Nagłówki tabeli -->
         <ion-row>
-          <ion-col size="1"></ion-col>
-          <ion-col size="3">
-            <strong>Imię</strong>
-          </ion-col>
-          <ion-col size="3">
-            <strong>Nazwisko</strong>
-          </ion-col>
-          <ion-col size="5">
-            <strong>Email</strong>
-          </ion-col>
+          <ion-col size="1">Nr.</ion-col>
+          <ion-col size="2">Imię</ion-col>
+          <ion-col size="2">Nazwisko</ion-col>
+          <ion-col size="4">Email</ion-col>
+          <ion-col size="1">Edit</ion-col>
+          <ion-col size="2">Delete</ion-col>
         </ion-row>
         <!-- Wiersze z danymi użytkowników -->
         <ion-row *ngFor="let user of filteredUsers; let i = index">
-          <ion-col size="1" class="data-col">
-            {{ i + 1 }}
+          <ion-col size="1">{{ i + 1 }}</ion-col>
+          <ion-col size="2">{{ user.firstName }}</ion-col>
+          <ion-col size="2">{{ user.lastName }}</ion-col>
+          <ion-col size="4">{{ user.email }}</ion-col>
+          <ion-col size="1"><ion-button size="small">Edit</ion-button></ion-col>
+          <ion-col size="2"><ion-button (click)="deleteUser(user.id)" size="small">Delete</ion-button></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-content *ngIf="isMobile">
+  <ion-card *ngFor="let user of filteredUsers" style="margin-bottom: 10px; border: none;">
+    <ion-card-content style="padding: 8px;">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8" class="data-col-mobile " style="text-align: center;">
+            <strong style="font-size: 18px; font-weight: bold; color: black;">{{ user.firstName }} {{ user.lastName }}</strong>
           </ion-col>
-          <ion-col size="3" class="data-col">
-            {{ user.firstName }}
+          <ion-col size="2" style="text-align: center;">
+            <ion-button size="small" color="primary" style="padding: 0;">
+              <ion-icon name="create-outline" style="font-size: 16px;"></ion-icon>
+            </ion-button>
           </ion-col>
-          <ion-col size="3" class="data-col">
-            {{ user.lastName }}
-          </ion-col>
-          <ion-col size="5" class="data-col">
-            {{ user.email }}
+          <ion-col size="2" style="text-align: center;">
+            <ion-button size="small" color="danger" (click)="deleteUser(user.id)" style="padding: 0;">
+              <ion-icon name="trash-outline" style="font-size: 16px;"></ion-icon>
+            </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
   </ion-card>
 </ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button (click)="goToTasksAdmin()" tab="tasks">
+          <ion-icon name="hourglass-outline"></ion-icon>
+          <ion-label>Projects</ion-label>
+        </ion-tab-button>
+        <ion-tab-button (click)="goToAdminHomepage()" tab="admin-homepage">
+          <ion-icon name="home"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-tab-button>
+        <ion-tab-button (click)="goToSettingsAdmin()" tab="settings">
+          <ion-icon name="settings"></ion-icon>
+          <ion-label>Settings</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>
+

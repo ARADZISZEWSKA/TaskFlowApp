@@ -1,35 +1,41 @@
+
 ion-title {
-    color: black;
-    font-size: 24px;
-  }
-  
-  ion-searchbar {
-    --placeholder-color: #333;
-    padding: 10px;
-  }
-  
-  ion-card {
-    max-width: 800px;
-    margin: 50px auto;
-  }
-  
-  ion-card-title {
-    text-align: center;
-    color: black;
-    padding: 30px;
-  }
-  
-  ion-col {
-    border: 1px solid #ccc;
-    text-align: center;
-  }
-  
-  .header-col {
-    color: black;
-  }
-  
-  .data-col {
-    border: 1px solid #ccc;
-    text-align: center;
-  }
-  
+  color: black;
+  font-size: 24px;
+  margin-left: 20px;
+}
+
+ion-searchbar {
+  --placeholder-color: #333;
+  padding: 10px;
+}
+
+ion-card {
+  max-width: 80%;
+  margin: 20px auto;
+}
+
+ion-card-title {
+  text-align: center;
+  color: black;
+  padding: 30px;
+}
+
+ion-col {
+  border: 1px solid #ccc;
+  text-align: center;
+  --ion-text-wrap: normal; /* Zapewnia zawijanie tekstu w kolumnach */
+}
+
+.header-col {
+  color: black;
+}
+
+.data-col {
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.data-col-mobile {
+  text-align: center;
+}
