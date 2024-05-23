@@ -17,8 +17,6 @@ export class ProjectDetailsModalComponent implements OnInit {
   users: User[] | null = null; // Initialize with null
   overdueTasks: any[] | null = null; // Initialize with null
   tasks: Task[] = [];
-  users: User[] | null = null; 
-  overdueTasks: any[] | null = null;
 
 
   constructor(
