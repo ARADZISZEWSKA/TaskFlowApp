@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { SettingsPageRoutingModule } from './settings-routing.module';
-
+import { ChangePasswordModalComponent } from './change-password-modal/change-password-modal.component'; // Upewnij się, że komponent jest importowany
 import { SettingsPage } from './settings.page';
 
 @NgModule({
@@ -15,6 +15,6 @@ import { SettingsPage } from './settings.page';
     IonicModule,
     SettingsPageRoutingModule
   ],
-  declarations: [SettingsPage]
+  declarations: [SettingsPage, ChangePasswordModalComponent]
 })
 export class SettingsPageModule {}
