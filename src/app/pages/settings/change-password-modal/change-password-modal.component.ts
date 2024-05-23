@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-
+import { UserService } from 'src/app/services/user.service'; // Upewnij się, że ścieżka jest poprawna
 
 @Component({
   selector: 'app-change-password-modal',
@@ -8,22 +8,30 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./change-password-modal.component.scss'],
 })
 export class ChangePasswordModalComponent {
-  currentPassword: string = ''; // Initialize to empty string
-  newPassword: string = '';      // Initialize to empty string
-  confirmNewPassword: string = ''; // Initialize to empty string
-  //nie wiem ??
+  currentPassword: string = '';
+  newPassword: string = '';
+  confirmNewPassword: string = '';
 
-  constructor(private modalController: ModalController) {}
+  constructor(
+    private modalController: ModalController,
+    private userService: UserService
+  ) {}
 
   dismissModal() {
     this.modalController.dismiss();
   }
 
-  changePassword() {
+  async changePassword() {
     if (this.newPassword === this.confirmNewPassword) {
-      // Add your password change logic here
-      console.log('Password changed successfully');
-      this.dismissModal();
+      this.userService.changePassword(this.currentPassword, this.newPassword, this.confirmNewPassword).subscribe(
+        response => {
+          console.log('Password changed successfully', response);
+          this.dismissModal();
+        },
+        error => {
+          console.error('Error changing password', error);
+        }
+      );
     } else {
       console.log('Passwords do not match');
     }

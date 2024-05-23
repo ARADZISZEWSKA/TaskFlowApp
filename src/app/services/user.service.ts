@@ -47,4 +47,17 @@ export class UserService {
   getUserById(id: string): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
+
+
+  //zmiana hasła
+  changePassword(currentPassword: string, newPassword: string, confirmNewPassword: string): Observable<any> {
+    const payload = {
+      currentPassword,
+      newPassword,
+      confirmNewPassword
+    };
+   
+    
+    return this.http.post(`${this.baseUrl}/User/change-password`, payload);
   }
+}
