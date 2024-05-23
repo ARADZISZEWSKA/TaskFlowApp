@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+
+import { ChangeAdminPasswordModalComponent } from 'src/app/pages/settings-admin/change-admin-password-modal/change-admin-password-modal.component';
+import { ModalController } from '@ionic/angular';
+
 @Component({
   selector: 'app-settings-admin',
   templateUrl: './settings-admin.page.html',
@@ -9,7 +13,15 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SettingsAdminPage implements OnInit {
 
   constructor(private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private modalController: ModalController) { }
+
+    async presentChangeAdminPasswordModal() {
+      const modal = await this.modalController.create({
+        component: ChangeAdminPasswordModalComponent
+      });
+      return await modal.present();
+    }
 
   ngOnInit() {
   }

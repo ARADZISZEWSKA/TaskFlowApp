@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { ChangeAdminPasswordModalComponent } from './change-admin-password-modal/change-admin-password-modal.component'; // Upewnij się, że komponent jest importowany
 
 import { SettingsAdminPageRoutingModule } from './settings-admin-routing.module';
 
@@ -15,6 +16,6 @@ import { SettingsAdminPage } from './settings-admin.page';
     IonicModule,
     SettingsAdminPageRoutingModule
   ],
-  declarations: [SettingsAdminPage]
+  declarations: [SettingsAdminPage, ChangeAdminPasswordModalComponent]
 })
 export class SettingsAdminPageModule {}

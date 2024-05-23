@@ -11,6 +11,7 @@ export class ChangePasswordModalComponent {
   currentPassword: string = ''; // Initialize to empty string
   newPassword: string = '';      // Initialize to empty string
   confirmNewPassword: string = ''; // Initialize to empty string
+  //nie wiem ??
 
   constructor(private modalController: ModalController) {}
 
