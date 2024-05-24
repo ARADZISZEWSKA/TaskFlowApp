@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { ProjectService } from '../../services/project.service'
 import { Project } from '../../models/projects.model'; 
 import { ProjectDetailsModalComponent } from 'src/app/pages/admin-homepage/modals/project-details-modal/project-details-modal.component';
+import { Task} from 'src/app/models/task.model';
+import { TaskService } from 'src/app/services/task.service';
 
 
 @Component({
@@ -13,25 +15,59 @@ import { ProjectDetailsModalComponent } from 'src/app/pages/admin-homepage/modal
   styleUrls: ['./tasks-admin.page.scss'],
 })
 export class TasksAdminPage implements OnInit {
-  projects: Project[] = []; // Tablica do przechowywania danych projektów
+  projects: Project[] = [];
+  completionRates: { [projectId: string]: number } = {};
+  tasksMap: { [projectId: string]: Task[] } = {}; // Stores tasks for each project as an object
+  tasks: Task[] = [];
+
+
   constructor(
     private router: Router,
     private modalController: ModalController,
     private toastController:ToastController,
-    private projectService: ProjectService // Wstrzykujemy serwis projektu
+    private projectService: ProjectService,
+    private taskService:TaskService 
   ) {}
   
   // Funkcja do pobierania i ładowania projektów
   loadProjects() {
     this.projectService.getUserProjects().subscribe({
       next: (projects) => {
-        this.projects = projects; // Przypisujemy pobrane projekty do zmiennej projects
+        this.projects = projects;
+        projects.forEach(project => {
+          this.calculateProjectCompletion(project.id);
+          this.loadTasksForProject(project.id); // Load tasks for each project
+        });
+      },
+      error: (error) => console.error('Failed to load projects', error)
+    });
+  }
+
+
+  loadTasksForProject(projectId: string) {
+    this.taskService.getAllTasksByProjectAdmin(projectId).subscribe({
+      next: (tasks) => {
+        this.tasksMap[projectId] = tasks; // Store tasks in the object
+      },
+      error: (error) => console.error(`Failed to load tasks for project ${projectId}`, error)
+    });
+  }
+
+  calculateProjectCompletion(projectId: string) {
+    this.taskService.getAllTasksByProjectAdmin(projectId).subscribe({
+      next: (tasks) => {
+        const totalTasks = tasks.length;
+        const completedTasks = tasks.filter(task => task.status === 'completed').length;
+        this.completionRates[projectId] = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+        console.log(`Completion rate for ${projectId}: ${this.completionRates[projectId]}%`);
       },
       error: (error) => {
-        console.error('Failed to load projects', error);
+        console.error(`Failed to load tasks for project ${projectId}`, error);
+        this.completionRates[projectId] = 0; // Set to 0 in case of error
       }
     });
   }
+
 
   daysUntilDeadline(deadline: string | Date): number {
     // Ensure deadline is a Date object

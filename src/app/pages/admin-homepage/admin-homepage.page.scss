@@ -41,6 +41,12 @@ ion-toolbar {
     letter-spacing: 0.5px;
     color: var(--ion-secondary-text-color);
   }
+  .button-text{
+    color: var(--ion-secondary-text-color);
+    text-decoration: underline;
+    letter-spacing: 0.5px;
+    
+  }
   
   .todays-header {
     margin-top: 2vh;
@@ -216,13 +222,13 @@ ion-progress-bar {
     align-items: center; /* Wyśrodkowanie w pionie */
   }
   
+  .header-container {
+    display: flex;
+    align-items: center;
+    // justify-content: space-between;
+  }
   .seeAll-button {
-    position: fixed; /* Ustaw pozycję przycisku na stałą */
-    top: 36%;
-    right: 20px; 
-    transform: translateY(-50%); /* Wyśrodkuj przycisk względem pionu */
-    border-radius: 5px; /* Zaokrąglij rogi przycisku */
-    z-index: 999; /* Ustaw wysoki indeks warstwy, aby był na wierzchu */
+    margin-right: auto;
   }
   .buttons {
     display: flex; /* Use Flexbox to layout children */
@@ -354,7 +360,7 @@ ion-checkbox{
 ::ng-deep .swiper-button-next:after {
   display:none;
   font-size: 20px;
-  padding-bottom: 160px;
+  padding-bottom: 220px;
   
 }
 

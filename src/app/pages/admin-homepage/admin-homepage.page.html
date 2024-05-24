@@ -13,7 +13,13 @@
   <ion-toolbar>
     <div id="container" class="ion-margin-top">
       <strong>What's up, {{username}}</strong>
-      <span class="sub-header">Your projects</span>
+      <div class="header-container sub-header">
+        <span>Your projects</span>
+        <ion-button class="seeAll-button" fill="clear" size="small" (click)="goToTasksPage()" shape="round">
+          <ion-icon size="small" name="search-outline"></ion-icon>
+          <span class="button-text">SEE ALL</span>
+        </ion-button>
+      </div>
       </div>
 
   </ion-toolbar>
@@ -65,11 +71,7 @@
   </swiper>
   </div>
   </div>
-  <ion-grid class="buttons">
-    <ion-col size="12">
-      <ion-button class="seeAll-button center" (click)="goToTasksPage()" shape="round">See all projects</ion-button>
-    </ion-col>
-  </ion-grid>
+  
 </div>
 
   
