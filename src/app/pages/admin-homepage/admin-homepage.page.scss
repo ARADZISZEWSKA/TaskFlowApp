@@ -265,19 +265,7 @@ ion-progress-bar {
 }
 }
 
-::ng-deep .swiper-button-prev:after,
-::ng-deep .swiper-button-next:after {
-  display: none;
-    font-size: 30px;
-}
 
-@media (min-width: 500px) {
-  ::ng-deep .swiper-button-prev:after,
-  ::ng-deep .swiper-button-next:after {
-    display: block !important;
-    font-size: 30px;
-  }
-}
 
 #popover-button {
   position: fixed;
@@ -298,12 +286,95 @@ ion-progress-bar {
   
 }
 
-ion-item {
-  display: flex;
-  align-items: center; /* This will vertically center all content within the item */
-}
+
 ion-icon {
   vertical-align: middle; /* Adjust alignment of icon */
+}
+
+ion-list{
+  background-color: var(--ion-background-color, --td-bg);
+  border-width:none;
+  position:relative;
+}
+
+.tasks-list{
+  padding-top: 70px;
+}
+ion-item{
+  
+  --ion-item-background:var(--ion-background-color, --td-bg);
+  --ripple-color:transparent;
+  --background-activated:transparent;
+  position:relative;
+  display: flex;
+  align-items: center;
+}
+ion-label{
+  background-color:var(--ion-background-color, --td-bg);
+  position:relative;
+  
+}
+ion-checkbox{
+  --border-radius: 5px;
+  --border-color: gray;
+  --border-width: 1px;
+  position:relative;
+  size:large;
+
+}
+.container-item{
+  display:flex;
+  flex-direction: row;
+  position:relative;
+}
+.swiper-and-text-container{
+  display:flex;
+  flex-direction: row;
+  position:relative;
+}
+.todays-tasks-header {
+  margin-top: 280px;  /* Dostosuj tę wartość według potrzeb */
+  margin-left:5px;
+  position:absolute;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+@media (max-width: 601px) {
+  .todays-tasks-header {
+    margin-top: 210px;  /* Dostosuj tę wartość według potrzeb */
+  }
+  
+  }
+
+.completed-task {
+  text-decoration: line-through;
+}
+::ng-deep .swiper-button-prev:after,
+::ng-deep .swiper-button-next:after {
+  display:none;
+  font-size: 20px;
+  padding-bottom: 160px;
+  
+}
+
+::ng-deep .swiper-pagination{
+  margin: 100px 4px 0px 0px !important;
+
+}
+::ng-deep .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+  top: 110px;
+  left: 0;
+  width: 100%;
+}
+
+
+@media (min-width: 500px) {
+::ng-deep .swiper-button-prev:after,
+::ng-deep .swiper-button-next:after {
+  display: block !important;
+  font-size: 25px;
+}
 }
 
 

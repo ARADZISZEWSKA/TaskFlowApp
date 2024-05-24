@@ -22,6 +22,8 @@ export class ChangePasswordModalComponent {
   }
 
   async changePassword() {
+    console.log(this.newPassword)
+    console.log(this.confirmNewPassword)
     if (this.newPassword === this.confirmNewPassword) {
       this.userService.changePassword(this.currentPassword, this.newPassword, this.confirmNewPassword).subscribe(
         response => {

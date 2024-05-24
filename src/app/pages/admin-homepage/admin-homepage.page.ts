@@ -1,23 +1,18 @@
-// AdminHomepagePage.ts
 import { Component, OnInit } from '@angular/core';
-import { ModalController, Platform } from '@ionic/angular';
+import { ModalController, Platform, createAnimation } from '@ionic/angular';
 import { AddProjectModalComponent } from './modals/add-project-modal/add-project-modal.component';
 import { RegisterUserModalComponent } from './modals/register-user-modal/register-user-modal.component';
 import { Router } from '@angular/router';
 import { ProjectService } from '../../services/project.service'
 import { Project } from '../../models/projects.model'; 
 import { ProjectDetailsModalComponent } from './modals/project-details-modal/project-details-modal.component';
-import { UserProfileModalComponent } from './modals/user-profile-modal/user-profile-modal.component';
 import { ToastController } from '@ionic/angular';
 import { TaskService } from 'src/app/services/task.service';
-// import Swiper core and required modules
+import { Task } from 'src/app/models/task.model'; // Ensure Task model is imported
 import SwiperCore, { Navigation, Pagination, Scrollbar} from 'swiper';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
-
-
-
 
 @Component({
   selector: 'app-admin-homepage',
@@ -27,37 +22,49 @@ SwiperCore.use([Navigation, Pagination, Scrollbar]);
 export class AdminHomepagePage implements OnInit {
   projects: Project[] = []; // Stores the list of projects
   completionRates: { [projectId: string]: number } = {};
-
-
+  tasksMap: { [projectId: string]: Task[] } = {}; // Stores tasks for each project as an object
+  tasks: Task[] = [];
   isMobile = false;
- 
+  username: string | null | undefined;
+
   constructor(
     private modalController: ModalController,
-    private toastController:ToastController,
+    private toastController: ToastController,
     private router: Router,
     private projectService: ProjectService,
     private platform: Platform, // Inject the ProjectService
     private taskService: TaskService
-    
   ) {
-
     this.isMobile = this.platform.is('mobile');
   }
 
   sliderConfig = {
-    
     slidesPerView: 1,
     spaceBetween: 20,
     navigation: true,
     pagination: { clickable: true }
   };
 
-  username: string | null | undefined;
-
   ngOnInit() {
     this.loadProjects();
-    this.username = localStorage.getItem('username') ; // Load projects when component initializes
+    this.username = localStorage.getItem('username'); // Load projects when component initializes
     this.archiveAndDeleteCompletedTasks();
+  }
+
+  playCheckboxAnimation(event: any, task: Task): void {
+    console.log(event);
+    const newStatus = task.status === 'completed' ? 'not completed' : 'completed';
+    this.taskService.updateTaskStatus(task.id!, newStatus).subscribe({
+      next: () => {
+        task.status = newStatus; 
+        createAnimation('')
+          .addElement(event.srcElement)
+          .easing('cubic-bezier(0, 0.55, 0.45, 1)')
+          .duration(500)
+          .fromTo('transform', 'rotate(0)', 'rotate(360deg)').play();
+      },
+      error: (error) => console.error('Failed to update task status:', error)
+    });
   }
 
   loadProjects() {
@@ -66,9 +73,19 @@ export class AdminHomepagePage implements OnInit {
         this.projects = projects;
         projects.forEach(project => {
           this.calculateProjectCompletion(project.id);
+          this.loadTasksForProject(project.id); // Load tasks for each project
         });
       },
       error: (error) => console.error('Failed to load projects', error)
+    });
+  }
+
+  loadTasksForProject(projectId: string) {
+    this.taskService.getAllTasksByProjectAdmin(projectId).subscribe({
+      next: (tasks) => {
+        this.tasksMap[projectId] = tasks; // Store tasks in the object
+      },
+      error: (error) => console.error(`Failed to load tasks for project ${projectId}`, error)
     });
   }
 
@@ -86,15 +103,13 @@ export class AdminHomepagePage implements OnInit {
       }
     });
   }
-  
-
 
   archiveAndDeleteCompletedTasks() {
     this.taskService.archiveAndDeleteCompletedTasks().subscribe({
       next: (response) => {
         // Assuming response is already a JavaScript object
         if (response.success) {
-          console.log('Tasks deleted succesfully');
+          console.log('Tasks deleted successfully');
         } else {
           console.error('API succeeded but indicated failure:', response.message);
         }
@@ -147,8 +162,6 @@ export class AdminHomepagePage implements OnInit {
     toast.present();
   }
   
-
-  
   goToSettingsAdmin(): void {
     this.router.navigateByUrl('/settings-admin'); 
   }
@@ -160,13 +173,13 @@ export class AdminHomepagePage implements OnInit {
   goToAdminHomepage(): void {
     this.router.navigateByUrl('/admin-homepage'); 
   }
+
   handleRefresh(event: CustomEvent) {
     setTimeout(() => {
       this.loadProjects();
-    event.detail.complete();
+      event.detail.complete();
     }, 1000);
   }
-  
   
   daysUntilDeadline(deadline: string | Date): number {
     // Ensure deadline is a Date object
@@ -175,11 +188,9 @@ export class AdminHomepagePage implements OnInit {
     const differenceInMilliseconds = deadlineDate.getTime() - currentDate.getTime();
     const differenceInDays = Math.ceil(differenceInMilliseconds / (1000 * 3600 * 24));
     return differenceInDays;
-  
-}
-goToTasksPage() {
-  this.router.navigateByUrl('/tasks-admin');
+  }
 
+  goToTasksPage() {
+    this.router.navigateByUrl('/tasks-admin');
+  }
 }
-}
-

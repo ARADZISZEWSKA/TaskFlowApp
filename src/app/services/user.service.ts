@@ -49,6 +49,7 @@ export class UserService {
   }
 
 
+  
   //zmiana hasła
   changePassword(currentPassword: string, newPassword: string, confirmNewPassword: string): Observable<any> {
     const payload = {
@@ -56,8 +57,7 @@ export class UserService {
       newPassword,
       confirmNewPassword
     };
-   
     
-    return this.http.post(`${this.baseUrl}/User/change-password`, payload);
+    return this.http.post(`${this.baseUrl}/change-password`, payload, { withCredentials: true });
   }
 }

@@ -280,7 +280,13 @@ padding: 0;
 }
 
 ::ng-deep .swiper-pagination{
-  margin:120px 4px;
+  margin: 100px 4px 0px 0px !important;
+
+}
+::ng-deep .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+  top: 110px;
+  left: 0;
+  width: 100%;
 }
 
 
