@@ -5,9 +5,21 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="ion-padding" style="position: absolute; bottom: 60px; left: 0; right: 0;">
-    <ion-button style="margin-bottom: 10px" expand="full" (click)="presentChangePasswordModal()">Change your password</ion-button>
-    <ion-button color="danger" (click)="logout()" expand="full">Log out</ion-button>
+  <div class="flex-center">
+      <ion-card shape="round">
+          <ion-card-content>
+            <ion-card-header>
+              <ion-icon size="large" name="cog-outline"></ion-icon>
+            </ion-card-header>
+              <ion-button class="ion-margin-top"  expand="block" (click)="presentChangePasswordModal()">
+                Change your password
+              </ion-button>
+              <ion-button class="ion-margin-top"  expand="block" color="danger" (click)="logout()">
+                Log out
+                <ion-icon name="log-out-outline"></ion-icon>
+              </ion-button>
+          </ion-card-content>
+      </ion-card>
   </div>
 </ion-content>
 

@@ -39,3 +39,11 @@ ion-col {
 .data-col-mobile {
   text-align: center;
 }
+ion-tab-bar {
+  --background: #ffffff;  /* White background */
+  --color-selected: #488aff; /* Blue color for selected tab */
+  --color: grey;  /* Grey color for unselected tabs */
+  --mode: ios;
+  padding-top: 5px; /* Padding at the top of the tab bar */
+  border-top: 1px solid #e0e0e0;
+}
