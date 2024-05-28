@@ -3,8 +3,6 @@ import { ProjectService } from 'src/app/services/project.service';
 import { Project } from 'src/app/models/projects.model';
 import { Task } from 'src/app/models/task.model';
 import { TaskService } from 'src/app/services/task.service';
-import { User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
 import { ModalController, createAnimation } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 
@@ -13,17 +11,13 @@ import { ToastController } from '@ionic/angular';
   templateUrl: './project-details-home-modal.component.html',
   styleUrls: ['./project-details-home-modal.component.scss'],
 })
-export class ProjectDetailsHomeModalComponent  implements OnInit {
-
+export class ProjectDetailsHomeModalComponent implements OnInit {
   tasks: Task[] = [];
-  
-  toDoTasks: any[] = [];
   @Input() project!: Project;
+  @Input() onModalDismiss!: () => void; // Callback to refresh parent component
   tasksMap: { [projectId: string]: Task[] } = {};
-  
 
   constructor(
-    private projectService: ProjectService,
     private modalController: ModalController,
     private toastController: ToastController,
     private taskService: TaskService
@@ -41,27 +35,23 @@ export class ProjectDetailsHomeModalComponent  implements OnInit {
   archiveAndDeleteCompletedTasks() {
     this.taskService.archiveAndDeleteCompletedTasks().subscribe({
       next: (response) => {
-        // Assuming response is already a JavaScript object
         if (response.success) {
-          console.log('Tasks deleted succesfully');
+          console.log('Tasks deleted successfully');
         } else {
           console.error('API succeeded but indicated failure:', response.message);
         }
       },
       error: (error) => {
-        // Log the error response to understand the issue better
         console.error('Failed to archive and delete tasks:', error.error);
       }
     });
   }
 
-  
-
-
   loadTasks(projectId: string) {
     this.taskService.getAllTasksByProject(projectId).subscribe({
       next: (tasks) => {
         this.tasksMap[projectId] = tasks;
+        this.tasks = tasks; // Directly update the tasks array
       },
       error: (error) => {
         console.error('Failed to load tasks:', error);
@@ -69,12 +59,8 @@ export class ProjectDetailsHomeModalComponent  implements OnInit {
     });
   }
 
-  cancel() {
-    this.modalController.dismiss(null, 'cancel');
-  }
 
 
-  // Funkcja do obliczania liczby dni do terminu zadania
   daysUntilDeadline(deadline: string | Date): number {
     const deadlineDate = new Date(deadline);
     const currentDate = new Date();
@@ -97,9 +83,9 @@ export class ProjectDetailsHomeModalComponent  implements OnInit {
       error: (error) => console.error('Failed to update task status:', error)
     });
   }
-  
+
+  dismiss() {
+    this.modalController.dismiss(null, 'dismiss');
+    this.onModalDismiss(); // Call the callback to refresh parent component
   }
-
-
-
-
+}

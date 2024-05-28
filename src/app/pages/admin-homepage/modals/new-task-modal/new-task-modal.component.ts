@@ -1,30 +1,30 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from 'src/app/models/task.model';
 import { HttpResponse } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-new-task-modal',
   templateUrl: './new-task-modal.component.html'
 })
 export class NewTaskModalComponent {
-  @Input()
-  userId!: string;
-  @Input()
-  projectId!: string;
+  @Input() userId!: string;
+  @Input() projectId!: string;
+  @Input() onModalDismiss!: () => void; // Callback to be called on dismiss
+
   taskName: string = '';
   description: string = '';
   deadline: string = '';
 
   constructor(
     private modalController: ModalController,
-    private taskService: TaskService // Inject the TaskService
+    private taskService: TaskService
   ) {}
 
   dismissModal() {
     this.modalController.dismiss();
+    this.onModalDismiss(); // Call the callback function when the modal is dismissed
   }
 
   addTask() {
@@ -51,8 +51,5 @@ export class NewTaskModalComponent {
         this.dismissModal(); // Dismiss the modal in case of error
       }
     });
-    
-    
-    
   }
 }

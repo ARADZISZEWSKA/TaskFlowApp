@@ -5,8 +5,7 @@
 </ion-toolbar>
 
 <ion-content>
-
-  <!-- Wyświetlenie informacji o użytkowniku -->
+  <!-- User info display -->
   <ion-item lines="none" style="justify-content: center; display: flex; align-items: center;">
     <ion-avatar aria-hidden="true">
       <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Avatar" />
@@ -16,45 +15,41 @@
     </ion-label>
   </ion-item>
 
-  <!-- Wyświetlenie sekcji "To do" -->
-<ion-item lines="none">
-  <ion-label>
-    <h2 style="font-weight: 600;">To do</h2>
-  </ion-label>
-</ion-item>
-<ion-list class="ion-padding-horizontal" [inset]="true">
-  <ion-item *ngFor="let task of toDoTasks">
-    <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
-        
-            <ion-label [ngClass]="{'completed-task': task.status === 'completed'}">
-              {{ task.taskName }}
-            </ion-label>
+  <!-- "To do" section -->
+  <ion-item lines="none">
+    <ion-label>
+      <h2 style="font-weight: 600;">To do</h2>
+    </ion-label>
   </ion-item>
-</ion-list>
+  <ion-list class="ion-padding-horizontal" [inset]="true">
+    <ion-item *ngFor="let task of toDoTasks">
+      <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
+      <ion-label [ngClass]="{'completed-task': task.status === 'completed'}">
+        {{ task.taskName }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-<!-- Wyświetlenie sekcji "Overdue assignments" -->
-<ion-item lines="none">
-  <ion-label>
-    <h2 style="font-weight: 600;">Overdue assignments</h2>
-  </ion-label>
-</ion-item>
-<ion-list class="ion-padding-horizontal" [inset]="true">
-  <ion-item *ngFor="let task of overdueTasks">
-    <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
-            <ion-label [ngClass]="{'completed-task': task.status === 'completed'}">
-              {{ task.taskName }}
-            </ion-label>
+  <!-- "Overdue assignments" section -->
+  <ion-item lines="none">
+    <ion-label>
+      <h2 style="font-weight: 600;">Overdue assignments</h2>
+    </ion-label>
   </ion-item>
-</ion-list>
+  <ion-list class="ion-padding-horizontal" [inset]="true">
+    <ion-item *ngFor="let task of overdueTasks">
+      <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
+      <ion-label [ngClass]="{'completed-task': task.status === 'completed'}">
+        {{ task.taskName }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-
-
-  <!-- Przycisk dodawania nowego zadania -->
+  <!-- Button to add new task -->
   <div class="fab-container">
     <ion-fab-button vertical="bottom" horizontal="center" mode="ios" (click)="openNewTaskModal()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
     <div class="text-below-fab">Add new task</div>
   </div>
-
 </ion-content>

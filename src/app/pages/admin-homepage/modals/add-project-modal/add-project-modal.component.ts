@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { IonModal } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Project } from 'src/app/models/projects.model';
 import { UserService } from '../../../../services/user.service';
 import { User } from '../../../../models/user.model';
-import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-add-project-modal',
@@ -14,6 +13,7 @@ import { Input } from '@angular/core';
 })
 export class AddProjectModalComponent implements OnInit {
   @Input() ownerId: string | undefined;
+  @Input() onModalDismiss!: () => void; // Callback to be called on dismiss
   newProject: Project = new Project();
   @ViewChild('memberModal', { static: true }) memberModal!: IonModal;
 
@@ -40,8 +40,6 @@ export class AddProjectModalComponent implements OnInit {
       });
   }
 
-   
-
   memberSelectionChanged(selectedUserIds: string[]) {
     this.selectedMembers = selectedUserIds;
     this.selectedMembersText = this.formatData(this.members.filter(member => selectedUserIds.includes(member.value)));
@@ -57,6 +55,7 @@ export class AddProjectModalComponent implements OnInit {
 
   cancel() {
     this.modalController.dismiss(null, 'cancel');
+    this.onModalDismiss(); // Call the callback function when the modal is dismissed
   }
 
   confirm() {
@@ -75,9 +74,9 @@ export class AddProjectModalComponent implements OnInit {
 
         console.log(response); // Display server response
         this.modalController.dismiss({ success: true }); // Dismiss modal on successful response
+        this.onModalDismiss(); // Call the callback function after adding the project
     } catch (error) {
         console.error('Failed to add project:', error); // Display error message
     }
-}
-
+  }
 }

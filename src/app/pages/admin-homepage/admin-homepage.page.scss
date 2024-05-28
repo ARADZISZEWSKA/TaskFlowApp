@@ -301,33 +301,39 @@ ion-list{
   background-color: var(--ion-background-color, --td-bg);
   border-width:none;
   position:relative;
+  z-index:10;
 }
 
-.tasks-list{
-  padding-top: 70px;
+.tasks-list {
+  margin-top: 70px; /* Add enough margin to avoid overlapping with pagination */
 }
-ion-item{
-  
-  --ion-item-background:var(--ion-background-color, --td-bg);
-  --ripple-color:transparent;
-  --background-activated:transparent;
-  position:relative;
+
+ion-item {
+  --ion-item-background: var(--ion-background-color, --td-bg);
+  --ripple-color: transparent;
+  --background-activated: transparent;
+  position: relative;
   display: flex;
   align-items: center;
+  z-index: 2; /* Ensure items are above the pagination */
 }
-ion-label{
-  background-color:var(--ion-background-color, --td-bg);
-  position:relative;
-  
-}
-ion-checkbox{
+
+ion-checkbox {
   --border-radius: 5px;
   --border-color: gray;
   --border-width: 1px;
-  position:relative;
-  size:large;
-
+  position: relative;
+  z-index: 2; /* Ensure checkboxes are above the pagination */
 }
+
+ion-label {
+  background-color: var(--ion-background-color, --td-bg);
+  position: relative;
+  z-index: 2; /* Ensure labels are above the pagination */
+}
+
+
+
 .container-item{
   display:flex;
   flex-direction: row;
@@ -365,13 +371,14 @@ ion-checkbox{
 }
 
 ::ng-deep .swiper-pagination{
-  margin: 100px 4px 0px 0px !important;
+  position:relative;
 
 }
 ::ng-deep .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
-  top: 110px;
+  top: 160px;
   left: 0;
   width: 100%;
+  bottom:0px;
 }
 
 
@@ -380,6 +387,12 @@ ion-checkbox{
 ::ng-deep .swiper-button-next:after {
   display: block !important;
   font-size: 25px;
+}
+::ng-deep .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+  top: 200px;
+  left: 0;
+  width: 100%;
+  bottom:0px;
 }
 }
 

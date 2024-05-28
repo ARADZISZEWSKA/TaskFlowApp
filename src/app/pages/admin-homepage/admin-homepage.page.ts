@@ -124,7 +124,11 @@ export class AdminHomepagePage implements OnInit {
   async openAddProjectModal() {
     const modal = await this.modalController.create({
       component: AddProjectModalComponent,
+      componentProps: {
+        onModalDismiss: () => this.loadProjects() // Pass the callback function
+      }
     });
+
     return await modal.present();
   }
 
@@ -141,7 +145,8 @@ export class AdminHomepagePage implements OnInit {
       const modal = await this.modalController.create({
         component: ProjectDetailsModalComponent,
         componentProps: {
-          project: project 
+          project: project,
+          onModalDismiss: () => this.loadProjects() // Pass the callback function
         }
       });
       await modal.present();

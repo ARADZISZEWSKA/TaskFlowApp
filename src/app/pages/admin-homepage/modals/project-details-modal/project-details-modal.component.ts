@@ -14,10 +14,10 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class ProjectDetailsModalComponent implements OnInit {
   @Input() project!: Project;
+  @Input() onModalDismiss!: () => void; // Callback to be called on dismiss
   users: User[] | null = null; // Initialize with null
   overdueTasks: any[] | null = null; // Initialize with null
   tasks: Task[] = [];
-
 
   constructor(
     private projectService: ProjectService,
@@ -49,7 +49,7 @@ export class ProjectDetailsModalComponent implements OnInit {
       next: (response) => {
         // Assuming response is already a JavaScript object
         if (response.success) {
-          console.log('Tasks deleted succesfully');
+          console.log('Tasks deleted successfully');
         } else {
           console.error('API succeeded but indicated failure:', response.message);
         }
@@ -63,10 +63,10 @@ export class ProjectDetailsModalComponent implements OnInit {
 
   cancel() {
     this.modalController.dismiss(null, 'cancel');
+    this.onModalDismiss(); // Call the callback function when the modal is dismissed
   }
 
-
-  // Funkcja do obliczania liczby dni do terminu zadania
+  // Function to calculate days until task deadline
   daysUntilDeadline(deadline: string | Date): number {
     const deadlineDate = new Date(deadline);
     const currentDate = new Date();
@@ -79,14 +79,16 @@ export class ProjectDetailsModalComponent implements OnInit {
       component: UserProfileModalComponent,
       componentProps: {
         user: user,
-        projectId: this.project.id
+        projectId: this.project.id,
+        onModalDismiss: () => this.loadProjectDetails() // Pass the callback function
       }
     });
+
     return await modal.present();
   }
 
   async deleteProject() {
-    const projectId = this.project.id; // Pobranie ID projektu
+    const projectId = this.project.id; // Get project ID
     try {
       await this.projectService.deleteProject(projectId).toPromise();
       const toast = await this.toastController.create({
@@ -95,11 +97,12 @@ export class ProjectDetailsModalComponent implements OnInit {
         color: 'success'
       });
       toast.present();
-      // Zamknij modal po usunięciu projektu
+      // Close modal after project is deleted
       this.modalController.dismiss(null, 'delete');
+      this.onModalDismiss(); // Call the callback function after deleting the project
     } catch (error) {
       console.error('Error deleting project:', error);
-      // Obsłuż błąd usuwania projektu, np. wyświetl toast z informacją o błędzie
+      // Handle project deletion error, e.g., show a toast with error message
       const toast = await this.toastController.create({
         message: 'Failed to delete project. Please try again later.',
         duration: 2000,
@@ -124,6 +127,9 @@ export class ProjectDetailsModalComponent implements OnInit {
       error: (error) => console.error('Failed to update task status:', error)
     });
   }
-  
-  }
 
+  loadProjectDetails() {
+    // Reload project details and tasks
+    this.ngOnInit();
+  }
+}

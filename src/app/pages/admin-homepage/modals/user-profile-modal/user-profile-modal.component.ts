@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController, createAnimation } from '@ionic/angular';
 import { NewTaskModalComponent } from '../new-task-modal/new-task-modal.component';
 import { TaskService } from 'src/app/services/task.service';
-import { Subscription } from 'rxjs';
 import { Task } from 'src/app/models/task.model';
 
 @Component({
@@ -12,22 +11,21 @@ import { Task } from 'src/app/models/task.model';
 })
 export class UserProfileModalComponent implements OnInit {
   @Input() user: any;
-  @Input() projectId!: string; 
-  @Input() overdueTasks: any[] = []; // Przeterminowane zadania
+  @Input() projectId!: string;
+  @Input() overdueTasks: any[] = [];
+  @Input() onModalDismiss!: () => void; // Callback to be called on dismiss
   toDoTasks: any[] = [];
-  
+  tasks: Task[] = [];
 
   constructor(
     private modalController: ModalController,
-    private taskService: TaskService // Inject TaskService here
+    private taskService: TaskService
   ) {}
 
   ngOnInit() {
-    this.loadTasks(this.user.id, this.projectId);
+    this.loadTasks(this.user.id, this.projectId); // Initial task load
   }
-  tasks: Task[] = [];
 
-  // Component method to handle checkbox click
   playCheckboxAnimation(event: any, task: Task): void {
     console.log(event);
     const newStatus = task.status === 'completed' ? 'not completed' : 'completed';
@@ -43,12 +41,10 @@ export class UserProfileModalComponent implements OnInit {
       error: (error) => console.error('Failed to update task status:', error)
     });
   }
-  
-
- 
 
   cancel() {
     this.modalController.dismiss(null, 'cancel');
+    this.onModalDismiss(); // Call the callback function when the modal is dismissed
   }
 
   async openNewTaskModal() {
@@ -56,9 +52,11 @@ export class UserProfileModalComponent implements OnInit {
       component: NewTaskModalComponent,
       componentProps: {
         userId: this.user.id,
-        projectId: this.projectId  
+        projectId: this.projectId,
+        onModalDismiss: () => this.loadTasks(this.user.id, this.projectId) // Pass the callback function
       }
     });
+
     return await modal.present();
   }
 
@@ -70,7 +68,7 @@ export class UserProfileModalComponent implements OnInit {
         // Clear existing tasks
         this.overdueTasks = [];
         this.toDoTasks = [];
-  
+
         // Loop through tasks and add them to appropriate arrays
         tasks.forEach(task => {
           if (this.isTaskOverdue(task)) {
@@ -89,14 +87,10 @@ export class UserProfileModalComponent implements OnInit {
       }
     });
   }
-  
-  
-  
-
 
   isTaskOverdue(task: any): boolean {
     const deadlineDate = new Date(task.deadline);
     const currentDate = new Date();
-    return deadlineDate < currentDate; // Zadanie jest przeterminowane, jeśli deadline jest wcześniejszy niż bieżąca data
+    return deadlineDate < currentDate; // The task is overdue if the deadline is earlier than the current date
   }
 }
