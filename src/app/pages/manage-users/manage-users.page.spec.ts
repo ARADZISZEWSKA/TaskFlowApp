@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { ManageUsersPage } from './manage-users.page';
 
 describe('ManageUsersPage', () => {

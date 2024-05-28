@@ -1,0 +1,42 @@
+<ion-toolbar>
+  <ion-button (click)="cancel()">
+    <ion-icon name="chevron-back-outline"></ion-icon>
+  </ion-button>
+</ion-toolbar>
+
+<ion-content>
+  <ion-item lines="none" style="justify-content: center; display: flex; align-items: center;">
+    <ion-avatar aria-hidden="true">
+      <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Avatar" />
+    </ion-avatar>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label>
+      <h2 style="font-weight: 600;">First Name</h2>
+    </ion-label>
+    <ion-input [(ngModel)]="user.firstName" placeholder="First Name"></ion-input>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label>
+      <h2 style="font-weight: 600;">Last Name</h2>
+    </ion-label>
+    <ion-input [(ngModel)]="user.lastName" placeholder="Last Name"></ion-input>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label>
+      <h2 style="font-weight: 600;">Email</h2>
+    </ion-label>
+    <ion-input [(ngModel)]="user.email" type="email" placeholder="Email"></ion-input>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label>
+      <h2 style="font-weight: 600;">Role</h2>
+    </ion-label>
+    <ion-input [(ngModel)]="user.role" placeholder="Role"></ion-input>
+  </ion-item>
+
+  <!-- Save button -->
+  <div class="ion-padding">
+    <ion-button expand="block" color="primary" (click)="saveChanges()">Save Changes</ion-button>
+  </div>
+</ion-content>

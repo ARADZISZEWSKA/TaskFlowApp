@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { EditUserModalComponent } from './edit-user-modal/edit-user-modal.component';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -15,6 +16,7 @@ import { ManageUsersPage } from './manage-users.page';
     IonicModule,
     ManageUsersPageRoutingModule
   ],
-  declarations: [ManageUsersPage]
+  declarations: [ManageUsersPage, EditUserModalComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ManageUsersPageModule {}

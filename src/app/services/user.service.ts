@@ -21,10 +21,14 @@ export class UserService {
         })
       );
   }
+  
   deleteUser(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
+  updateUser(id: string, userData: any): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/${id}`, userData);
+  }
 
   //zostawiac?
   

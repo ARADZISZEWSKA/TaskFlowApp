@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
-import { Platform, ToastController } from '@ionic/angular';
+import { ModalController, Platform, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { EditUserModalComponent } from './edit-user-modal/edit-user-modal.component';
+
 
 @Component({
   selector: 'app-manage-users',
@@ -15,7 +17,12 @@ export class ManageUsersPage implements OnInit {
   searchTerm: string = '';
   isMobile: boolean = false;
 
-  constructor(private userService: UserService, private platform: Platform, private router: Router,    private toastController: ToastController
+  constructor(
+    private userService: UserService,
+    private platform: Platform, 
+    private router: Router,    
+    private toastController: ToastController,
+    private modalController: ModalController
 
   ) {
     this.isMobile = this.platform.is('mobile');
@@ -58,10 +65,14 @@ export class ManageUsersPage implements OnInit {
 
   
 
-  // Metoda do edycji użytkownika
-  editUser(user: User) {
-    // Tutaj możesz dodać logikę do edycji użytkownika
-    console.log('Edycja użytkownika:', user);
+  async editUser(user: User) {
+    const modal = await this.modalController.create({
+      component: EditUserModalComponent,
+      componentProps: {
+        id: user.id
+      }
+    });
+    await modal.present();
   }
 
   async presentToast(message: string) {
