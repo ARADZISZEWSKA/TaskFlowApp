@@ -21,15 +21,8 @@ export class UserService {
         })
       );
   }
-
-  deleteUser(userId: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/delete`, { withCredentials: true })
-      .pipe(
-        catchError((error) => {
-          console.error('Failed to delete user:', error);
-          return throwError(error);
-        })
-      );
+  deleteUser(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 
 

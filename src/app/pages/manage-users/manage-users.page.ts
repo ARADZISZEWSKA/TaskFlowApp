@@ -42,21 +42,20 @@ export class ManageUsersPage implements OnInit {
   }
 
   deleteUser(userId: string) {
-    this.userService.deleteUser(userId).subscribe(
-      () => {
-        // Usunięcie użytkownika z listy
-        this.users = this.users.filter((user) => user.id !== userId);
-        this.filteredUsers = this.filteredUsers.filter(
-          (user) => user.id !== userId
-        );
-        this.presentToast('User deleted successfully.');
-      },
-      (error) => {
-        console.error('Failed to delete user:', error);
-        this.presentToast('Failed to delete user.');
-      }
-    );
+    if (userId) {
+      this.userService.deleteUser(userId).subscribe({
+        next: () => {
+          console.log('User deleted');
+        },
+        error: (error) => {
+          console.error('Error deleting user:', error);
+        }
+      });
+    } else {
+      console.error('User ID is required');
+    }
   }
+
   
 
   // Metoda do edycji użytkownika
