@@ -13,13 +13,13 @@ import { User } from '../../../../models/user.model';
 })
 export class AddProjectModalComponent implements OnInit {
   @Input() ownerId: string | undefined;
-  @Input() onModalDismiss!: () => void; // Callback to be called on dismiss
+  @Input() onModalDismiss!: () => void; 
   newProject: Project = new Project();
   @ViewChild('memberModal', { static: true }) memberModal!: IonModal;
 
   selectedMembersText = '0 Items';
   selectedMembers: string[] = [];
-  members: any[] = [];  // This will be modified to work with the typeahead component
+  members: any[] = [];  
 
   constructor(
     private http: HttpClient,
@@ -28,15 +28,15 @@ export class AddProjectModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.fetchUsers(); // Wywołujemy fetchUsers bez parametru ownerId
+    this.fetchUsers(); 
   }
 
   fetchUsers() {
-    this.userService.getUsersByOwner().subscribe(users => { // Pobierz listę użytkowników
+    this.userService.getUsersByOwner().subscribe(users => { 
       this.members = users.map(user => ({
         text: `${user.firstName} ${user.lastName}`,
         value: user.id
-      }));// Dodaj dane użytkownika do tablicy members
+      }));
       });
   }
 
@@ -55,7 +55,7 @@ export class AddProjectModalComponent implements OnInit {
 
   cancel() {
     this.modalController.dismiss(null, 'cancel');
-    this.onModalDismiss(); // Call the callback function when the modal is dismissed
+    this.onModalDismiss(); 
   }
 
   confirm() {
@@ -72,11 +72,11 @@ export class AddProjectModalComponent implements OnInit {
             withCredentials: true
         }).toPromise();
 
-        console.log(response); // Display server response
-        this.modalController.dismiss({ success: true }); // Dismiss modal on successful response
-        this.onModalDismiss(); // Call the callback function after adding the project
+        console.log(response);
+        this.modalController.dismiss({ success: true }); // przekazujemy dane wynikowe, które będą dostępne w komponencie rodzica po zamknięciu
+        this.onModalDismiss(); 
     } catch (error) {
-        console.error('Failed to add project:', error); // Display error message
+        console.error('Failed to add project:', error); 
     }
   }
 }

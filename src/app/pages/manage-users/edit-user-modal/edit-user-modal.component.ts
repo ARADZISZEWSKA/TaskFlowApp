@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { ModalController } from '@ionic/angular';
 import { User } from 'src/app/models/user.model';
+
 @Component({
   selector: 'app-edit-user-modal',
   templateUrl: './edit-user-modal.component.html',
@@ -10,6 +11,7 @@ import { User } from 'src/app/models/user.model';
 export class EditUserModalComponent {
 
   @Input() id!: string; 
+  @Input() onModalDismiss!: () => void;
 
   // Użytkownik do edycji
   user: any = {
@@ -26,10 +28,14 @@ export class EditUserModalComponent {
     private modalController: ModalController
   ) { }
 
+  saveButton(){
+    this.modalController.dismiss({ success: true}, 'confirm');
+    this.saveChanges();
+  }
+
   saveChanges() {
     const updatedUserData: any = {};
   
-    // Sprawdź, które pola zostały zmienione i dodaj je do obiektu updatedUserData
     if (this.user.firstName !== '') {
       updatedUserData.firstName = this.user.firstName;
     }
@@ -50,21 +56,22 @@ export class EditUserModalComponent {
     updatedUserData.Tasks = [];
 
   
-    // Wywołaj metodę updateUser z serwisu UserService, przekazując ID użytkownika i obiekt z edytowanymi danymi
+    // Wywołujemy metodę updateUser z serwisu UserService, przekazując ID użytkownika i obiekt z edytowanymi danymi
     this.userService.updateUser(this.id, updatedUserData).subscribe({
       next: () => {
         console.log('User updated successfully.');
-        this.modalController.dismiss(); // Zamknij modal po zapisaniu zmian
-      },
+        this.modalController.dismiss({ success: true }); // Dismiss modal on successful response
+        this.onModalDismiss();
+        },
       error: (error) => {
         console.error('Error updating user:', error);
-        // Obsłuż błąd tutaj
       }
     });
   }
-  
+   
 
   cancel() {
     this.modalController.dismiss(null, 'cancel');
+    this.onModalDismiss();
   }
 }

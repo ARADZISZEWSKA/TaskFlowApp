@@ -35,6 +35,15 @@ export class ManageUsersPage implements OnInit {
       this.filteredUsers = data;
       this.isMobile = window.innerWidth <= 768;
     });
+    this.loadUsers();
+
+  }
+
+  loadUsers() {
+    this.userService.getUsersByOwner().subscribe((data) => {
+      this.users = data;
+      this.filteredUsers = data;
+    });
   }
 
   filterUsers(event: any) {
@@ -53,6 +62,8 @@ export class ManageUsersPage implements OnInit {
       this.userService.deleteUser(userId).subscribe({
         next: () => {
           console.log('User deleted');
+          this.presentToast('User deleted successfully');
+          this.loadUsers();
         },
         error: (error) => {
           console.error('Error deleting user:', error);
@@ -65,15 +76,22 @@ export class ManageUsersPage implements OnInit {
 
   
 
-  async editUser(user: User) {
+  async openEditUserModal(user: User) {
     const modal = await this.modalController.create({
       component: EditUserModalComponent,
       componentProps: {
-        id: user.id
+        id: user.id,
+        onModalDismiss: () => this.loadUsers()
       }
     });
     await modal.present();
-  }
+
+    const { data, role } = await modal.onWillDismiss();
+    if (role === 'confirm' && data?.success) {
+      this.loadUsers(); // Odśwież listę użytkowników, jeśli modal został zamknięty pomyślnie
+    }
+    
+}
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
@@ -97,3 +115,4 @@ export class ManageUsersPage implements OnInit {
     this.router.navigateByUrl('/admin-homepage'); 
   }
 }
+

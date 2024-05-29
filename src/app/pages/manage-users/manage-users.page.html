@@ -32,7 +32,7 @@
           <ion-col size="2">{{ user.firstName }}</ion-col>
           <ion-col size="2">{{ user.lastName }}</ion-col>
           <ion-col size="4">{{ user.email }}</ion-col>
-          <ion-button size="small" (click)="editUser(user)">Edit</ion-button>
+          <ion-button size="small" (click)="openEditUserModal(user)">Edit</ion-button>
           <ion-col size="2"><ion-button (click)="deleteUser(user.id)" size="small">Delete</ion-button></ion-col>
         </ion-row>
       </ion-grid>
@@ -49,7 +49,7 @@
             <strong style="font-size: 18px; font-weight: bold; color: black;">{{ user.firstName }} {{ user.lastName }}</strong>
           </ion-col>
           <ion-col size="2" style="text-align: center;">
-            <ion-button size="small" color="primary" style="padding: 0;" (click)="editUser(user)">
+            <ion-button size="small" color="primary" style="padding: 0;" (click)="openEditUserModal(user)">
               <ion-icon name="create-outline" style="font-size: 16px;"></ion-icon>
             </ion-button>
           </ion-col>
@@ -85,4 +85,3 @@
     </ion-tabs>
   </ion-toolbar>
 </ion-footer>
-
