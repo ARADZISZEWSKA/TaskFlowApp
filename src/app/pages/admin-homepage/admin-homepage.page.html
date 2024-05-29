@@ -1,3 +1,4 @@
+<!-- admin-homepage.page.html -->
 <ion-content [fullscreen]="true">
   <ion-refresher
     mode="ios"
@@ -20,63 +21,64 @@
           <span class="button-text">SEE ALL</span>
         </ion-button>
       </div>
-      </div>
-
+    </div>
   </ion-toolbar>
 
-<div>
-  <div class="swiper-and-text-container">
-    <div class="sub-header todays-tasks-header">
-      <span class="sub-header">Tasks</span>
-    </div>
-  <div class="swiper-container">
-
-    <swiper [config]="sliderConfig">
-      <ng-template swiperSlide *ngFor="let project of projects" class="swiper-slide">
-        <ion-card class="projects">
-          <div class="card-container">
-            <div class="projects-buttons bussiness">
-              <ion-card-content >
-                <span class="task-count">
-                  {{ daysUntilDeadline(project.deadline) }} days left
-                </span>
-                <ion-card-title>
-                  <span class="projects-name">{{ project.projectName }}</span>
-                </ion-card-title>
-              </ion-card-content>
-              <div class="progress-container">
-                <ion-progress-bar mode="ios" [value]="completionRates[project.id] / 100"></ion-progress-bar>
-                <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsModal(project.id)">
-                  <ion-icon name="chevron-forward-outline"></ion-icon>
-                  <span>See details</span>
-                </ion-button>
-              </div>
-            </div>
-          </div>
-          
-        </ion-card>
-
-        <div class="tasks-list">
-        <ion-list lines="none" >
-          <ion-item *ngFor="let task of tasksMap[project.id]">
-            <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
-            <ion-label [ngClass]="{'completed-task': task.status === 'completed'}">
-              {{ task.taskName }}
-            </ion-label>
-          </ion-item>
-        </ion-list>
+  <div>
+    <div class="swiper-and-text-container">
+      <div class="sub-header todays-tasks-header">
+        <span class="sub-header">Tasks</span>
       </div>
-
-      </ng-template>
-  </swiper>
+      <div class="swiper-container">
+        <swiper [config]="sliderConfig">
+          <ng-template swiperSlide *ngFor="let project of projects" class="swiper-slide">
+            <ion-card class="projects">
+              <div class="card-container">
+                <div class="projects-buttons business">
+                  <ion-card-content>
+                    <span class="task-count">
+                      {{ daysUntilDeadline(project.deadline) }} days left
+                    </span>
+                    <ion-card-title>
+                      <span class="projects-name">{{ project.projectName }}</span>
+                    </ion-card-title>
+                  </ion-card-content>
+                  <div class="progress-container">
+                    <ion-progress-bar mode="ios" [value]="completionRates[project.id] / 100"></ion-progress-bar>
+                    <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsModal(project.id)">
+                      <ion-icon name="chevron-forward-outline"></ion-icon>
+                      <span>See details</span>
+                    </ion-button>
+                  </div>
+                </div>
+              </div>
+            </ion-card>
+            
+            <!-- tasks.component.html -->
+            <div class="tasks-list">
+              <ion-list lines="none">
+                <ion-accordion-group #accordionGroup>
+                  <ion-accordion *ngFor="let task of tasksMap[project.id]" [value]="task.taskName">
+                    <ion-item lines="none" slot="header" (click)="toggleAccordion(task.taskName)">
+                      <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
+                      <ion-label [ngClass]="{'completed-task': task.status === 'completed'}">
+                        {{ task.taskName }}
+                      </ion-label>
+                    </ion-item>
+                    <div class="ion-padding" slot="content">
+                      <p>{{ task.description }}</p>
+                    </div>
+                  </ion-accordion>
+                </ion-accordion-group>
+              </ion-list>
+            </div>
+          </ng-template>
+        </swiper>
+      </div>
+    </div>
   </div>
-  </div>
   
-</div>
-
-  
-  
- <!-- Floating Action Button -->
+  <!-- Floating Action Button -->
   <div class="fab-container">
     <ion-fab vertical="center" horizontal="center">
       <ion-fab-button id="popover-button" mode="ios">
@@ -105,10 +107,6 @@
       </ion-content>
     </ng-template>
   </ion-popover>
-  
-  
-
- 
 </ion-content>
 
 <ion-footer>

@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController, Platform, createAnimation } from '@ionic/angular';
 import { AddProjectModalComponent } from './modals/add-project-modal/add-project-modal.component';
 import { RegisterUserModalComponent } from './modals/register-user-modal/register-user-modal.component';
 import { Router } from '@angular/router';
-import { ProjectService } from '../../services/project.service'
+import { ProjectService } from '../../services/project.service';
 import { Project } from '../../models/projects.model'; 
 import { ProjectDetailsModalComponent } from './modals/project-details-modal/project-details-modal.component';
 import { ToastController } from '@ionic/angular';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from 'src/app/models/task.model'; // Ensure Task model is imported
+import { IonAccordionGroup } from '@ionic/angular';
 import SwiperCore, { Navigation, Pagination, Scrollbar} from 'swiper';
 
 // install Swiper modules
@@ -26,6 +27,7 @@ export class AdminHomepagePage implements OnInit {
   tasks: Task[] = [];
   isMobile = false;
   username: string | null | undefined;
+  @ViewChild('accordionGroup', { static: true }) accordionGroup!: IonAccordionGroup; // Add the definite assignment assertion
 
   constructor(
     private modalController: ModalController,
@@ -49,6 +51,15 @@ export class AdminHomepagePage implements OnInit {
     this.loadProjects();
     this.username = localStorage.getItem('username'); // Load projects when component initializes
     this.archiveAndDeleteCompletedTasks();
+  }
+
+  toggleAccordion(taskName: string) {
+    const nativeEl = this.accordionGroup;
+    if (nativeEl.value === taskName) {
+      nativeEl.value = undefined;
+    } else {
+      nativeEl.value = taskName;
+    }
   }
 
   playCheckboxAnimation(event: any, task: Task): void {
@@ -185,7 +196,7 @@ export class AdminHomepagePage implements OnInit {
       event.detail.complete();
     }, 1000);
   }
-  
+
   daysUntilDeadline(deadline: string | Date): number {
     // Ensure deadline is a Date object
     const deadlineDate = new Date(deadline);

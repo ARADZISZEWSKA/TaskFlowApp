@@ -17,60 +17,54 @@
     </div>
   </ion-toolbar>
 
-<div class="swiper-and-text-container">
-  <div class="sub-header todays-tasks-header">
-    <span class="sub-header">Today's tasks</span>
-  </div>
-  <div class="swiper-container">
-
-    <swiper [config]="sliderConfig">
-      
-      <ng-template swiperSlide *ngFor="let project of projects" class="swiper-slide">
-        <ion-card class="projects">
-          <div class="card-container">
-            <div class="projects-buttons purple">
-              <ion-card-content >
-                <span class="task-count">
-                  {{ daysUntilDeadline(project.deadline) }} days left
-                </span>
-                <ion-card-title>
-                  <span class="projects-name">{{ project.projectName }}</span>
-                </ion-card-title>
-              </ion-card-content>
-              <div class="progress-container">
-                <ion-progress-bar mode="ios" [value]="(tasksMap[project.id].completionRate) / 100"></ion-progress-bar>
-
-                <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsHomeModal(project)">
-                  <ion-icon name="chevron-forward-outline"></ion-icon>
-                  <span>See details</span>
-                </ion-button>
+  <div class="swiper-and-text-container">
+    <div class="sub-header todays-tasks-header">
+      <span class="sub-header">Today's tasks</span>
+    </div>
+    <div class="swiper-container">
+      <swiper [config]="sliderConfig">
+        <ng-template swiperSlide *ngFor="let project of projects" class="swiper-slide">
+          <ion-card class="projects">
+            <div class="card-container">
+              <div class="projects-buttons purple">
+                <ion-card-content>
+                  <span class="task-count">
+                    {{ daysUntilDeadline(project.deadline) }} days left
+                  </span>
+                  <ion-card-title>
+                    <span class="projects-name">{{ project.projectName }}</span>
+                  </ion-card-title>
+                </ion-card-content>
+                <div class="progress-container">
+                  <ion-progress-bar mode="ios" [value]="tasksMap[project.id].completionRate / 100"></ion-progress-bar>
+                  <ion-button class="corner-button" fill="clear" (click)="openProjectDetailsHomeModal(project)">
+                    <ion-icon name="chevron-forward-outline"></ion-icon>
+                    <span>See details</span>
+                  </ion-button>
+                </div>
               </div>
             </div>
-          </div>
-        </ion-card>
+          </ion-card>
 
-        <ion-list lines="none" >
-          <ion-item *ngFor="let task of todayTasksMap[project.id]">
-            <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
-            <ion-label [ngClass]="{'completed-task': task.status === 'completed'}">
-              {{ task.taskName }}
-            </ion-label>
-          </ion-item>
-        </ion-list>
-        
-        
-        
-        
-      </ng-template>
-  </swiper>
+          <ion-list lines="none">
+            <ion-accordion-group>
+              <ion-accordion *ngFor="let task of todayTasksMap[project.id]" [value]="task.id">
+                <ion-item slot="header">
+                  <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
+                  <ion-label [ngClass]="{'completed-task': task.status === 'completed'}">
+                    {{ task.taskName }}
+                  </ion-label>
+                </ion-item>
+                <div class="ion-padding" slot="content">
+                  <p>{{ task.description }}</p>
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+          </ion-list>
+        </ng-template>
+      </swiper>
+    </div>
   </div>
- 
-</div>
-
-  
-  
-
- 
 </ion-content>
 
 <ion-footer>
