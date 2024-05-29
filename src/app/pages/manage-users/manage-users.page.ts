@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { ModalController, Platform, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { EditUserModalComponent } from './edit-user-modal/edit-user-modal.component';
+import { RegisterUserModalComponent } from 'src/app/pages/admin-homepage/modals/register-user-modal/register-user-modal.component';
 
 
 @Component({
@@ -90,7 +91,13 @@ export class ManageUsersPage implements OnInit {
     if (role === 'confirm' && data?.success) {
       this.loadUsers(); // Odśwież listę użytkowników, jeśli modal został zamknięty pomyślnie
     }
-    
+}
+
+async openRegisterUserModal() {
+  const modal = await this.modalController.create({
+    component: RegisterUserModalComponent,
+  });
+  return await modal.present();
 }
 
   async presentToast(message: string) {

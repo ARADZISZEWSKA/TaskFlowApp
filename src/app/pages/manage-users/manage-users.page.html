@@ -1,8 +1,22 @@
-<ion-header>
+<ion-header *ngIf="!isMobile">
   <ion-toolbar>
     <ion-title>
       Your Users
     </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header *ngIf="isMobile">
+  <ion-toolbar>
+    <ion-title>
+      Your Users
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button id="popover-button">
+        <ion-icon name="add-outline"></ion-icon>
+        <ion-label>Add New User</ion-label>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -38,6 +52,14 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
+
+  <div class="fab-container">
+    <ion-fab vertical="center" horizontal="center">
+      <ion-fab-button class="addUser-button" mode="ios" (click)="openRegisterUserModal()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
 </ion-content>
 
 <ion-content *ngIf="isMobile">
@@ -45,7 +67,7 @@
     <ion-card-content style="padding: 8px;">
       <ion-grid>
         <ion-row>
-          <ion-col size="8" class="data-col-mobile " style="text-align: center;">
+          <ion-col size="8" class="data-col-mobile" style="text-align: center;">
             <strong style="font-size: 18px; font-weight: bold; color: black;">{{ user.firstName }} {{ user.lastName }}</strong>
           </ion-col>
           <ion-col size="2" style="text-align: center;">
@@ -63,7 +85,6 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
-
 
 <ion-footer>
   <ion-toolbar>

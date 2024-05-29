@@ -218,34 +218,21 @@ ion-progress-bar {
   
   .button {
     display: flex;
-    justify-content: flex-end; /* Wyrównanie do prawej strony */
-    align-items: center; /* Wyśrodkowanie w pionie */
+    justify-content: flex-end; 
+    align-items: center; 
   }
   
   .header-container {
     display: flex;
     align-items: center;
-    // justify-content: space-between;
   }
   .seeAll-button {
     margin-right: auto;
   }
   .buttons {
-    display: flex; /* Use Flexbox to layout children */
-    justify-content: space-between; /* Distribute children with space between */
+    display: flex; 
+    justify-content: space-between;
   }
-  // .AddUser{
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   width: 50%;
-  //   padding: 06px 0;
-  //   flex-direction: column;
-  // }
-  // .AddUser ion-button {
-  //   font-size: 2rem; /* Increase the font size */
-  //   padding: 0px 40px; /* Increase padding to make the button larger */
-  // }
 
   .center {
     display: flex;
@@ -271,18 +258,12 @@ ion-progress-bar {
 }
 }
 
-
-
 #popover-button {
   position: fixed;
   bottom: 80px;
   right: 20px;
   font-size: x-large;
- 
-  
 }
-
-  
 
 @media (max-width: 601px) {
   #add-buttons{

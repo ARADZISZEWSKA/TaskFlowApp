@@ -27,6 +27,13 @@ ion-col {
   --ion-text-wrap: normal; /* Zapewnia zawijanie tekstu w kolumnach */
 }
 
+.addUser-button {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  font-size: x-large;
+}
+
 .header-col {
   color: black;
 }
