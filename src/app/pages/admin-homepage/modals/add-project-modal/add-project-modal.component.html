@@ -4,7 +4,7 @@
       <ion-button (click)="cancel()">Cancel</ion-button>
     </ion-buttons>
     
-    <ion-title >Add your team</ion-title>
+    <ion-title >Add new Project</ion-title>
     <ion-buttons slot="end">
       <ion-button id="open-loading" (click)="confirm()" >Confirm</ion-button>
       <ion-loading mode="ios" class="custom-loading" trigger="open-loading" message="Creating a new project..." duration="2000"></ion-loading>
@@ -29,14 +29,28 @@
   </div>
 
           
-
-
-<ion-list [inset]="true">
-  <ion-item [button]="true" [detail]="false" id="select-members">
-    <ion-label>Select project members</ion-label>
-    <div slot="end" id="selected-members">{{ selectedMembersText }}</div>
-  </ion-item>
-</ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list [inset]="true">
+          <ion-item [button]="true" [detail]="false" id="select-members">
+            <ion-label>Select project members</ion-label>
+            <div id="selected-members" >{{ selectedMembersText }}</div>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngFor="let member of getSelectedUsersNames()">
+            <ion-label>{{ member}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
 
 <!--modal dodający userów do projektu-->
 <ion-modal #memberModal  trigger="select-members" >

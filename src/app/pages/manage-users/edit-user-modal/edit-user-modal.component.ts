@@ -60,7 +60,7 @@ export class EditUserModalComponent {
     this.userService.updateUser(this.id, updatedUserData).subscribe({
       next: () => {
         console.log('User updated successfully.');
-        this.modalController.dismiss({ success: true }); // Dismiss modal on successful response
+        this.modalController.dismiss({ success: true }); 
         this.onModalDismiss();
         },
       error: (error) => {

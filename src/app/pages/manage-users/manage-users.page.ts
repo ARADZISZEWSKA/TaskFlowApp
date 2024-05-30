@@ -40,6 +40,8 @@ export class ManageUsersPage implements OnInit {
 
   }
 
+//Zarządzanie Użytkownikami
+
   loadUsers() {
     this.userService.getUsersByOwner().subscribe((data) => {
       this.users = data;
@@ -75,7 +77,7 @@ export class ManageUsersPage implements OnInit {
     }
   }
 
-  
+  // Otwieranie Modali
 
   async openEditUserModal(user: User) {
     const modal = await this.modalController.create({
@@ -100,6 +102,8 @@ async openRegisterUserModal() {
   return await modal.present();
 }
 
+//Toast
+
   async presentToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
@@ -110,6 +114,8 @@ async openRegisterUserModal() {
   
   
   
+//Footer
+
   goToSettingsAdmin(): void {
     this.router.navigateByUrl('/settings-admin'); 
   }

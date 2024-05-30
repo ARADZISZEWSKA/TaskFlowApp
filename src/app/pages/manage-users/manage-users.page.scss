@@ -24,7 +24,7 @@ ion-card-title {
 ion-col {
   border: 1px solid #ccc;
   text-align: center;
-  --ion-text-wrap: normal; /* Zapewnia zawijanie tekstu w kolumnach */
+  --ion-text-wrap: normal; 
 }
 
 .addUser-button {
@@ -47,10 +47,10 @@ ion-col {
   text-align: center;
 }
 ion-tab-bar {
-  --background: #ffffff;  /* White background */
-  --color-selected: #488aff; /* Blue color for selected tab */
-  --color: grey;  /* Grey color for unselected tabs */
+  --background: #ffffff; 
+  --color-selected: #488aff;
+  --color: grey; 
   --mode: ios;
-  padding-top: 5px; /* Padding at the top of the tab bar */
+  padding-top: 5px;
   border-top: 1px solid #e0e0e0;
 }

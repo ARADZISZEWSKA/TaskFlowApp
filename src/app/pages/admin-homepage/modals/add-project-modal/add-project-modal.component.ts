@@ -35,9 +35,11 @@ export class AddProjectModalComponent implements OnInit {
     this.userService.getUsersByOwner().subscribe(users => { 
       this.members = users.map(user => ({
         text: `${user.firstName} ${user.lastName}`,
-        value: user.id
+        value: user.id,
+        firstName: user.firstName, // Store firstName
+        lastName: user.lastName // Store lastName
       }));
-      });
+    });
   }
 
   memberSelectionChanged(selectedUserIds: string[]) {
@@ -46,11 +48,16 @@ export class AddProjectModalComponent implements OnInit {
     this.memberModal.dismiss();
   }
 
+  getSelectedUsersNames(): string[] {
+    return this.members
+      .filter(member => this.selectedMembers.includes(member.value))
+      .map(member => `${member.firstName || ''} ${member.lastName || ''}`)
+      .filter(name => name.trim().length > 0);
+  }
+  
+
   private formatData(users: any[]): string {
-    if (users.length === 1) {
-      return users[0].text;
-    }
-    return `${users.length} items`;
+    return `${users.length} users`;
   }
 
   cancel() {
