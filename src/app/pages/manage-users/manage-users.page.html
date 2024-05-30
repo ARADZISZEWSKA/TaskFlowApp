@@ -1,7 +1,7 @@
 <ion-header *ngIf="!isMobile">
   <ion-toolbar>
     <ion-title>
-      Manage Your Users
+      Manage Users
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,7 +9,7 @@
 <ion-header *ngIf="isMobile">
   <ion-toolbar>
     <ion-title>
-      Manage Your Users
+      Manage Users
     </ion-title>
     <ion-buttons slot="end">
       <ion-button id="popover-button">
@@ -28,10 +28,8 @@
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!-- Dodanie ion-searchbar -->
       <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterUsers($event)"></ion-searchbar>
       <ion-grid>
-        <!-- Nagłówki tabeli -->
         <ion-row>
           <ion-col size="1">Nr.</ion-col>
           <ion-col size="2">Imię</ion-col>
@@ -40,7 +38,6 @@
           <ion-col size="1">Edit</ion-col>
           <ion-col size="2">Delete</ion-col>
         </ion-row>
-        <!-- Wiersze z danymi użytkowników -->
         <ion-row *ngFor="let user of filteredUsers; let i = index">
           <ion-col size="1">{{ i + 1 }}</ion-col>
           <ion-col size="2">{{ user.firstName }}</ion-col>
@@ -63,6 +60,7 @@
 </ion-content>
 
 <ion-content *ngIf="isMobile">
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterUsers($event)"></ion-searchbar>
   <ion-card *ngFor="let user of filteredUsers" style="margin-bottom: 10px; border: none;">
     <ion-card-content style="padding: 8px;">
       <ion-grid>
