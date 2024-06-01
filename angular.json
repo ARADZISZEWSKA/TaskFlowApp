@@ -32,7 +32,7 @@
               }
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
-            "scripts": []
+            "scripts": ["node_modules/canvas-confetti/dist/confetti.browser.js"]
           },
           "configurations": {
             "production": {

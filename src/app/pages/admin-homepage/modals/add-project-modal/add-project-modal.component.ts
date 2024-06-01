@@ -68,6 +68,7 @@ export class AddProjectModalComponent implements OnInit {
   confirm() {
     this.modalController.dismiss({ success: true }, 'confirm');
     this.addProject();
+    this.launchConfetti(); // Uruchomienie confetti po kliknięciu przycisku "Confirm"
   }
 
   async addProject(): Promise<void> {
@@ -85,5 +86,20 @@ export class AddProjectModalComponent implements OnInit {
     } catch (error) {
         console.error('Failed to add project:', error); 
     }
+  }
+
+  launchConfetti() {
+    function randomInRange(min: number, max: number) {
+      return Math.random() * (max - min) + min;
+    }
+
+    const confetti = (window as any).confetti;
+
+    confetti({
+      angle: randomInRange(55, 125),
+      spread: randomInRange(50, 70),
+      particleCount: randomInRange(50, 100),
+      origin: { y: 0.6 }
+    });
   }
 }
