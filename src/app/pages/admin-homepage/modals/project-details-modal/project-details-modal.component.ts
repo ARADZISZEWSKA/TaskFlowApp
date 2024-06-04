@@ -42,7 +42,14 @@ export class ProjectDetailsModalComponent implements OnInit {
       }
     }
     this.archiveAndDeleteCompletedTasks();
+    //nowe na dole
+    this.editableProject = { ...this.project };
   }
+
+  toggleEdit() {
+    this.isEditing = !this.isEditing;
+  }
+  // nowe do gory
 
   archiveAndDeleteCompletedTasks() {
     this.taskService.archiveAndDeleteCompletedTasks().subscribe({
@@ -99,9 +106,8 @@ export class ProjectDetailsModalComponent implements OnInit {
       toast.present();
       // Close modal after project is deleted
       this.modalController.dismiss(null, 'delete');
-      if (typeof this.onModalDismiss === 'function') {
-        this.onModalDismiss(); // Call the callback function after deleting the project
-      }    } catch (error) {
+      this.onModalDismiss(); // Call the callback function after deleting the project
+    } catch (error) {
       console.error('Error deleting project:', error);
       // Handle project deletion error, e.g., show a toast with error message
       const toast = await this.toastController.create({
@@ -112,6 +118,33 @@ export class ProjectDetailsModalComponent implements OnInit {
       toast.present();
     }
   }
+
+  //Edycja
+  isEditing = false;  // Flaga do przełączania trybu edycji
+  editableProject!: Project;  // Kopia projektu do edycji
+
+  async saveProject() {
+    try {
+      await this.projectService.updateProject(this.editableProject).toPromise();
+      this.project = { ...this.editableProject };  // Aktualizacja oryginalnego projektu
+      this.isEditing = false;
+      const toast = await this.toastController.create({
+        message: 'Project updated successfully!',
+        duration: 2000,
+        color: 'success'
+      });
+      toast.present();
+    } catch (error) {
+      console.error('Error updating project:', error);
+      const toast = await this.toastController.create({
+        message: 'Failed to update project. Please try again later.',
+        duration: 2000,
+        color: 'danger'
+      });
+      toast.present();
+    }
+  }
+  
 
   playCheckboxAnimation(event: any, task: Task): void {
     console.log(event);

@@ -49,6 +49,10 @@ export class ProjectService {
         });
       }
 
+      updateProject(project: Project): Observable<any> {
+        return this.http.put(`${this.baseUrl}/projects/${project.id}`, project);
+      }
+
       // In your project.service.ts
       getTasksForUserProjectDueToday(userId: string, projectId: string): Observable<Task[]> {
         return this.http.get<Task[]>(`${this.baseUrl}/tasks/user/${userId}/project/${projectId}/dueToday`);
