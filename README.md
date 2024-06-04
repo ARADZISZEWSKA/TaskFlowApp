@@ -66,6 +66,7 @@ Nasze oprogramowanie objęte jest licencją MIT. Wybrałyśmy ją ze względu na
 | **.NET SDK** | Wersja: 5.0 lub nowsza |
 | **Środowisko programistyczne backend** | Wersja: Visual Studio 2019 lub nowszy z wsparciem dla ASP.NET i Web Development, Alternatywa: Visual Studio Code (VS Code) z odpowiednimi rozszerzeniami |
 | **Środowisko programistyczne frontend** | Ionic w wersji 7.2.0 z wykorzystaniem Angulara|
+| **Node.js** | Wersja: 14.x lub nowsza |
 | **MongoDB** | MongoDB: Najnowsza wersja stabilna (np. MongoDB 4.4 lub 5.0), Zarządzanie bazą danych: MongoDB Compass lub Mongo Shell |
 | **Kontrola wersji** | Narzędzie: Git, Repozytoria: GitHub |
 
@@ -83,11 +84,13 @@ git clone https://github.com/uzytkownik/nazwa-repozytorium.git
 # Przejdź do katalogu projektu
 cd nazwa-repozytorium
 
-# Zainstaluj potrzebne zależności
-npm install
-npm install canvas-confetti
-npm install swiper@8.4.7
+npm install -g @ionic/cli
 
+# Zainstaluj potrzebne zależności (canvas-confetti,swiper@8.4.7)
+npm install
+
+# Uruchom aplikację
+ionic serve
 ```
 
 ## **Scenariusze testowe**
