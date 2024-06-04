@@ -99,8 +99,9 @@ export class ProjectDetailsModalComponent implements OnInit {
       toast.present();
       // Close modal after project is deleted
       this.modalController.dismiss(null, 'delete');
-      this.onModalDismiss(); // Call the callback function after deleting the project
-    } catch (error) {
+      if (typeof this.onModalDismiss === 'function') {
+        this.onModalDismiss(); // Call the callback function after deleting the project
+      }    } catch (error) {
       console.error('Error deleting project:', error);
       // Handle project deletion error, e.g., show a toast with error message
       const toast = await this.toastController.create({

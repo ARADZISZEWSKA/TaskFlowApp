@@ -84,7 +84,7 @@ export class AdminHomepagePage implements OnInit {
         this.projects = projects;
         projects.forEach(project => {
           this.calculateProjectCompletion(project.id);
-          this.loadTasksForProject(project.id); // Load tasks for each project
+          this.loadTasksForProject(project.id); 
         });
       },
       error: (error) => console.error('Failed to load projects', error)
@@ -94,7 +94,7 @@ export class AdminHomepagePage implements OnInit {
   loadTasksForProject(projectId: string) {
     this.taskService.getAllTasksByProjectAdmin(projectId).subscribe({
       next: (tasks) => {
-        this.tasksMap[projectId] = tasks; // Store tasks in the object
+        this.tasksMap[projectId] = tasks; 
       },
       error: (error) => console.error(`Failed to load tasks for project ${projectId}`, error)
     });
@@ -163,17 +163,17 @@ export class AdminHomepagePage implements OnInit {
       await modal.present();
     } catch (error) {
       console.error('Error fetching project details', error);
-      // Handle error gracefully, e.g., display a toast message
       this.showToast('Failed to open project details. Please try again later.');
     }
   }
   
+
   // Function to display a toast message
   private async showToast(message: string) {
     const toast = await this.toastController.create({
       message: message,
       duration: 3000, // Duration in milliseconds
-      position: 'bottom' // Position of the toast message
+      position: 'bottom' 
     });
     toast.present();
   }

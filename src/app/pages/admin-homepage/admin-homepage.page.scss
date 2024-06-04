@@ -55,11 +55,11 @@ ion-toolbar {
 
 
   ion-tab-bar {
-    --background: #ffffff;  /* White background */
-    --color-selected: #488aff; /* Blue color for selected tab */
-    --color: grey;  /* Grey color for unselected tabs */
+    --background: #ffffff;  
+    --color-selected: #488aff; 
+    --color: grey;  
     --mode: ios;
-    padding-top: 5px; /* Padding at the top of the tab bar */
+    padding-top: 5px;
     border-top: 1px solid #e0e0e0;
    
 }
@@ -77,8 +77,8 @@ ion-toolbar {
 }
 
 .text-below-fab {
-  text-align: center; /* Center the text */
-  padding: 10px 0; /* Adds some space above and below the text */
+  text-align: center; 
+  padding: 10px 0; 
   text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--ion-secondary-text-color);
@@ -140,13 +140,13 @@ ion-toolbar {
 .progress-container {
   display: flex;
   align-items: center;
-  width: 100%; /* Take full width of its parent */
+  width: 100%; 
 }
 
 ion-progress-bar {
-  flex-grow: 0; /* Does not grow to fill the space */
-  width: 90%; /* Adjust this percentage as needed */
-  margin-right: 10px; /* Space between progress bar and button */
+  flex-grow: 0; 
+  width: 90%; 
+  margin-right: 10px; 
 }
 
 .swiper-container {
@@ -157,6 +157,22 @@ ion-progress-bar {
   margin-right: auto;
 }
 
+.no-projects-container {
+  width: 30%; 
+  max-width: 200px; 
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.add-project-button {
+  width: 100%; 
+}
 
 .card-container {
   padding: 10px;
@@ -212,7 +228,7 @@ ion-progress-bar {
 
 
 
-/* Media query for tablets and desktops */
+
 @media (min-width: 992px) {
 
   
@@ -273,9 +289,24 @@ ion-progress-bar {
   
 }
 
+.no-projects-text {
+  color: #666; 
+  font-size: 14px; 
+  text-align: center; 
+  margin-bottom: 10px; 
+}
+
+.add-project-button {
+  --border-radius: 8px; 
+  --width: 200px; 
+  --height: 36px; 
+  font-size: 12px;
+}
+
+
 
 ion-icon {
-  vertical-align: middle; /* Adjust alignment of icon */
+  vertical-align: middle; 
 }
 
 ion-list{
@@ -286,7 +317,7 @@ ion-list{
 }
 
 .tasks-list {
-  margin-top: 70px; /* Add enough margin to avoid overlapping with pagination */
+  margin-top: 70px; 
 }
 
 ion-item {
@@ -296,7 +327,7 @@ ion-item {
   position: relative;
   display: flex;
   align-items: center;
-  z-index: 2; /* Ensure items are above the pagination */
+  z-index: 2;
 }
 
 ion-checkbox {
@@ -304,13 +335,13 @@ ion-checkbox {
   --border-color: gray;
   --border-width: 1px;
   position: relative;
-  z-index: 2; /* Ensure checkboxes are above the pagination */
+  z-index: 2; 
 }
 
 ion-label {
   background-color: var(--ion-background-color, --td-bg);
   position: relative;
-  z-index: 2; /* Ensure labels are above the pagination */
+  z-index: 2; 
 }
 
 
@@ -326,7 +357,7 @@ ion-label {
   position:relative;
 }
 .todays-tasks-header {
-  margin-top: 280px;  /* Dostosuj tę wartość według potrzeb */
+  margin-top: 280px; 
   margin-left:5px;
   position:absolute;
   white-space: nowrap;
@@ -335,7 +366,7 @@ ion-label {
 
 @media (max-width: 601px) {
   .todays-tasks-header {
-    margin-top: 210px;  /* Dostosuj tę wartość według potrzeb */
+    margin-top: 210px;  
   }
   
   }

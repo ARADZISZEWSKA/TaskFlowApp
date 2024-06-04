@@ -24,6 +24,14 @@ ion-toolbar {
 
 }
 
+.no-projects-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
 ion-content {
   --background: var(--ion-background-color, --td-bg);
 }

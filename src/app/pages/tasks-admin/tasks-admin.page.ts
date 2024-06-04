@@ -84,13 +84,13 @@ export class TasksAdminPage implements OnInit {
       const modal = await this.modalController.create({
         component: ProjectDetailsModalComponent,
         componentProps: {
-          project: project 
+          project: project,
+          onModalDismiss: () => this.loadProjects() // Pass the callback function
         }
       });
       await modal.present();
     } catch (error) {
       console.error('Error fetching project details', error);
-      // Handle error gracefully, e.g., display a toast message
       this.showToast('Failed to open project details. Please try again later.');
     }
   }
