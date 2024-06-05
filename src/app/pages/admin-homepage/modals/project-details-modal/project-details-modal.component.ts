@@ -25,7 +25,7 @@ export class ProjectDetailsModalComponent implements OnInit {
     private toastController: ToastController,
     private taskService: TaskService
   ) {}
-
+/*
   async ngOnInit() {
     if (this.project && this.project.id) {
       try {
@@ -45,12 +45,32 @@ export class ProjectDetailsModalComponent implements OnInit {
     //nowe na dole
     this.editableProject = { ...this.project };
   }
+*/
+
+async ngOnInit() {
+  if (this.project && this.project.id) {
+    try {
+      console.log(`Fetching members for project ID: ${this.project.id}`);
+      const users = await this.projectService.getUserProjectMembers(this.project.id).toPromise();
+      console.log(users);
+      this.users = users as User[];
+
+      // Fetch overdue tasks
+      const tasks = await this.projectService.getOverdueTasks(this.project.id).toPromise();
+      this.overdueTasks = tasks as any[];
+    } catch (error) {
+      console.error('Error fetching project details:', error);
+    }
+  }
+  this.editableProject = { ...this.project }
+}
 
   toggleEdit() {
     this.isEditing = !this.isEditing;
   }
   // nowe do gory
 
+  /*
   archiveAndDeleteCompletedTasks() {
     this.taskService.archiveAndDeleteCompletedTasks().subscribe({
       next: (response) => {
@@ -67,7 +87,7 @@ export class ProjectDetailsModalComponent implements OnInit {
       }
     });
   }
-
+*/
   cancel() {
     this.modalController.dismiss(null, 'cancel');
     this.onModalDismiss(); // Call the callback function when the modal is dismissed
