@@ -52,7 +52,7 @@ export class ProjectService {
       updateProject(project: Project): Observable<any> {
         return this.http.put(`${this.baseUrl}/update/${project.id}`, project, {
           withCredentials: true
-        });
+       });
       }
 
       // In your project.service.ts
