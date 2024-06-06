@@ -79,17 +79,20 @@ export class AdminHomepagePage implements OnInit {
   }
 
   loadProjects() {
+    this.projects = [];
+    this.tasksMap = {}; // Clear current tasks
     this.projectService.getUserProjects().subscribe({
       next: (projects) => {
         this.projects = projects;
         projects.forEach(project => {
           this.calculateProjectCompletion(project.id);
-          this.loadTasksForProject(project.id); 
+          this.loadTasksForProject(project.id);
         });
       },
       error: (error) => console.error('Failed to load projects', error)
     });
   }
+  
 
   loadTasksForProject(projectId: string) {
     this.taskService.getAllTasksByProjectAdmin(projectId).subscribe({

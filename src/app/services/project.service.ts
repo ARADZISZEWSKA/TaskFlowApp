@@ -60,8 +60,13 @@ export class ProjectService {
         return this.http.get<Task[]>(`${this.baseUrl}/tasks/user/${userId}/project/${projectId}/dueToday`);
       }
 
+      deleteUserFromProject(projectId: string, userId: string): Observable<void> {
+        return this.http.delete<void>(`${this.baseUrl}/${projectId}/deleteUser/${userId}`, {
+          withCredentials: true
+        });
+
       
     }
 
-  
+}
 

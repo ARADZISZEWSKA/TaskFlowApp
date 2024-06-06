@@ -139,6 +139,31 @@ async ngOnInit() {
     }
   }
 
+  async deleteUserFromProject(user: User) {
+    const projectId = this.project.id; // Get project ID
+    const userId = user.id; // Get user ID
+
+    try {
+      await this.projectService.deleteUserFromProject(projectId, userId).toPromise();
+      const toast = await this.toastController.create({
+        message: 'User and associated tasks deleted successfully!',
+        duration: 2000,
+        color: 'success'
+      });
+      toast.present();
+      // Refresh project details after user is deleted
+      this.loadProjectDetails();
+    } catch (error) {
+      console.error('Error deleting user from project:', error);
+      const toast = await this.toastController.create({
+        message: 'Failed to delete user from project. Please try again later.',
+        duration: 2000,
+        color: 'danger'
+      });
+      toast.present();
+    }
+  }
+
   //Edycja
   isEditing = false;  // Flaga do przełączania trybu edycji
   editableProject!: Project;  // Kopia projektu do edycji
