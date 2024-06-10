@@ -49,7 +49,7 @@
           <ion-list lines="none">
             <ion-accordion-group>
               <ion-accordion *ngFor="let task of todayTasksMap[project.id]" [value]="task.id">
-                <ion-item slot="header">
+                <ion-item lines="none" slot="header">
                   <ion-checkbox [checked]="task.status === 'completed'" (click)="playCheckboxAnimation($event, task)" slot="start"></ion-checkbox>
                   <ion-label [ngClass]="{'completed-task': task.status === 'completed'}">
                     {{ task.taskName }}
