@@ -76,7 +76,7 @@ export class AddProjectModalComponent implements OnInit {
         // Set the member IDs directly to the newProject object
         this.newProject.members = this.selectedMembers;
       
-        const response = await this.http.post<any>('http://localhost:5139/projects/create', this.newProject, {
+        const response = await this.http.post<any>('https://taskflowapp.azurewebsites.net/projects/create', this.newProject, {
             withCredentials: true
         }).toPromise();
 

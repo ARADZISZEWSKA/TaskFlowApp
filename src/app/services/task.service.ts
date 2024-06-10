@@ -10,7 +10,7 @@ import { TaskStatusResponse } from '../models/taskstatusresponse';
 })
 export class TaskService {
 
-private baseUrl = 'http://localhost:5139/tasks';
+private baseUrl = 'https://taskflowapp.azurewebsites.net/tasks';
   constructor(private http: HttpClient) {}
 
   addTask(task: Task): Observable<Task>  {

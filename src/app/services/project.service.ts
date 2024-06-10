@@ -10,7 +10,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class ProjectService {
-  private baseUrl = 'http://localhost:5139/projects'; // Adjust as per your backend URL
+  private baseUrl = 'https://taskflowapp.azurewebsites.net/projects'; // Adjust as per your backend URL
 
   constructor(private http: HttpClient) { }
 

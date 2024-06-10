@@ -8,7 +8,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = 'http://localhost:5139/user'; 
+  private baseUrl = 'https://taskflowapp.azurewebsites.net/user'; 
 
   constructor(private http: HttpClient) { }
 

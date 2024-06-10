@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:5139'; // Adjust as per your backend URL
+  private baseUrl = 'https://taskflowapp.azurewebsites.net'; // Adjust as per your backend URL
 
   constructor(private http: HttpClient) { }
 
