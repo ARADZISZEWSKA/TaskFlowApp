@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from 'src/app/models/task.model';
 import { HttpResponse } from '@angular/common/http';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 @Component({
   selector: 'app-new-task-modal',
@@ -22,12 +23,36 @@ export class NewTaskModalComponent {
     private taskService: TaskService
   ) {}
 
+  async hapticsImpactMedium() {
+    await Haptics.impact({ style: ImpactStyle.Medium });
+  }
+
+  async hapticsImpactLight() {
+    await Haptics.impact({ style: ImpactStyle.Light });
+  }
+
+  async hapticsVibrate() {
+    await Haptics.vibrate();
+  }
+
+  async hapticsSelectionStart() {
+    await Haptics.selectionStart();
+  }
+
+  async hapticsSelectionChanged() {
+    await Haptics.selectionChanged();
+  }
+
+  async hapticsSelectionEnd() {
+    await Haptics.selectionEnd();
+  }
+
   dismissModal() {
     this.modalController.dismiss();
     this.onModalDismiss(); // Call the callback function when the modal is dismissed
   }
 
-  addTask() {
+  async addTask() {
     const newTask: Task = {
       taskName: this.taskName,
       description: this.description,
@@ -37,19 +62,20 @@ export class NewTaskModalComponent {
       status: 'false'
     };
 
-    this.taskService.addTask(newTask).subscribe({
-      next: (res) => {
-        if (res instanceof HttpResponse) {
-          console.log('Task added successfully:', res.body);
-        } else {
-          console.error('Unexpected response:', res);
-        }
-        this.dismissModal(); // Dismiss the modal in both cases
-      },
-      error: (err) => {
-        console.error('Error adding task:', err);
-        this.dismissModal(); // Dismiss the modal in case of error
+    try {
+      const res = await this.taskService.addTask(newTask).toPromise();
+      if (res instanceof HttpResponse) {
+        console.log('Task added successfully:', res.body);
+        await this.hapticsImpactMedium(); // Trigger haptics feedback on successful task addition
+      } else {
+        console.error('Unexpected response:', res);
+        await this.hapticsImpactLight(); // Trigger haptics feedback on unexpected response
       }
-    });
+    } catch (err) {
+      console.error('Error adding task:', err);
+      await this.hapticsImpactLight(); // Trigger haptics feedback on error
+    } finally {
+      this.dismissModal(); // Dismiss the modal in both cases
+    }
   }
 }
