@@ -1,16 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalController, Platform, createAnimation } from '@ionic/angular';
+import { ModalController, Platform, createAnimation, ToastController } from '@ionic/angular';
 import { AddProjectModalComponent } from './modals/add-project-modal/add-project-modal.component';
 import { RegisterUserModalComponent } from './modals/register-user-modal/register-user-modal.component';
 import { Router } from '@angular/router';
 import { ProjectService } from '../../services/project.service';
-import { Project } from '../../models/projects.model'; 
+import { Project } from '../../models/projects.model';
 import { ProjectDetailsModalComponent } from './modals/project-details-modal/project-details-modal.component';
-import { ToastController } from '@ionic/angular';
 import { TaskService } from 'src/app/services/task.service';
 import { Task } from 'src/app/models/task.model'; // Ensure Task model is imported
 import { IonAccordionGroup } from '@ionic/angular';
-import SwiperCore, { Navigation, Pagination, Scrollbar} from 'swiper';
+import SwiperCore, { Navigation, Pagination, Scrollbar } from 'swiper';
+import { PushNotifications } from '@capacitor/push-notifications';
 
 // install Swiper modules
 SwiperCore.use([Navigation, Pagination, Scrollbar]);
@@ -29,6 +29,13 @@ export class AdminHomepagePage implements OnInit {
   username: string | null | undefined;
   @ViewChild('accordionGroup', { static: true }) accordionGroup!: IonAccordionGroup; // Add the definite assignment assertion
 
+  sliderConfig = {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    navigation: true,
+    pagination: { clickable: true }
+  };
+
   constructor(
     private modalController: ModalController,
     private toastController: ToastController,
@@ -40,17 +47,12 @@ export class AdminHomepagePage implements OnInit {
     this.isMobile = this.platform.is('mobile');
   }
 
-  sliderConfig = {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    navigation: true,
-    pagination: { clickable: true }
-  };
-
-  ngOnInit() {
+  async ngOnInit() {
     this.loadProjects();
     this.username = localStorage.getItem('username'); // Load projects when component initializes
     this.archiveAndDeleteCompletedTasks();
+    await this.registerNotifications(); // Initialize push notifications
+    await this.addListeners(); // Add push notification listeners
   }
 
   toggleAccordion(taskName: string) {
@@ -92,7 +94,6 @@ export class AdminHomepagePage implements OnInit {
       error: (error) => console.error('Failed to load projects', error)
     });
   }
-  
 
   loadTasksForProject(projectId: string) {
     this.taskService.getAllTasksByProjectAdmin(projectId).subscribe({
@@ -169,7 +170,6 @@ export class AdminHomepagePage implements OnInit {
       this.showToast('Failed to open project details. Please try again later.');
     }
   }
-  
 
   // Function to display a toast message
   private async showToast(message: string) {
@@ -180,7 +180,7 @@ export class AdminHomepagePage implements OnInit {
     });
     toast.present();
   }
-  
+
   goToSettingsAdmin(): void {
     this.router.navigateByUrl('/settings-admin'); 
   }
@@ -188,7 +188,7 @@ export class AdminHomepagePage implements OnInit {
   goToTasksAdmin(): void {
     this.router.navigateByUrl('/tasks-admin'); 
   }
-  
+
   goToAdminHomepage(): void {
     this.router.navigateByUrl('/admin-homepage'); 
   }
@@ -211,5 +211,43 @@ export class AdminHomepagePage implements OnInit {
 
   goToTasksPage() {
     this.router.navigateByUrl('/tasks-admin');
+  }
+
+  // Push notifications setup
+  async addListeners() {
+    await PushNotifications.addListener('registration', token => {
+      console.info('Registration token: ', token.value);
+    });
+
+    await PushNotifications.addListener('registrationError', err => {
+      console.error('Registration error: ', err.error);
+    });
+
+    await PushNotifications.addListener('pushNotificationReceived', notification => {
+      console.log('Push notification received: ', notification);
+    });
+
+    await PushNotifications.addListener('pushNotificationActionPerformed', notification => {
+      console.log('Push notification action performed', notification.actionId, notification.inputValue);
+    });
+  }
+
+  async registerNotifications() {
+    let permStatus = await PushNotifications.checkPermissions();
+
+    if (permStatus.receive === 'prompt') {
+      permStatus = await PushNotifications.requestPermissions();
+    }
+
+    if (permStatus.receive !== 'granted') {
+      throw new Error('User denied permissions!');
+    }
+
+    await PushNotifications.register();
+  }
+
+  async getDeliveredNotifications() {
+    const notificationList = await PushNotifications.getDeliveredNotifications();
+    console.log('delivered notifications', notificationList);
   }
 }

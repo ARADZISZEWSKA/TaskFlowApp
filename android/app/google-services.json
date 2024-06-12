@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "927272259114",
+    "project_id": "taskflow-4a701",
+    "storage_bucket": "taskflow-4a701.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927272259114:android:d606ce739004a088877d53",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDx6xXGr2fHIW0bLXIQxhe4_JYT0KR62_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
